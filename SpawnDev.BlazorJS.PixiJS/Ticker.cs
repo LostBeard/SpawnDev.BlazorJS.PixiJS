@@ -27,12 +27,62 @@ namespace SpawnDev.BlazorJS.PixiJS
             #endregion
             #region Methods
             /// <summary>
+            /// Starts the ticker. If the ticker has listeners a new animation frame is requested at this point.
+            /// </summary>
+            public void Start() => JSRef!.CallVoid("start");
+            /// <summary>
+            /// Stops the ticker. If the ticker has requested an animation frame it is canceled at this point.
+            /// </summary>
+            public void Stop() => JSRef!.CallVoid("stop");
+            /// <summary>
+            /// Destroy the ticker and don't use after this. Calling this method removes all references to internal events.
+            /// </summary>
+            public void Destroy() => JSRef!.CallVoid("destroy");
+            /// <summary>
+            /// Triggers an update. An update entails setting the current {@link ticker.Ticker#elapsedMS|elapsedMS}, the current {@link ticker.Ticker#deltaTime|deltaTime}, invoking all listeners with current deltaTime,and then finally setting {@link ticker.Ticker#lastTime|lastTime} with the value of currentTime that was provided. This method will be called automatically by animation frame callbacks if the ticker instance has been started and listeners are added.
+            /// </summary>
+            public void Update() => JSRef!.CallVoid("update");
+            /// <summary>
+            /// Triggers an update. An update entails setting the current {@link ticker.Ticker#elapsedMS|elapsedMS}, the current {@link ticker.Ticker#deltaTime|deltaTime}, invoking all listeners with current deltaTime,and then finally setting {@link ticker.Ticker#lastTime|lastTime} with the value of currentTime that was provided. This method will be called automatically by animation frame callbacks if the ticker instance has been started and listeners are added.
+            /// </summary>
+            /// <param name="currentTime">The current time of execution.<br/>default performance.now()</param>
+            public void Update(double currentTime) => JSRef!.CallVoid("update", currentTime);
+            /// <summary>
             /// Register a handler for tick events. Calls continuously unless it is removed or the ticker is stopped.
             /// </summary>
             /// <param name="actionCallback"></param>
             public Ticker Add(ActionCallback<Ticker> actionCallback)
             {
                 JSRef!.CallVoid("add", actionCallback);
+                return this;
+            }
+            /// <summary>
+            /// Register a handler for tick events. Calls continuously unless it is removed or the ticker is stopped.
+            /// </summary>
+            /// <param name="actionCallback"></param>
+            public Ticker Add(Action<Ticker> actionCallback)
+            {
+                JSRef!.CallVoid("add", Callback.RefAdd(actionCallback));
+                return this;
+            }
+            /// <summary>
+            /// Add a handler for the tick event which is only execute once.
+            /// </summary>
+            /// <param name="actionCallback"></param>
+            /// <returns></returns>
+            public Ticker AddOnce(ActionCallback<Ticker> actionCallback)
+            {
+                JSRef!.CallVoid("addOnce", actionCallback);
+                return this;
+            }
+            /// <summary>
+            /// Add a handler for the tick event which is only execute once.
+            /// </summary>
+            /// <param name="actionCallback"></param>
+            /// <returns></returns>
+            public Ticker AddOnce(Action<Ticker> actionCallback)
+            {
+                JSRef!.CallVoid("addOnce", Callback.CreateOne(actionCallback));
                 return this;
             }
             /// <summary>
@@ -43,15 +93,6 @@ namespace SpawnDev.BlazorJS.PixiJS
             public Ticker Remove(ActionCallback<Ticker> actionCallback)
             {
                 JSRef!.CallVoid("remove", actionCallback);
-                return this;
-            }
-            /// <summary>
-            /// Register a handler for tick events. Calls continuously unless it is removed or the ticker is stopped.
-            /// </summary>
-            /// <param name="actionCallback"></param>
-            public Ticker Add(Action<Ticker> actionCallback)
-            {
-                JSRef!.CallVoid("add", Callback.RefAdd(actionCallback));
                 return this;
             }
             /// <summary>
