@@ -26,12 +26,52 @@ namespace SpawnDev.BlazorJS.PixiJS
             public float DeltaTime => JSRef!.Get<float>("deltaTime");
             #endregion
             #region Methods
-            public void Add(ActionCallback<Ticker> actionCallback) => JSRef!.CallVoid("add", actionCallback);
-            public void Remove(ActionCallback<Ticker> actionCallback) => JSRef!.CallVoid("remove", actionCallback);
-            public void Add(Action<Ticker> actionCallback) => JSRef!.CallVoid("add", Callback.RefGet(actionCallback, true));
-            public void Remove(Action<Ticker> actionCallback) => JSRef!.CallVoid("remove", Callback.RefGet(actionCallback, false));
+            /// <summary>
+            /// Register a handler for tick events. Calls continuously unless it is removed or the ticker is stopped.
+            /// </summary>
+            /// <param name="actionCallback"></param>
+            public Ticker Add(ActionCallback<Ticker> actionCallback)
+            {
+                JSRef!.CallVoid("add", actionCallback);
+                return this;
+            }
+            /// <summary>
+            /// Removes any handlers matching the function and context parameters. If no handlers are left after removing, then it cancels the animation frame.
+            /// </summary>
+            /// <param name="actionCallback"></param>
+            /// <returns></returns>
+            public Ticker Remove(ActionCallback<Ticker> actionCallback)
+            {
+                JSRef!.CallVoid("remove", actionCallback);
+                return this;
+            }
+            /// <summary>
+            /// Register a handler for tick events. Calls continuously unless it is removed or the ticker is stopped.
+            /// </summary>
+            /// <param name="actionCallback"></param>
+            public Ticker Add(Action<Ticker> actionCallback)
+            {
+                JSRef!.CallVoid("add", Callback.RefAdd(actionCallback));
+                return this;
+            }
+            /// <summary>
+            /// Removes any handlers matching the function and context parameters. If no handlers are left after removing, then it cancels the animation frame.
+            /// </summary>
+            /// <param name="actionCallback"></param>
+            /// <returns></returns>
+            public Ticker Remove(Action<Ticker> actionCallback) {
+
+                var cb = Callback.RefGet(actionCallback, false);
+                if (cb == null) return this;
+                Remove(cb);
+                Callback.RefDel(actionCallback);
+                return this;
+            }
             #endregion
             #region Events
+            /// <summary>
+            /// Register or unregister a handler for tick events. Registered handlers are called continuously unless removed or the ticker is stopped.
+            /// </summary>
             public JSEventCallback<Ticker> OnTick { get => new JSEventCallback<Ticker>(o => Add((ActionCallback<Ticker>)o), o => Remove((ActionCallback<Ticker>)o)); set { } }
             #endregion
         }
