@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35103.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpawnDev.BlazorJS.PixiJS", "SpawnDev.BlazorJS.PixiJS\SpawnDev.BlazorJS.PixiJS.csproj", "{CC46A3DB-7968-4A0E-B116-D9AA32ECF390}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpawnDev.BlazorJS.PixiJS.Demo", "SpawnDev.BlazorJS.PixiJS.Demo\SpawnDev.BlazorJS.PixiJS.Demo.csproj", "{7138F6E5-E30B-4454-991C-9011E74BC294}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CC46A3DB-7968-4A0E-B116-D9AA32ECF390}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC46A3DB-7968-4A0E-B116-D9AA32ECF390}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC46A3DB-7968-4A0E-B116-D9AA32ECF390}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC46A3DB-7968-4A0E-B116-D9AA32ECF390}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7138F6E5-E30B-4454-991C-9011E74BC294}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7138F6E5-E30B-4454-991C-9011E74BC294}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7138F6E5-E30B-4454-991C-9011E74BC294}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7138F6E5-E30B-4454-991C-9011E74BC294}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E04B364F-224D-4CE8-AF60-6C94645538BF}
+	EndGlobalSection
+EndGlobal
