@@ -100,7 +100,7 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// <param name="actionCallback"></param>
             public Ticker Add(Action<Ticker> actionCallback)
             {
-                JSRef!.CallVoid("add", Callback.RefAdd(actionCallback));
+                JSRef!.CallVoid("add", CallbackRef.RefAdd(actionCallback));
                 return this;
             }
             /// <summary>
@@ -140,12 +140,13 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// <returns></returns>
             public Ticker Remove(Action<Ticker> actionCallback) {
 
-                var cb = Callback.RefGet(actionCallback, false);
+                var cb = CallbackRef.RefGet(actionCallback, false);
                 if (cb == null) return this;
                 Remove(cb);
-                Callback.RefDel(actionCallback);
+                CallbackRef.RefDel(actionCallback);
                 return this;
             }
+            static CallbackRef CallbackRef = new CallbackRef();
             #endregion
             #region Events
             /// <summary>

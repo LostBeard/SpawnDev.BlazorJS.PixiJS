@@ -28,7 +28,6 @@ namespace SpawnDev.BlazorJS.PixiJS
             public float Y { get => JSRef!.Get<float>("y"); set => JSRef!.Set("y", value); }
             public float Width { get => JSRef!.Get<float>("width"); set => JSRef!.Set("width", value); }
             public float Height { get => JSRef!.Get<float>("height"); set => JSRef!.Set("height", value); }
-
             #endregion
         }
     }
