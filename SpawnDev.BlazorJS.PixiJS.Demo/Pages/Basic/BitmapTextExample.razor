@@ -1,0 +1,89 @@
+﻿@page "/examples/basic/bitmap-text"
+
+@using SpawnDev.BlazorJS
+@using SpawnDev.BlazorJS.JSObjects
+@using static SpawnDev.BlazorJS.PixiJS.PIXI
+@using SpawnDev.BlazorJS.PixiJS
+@using SpawnDev.BlazorJS.JsonConverters
+@implements IDisposable
+
+<p>
+    
+</p>
+<div style="width: 400px; height: 400px;" @ref="containerElRef"></div>
+@code {
+    [Inject]
+    BlazorJSRuntime JS { get; set; }
+    ElementReference? containerElRef = null;
+    Application? app = null;
+    Container? container = null;
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await Init();
+        }
+    }
+    async Task Init()
+    {
+        using var document = JS.GetDocument();
+
+        // Create a new application
+        app = new Application();
+
+        // Initialize the application
+        await app.Init(new ApplicationOptions { Background = "#1099bb", ResizeTo = containerElRef });
+
+        // Append the application canvas to the document body
+        using var htmlElement = new HTMLElement(containerElRef!.Value);
+        htmlElement!.AppendChild(app.Canvas);
+
+        // Create and add a container to the stage
+        container = new Container();
+        using var stage = app.Stage;
+        stage!.AddChild(container);
+
+        // Create and add text to the container
+        var textStyle = new
+        {
+            fontFamily = "Arial",
+            fontSize = 16,
+            fill = "#ddd"
+        };
+        var displayText = new BitmapText("Hello, PixiJS!", textStyle);
+
+        displayText.X = 100;
+        displayText.Y = 100;
+        displayText.Anchor.Set(0.5f);
+
+        container.AddChild(displayText);
+
+        // Move the container to the center
+        container.X = app.Screen.Width / 2;
+        container.Y = app.Screen.Height / 2;
+
+        // Center the text in local container coordinates
+        container.Pivot.X = container.Width / 2;
+        container.Pivot.Y = container.Height / 2;
+
+        // Listen for animate update
+        using var ticker = app.Ticker;
+        ticker.Add(Tick);
+    }
+    void Tick(Ticker time)
+    {
+        // Continuously rotate the container!
+        // * use delta to create frame-independent transform *
+        container!.Rotation -= 0.01f * time.DeltaTime;
+    }
+    public void Dispose()
+    {
+        if (app != null)
+        {
+            using var ticker = app.Ticker;
+            ticker.Remove(Tick);
+            app.Dispose();
+        }
+        container?.Dispose();
+    }
+}
