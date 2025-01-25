@@ -14,18 +14,25 @@ namespace SpawnDev.BlazorJS.PixiJS
         /// <summary>
         /// https://pixijs.download/release/docs/rendering.AutoDetectOptions.html
         /// </summary>
-        public class AutoDetectOptions : SharedRendererOptions
+        public class AutoDetectOptions : RendererOptions
         {
-
-        }
-        // https://pixijs.download/release/docs/rendering.SharedRendererOptions.html
-        public class SharedRendererOptions
-        {
-
-        }
-        public class RendererOptions
-        {
-
+            /// <summary>
+            /// The preferred renderer type. WebGPU is recommended as its generally faster than WebGL.
+            /// </summary>
+            [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+            public string? Preference { get; set; }
+            /// <summary>
+            /// Optional WebGLOptions to pass only to the WebGL renderer
+            /// </summary>
+            [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+            [JsonPropertyName("webgl")]
+            public WebGLOptions? WebGL { get; set; }
+            /// <summary>
+            /// Optional WebGPUOptions to pass only to WebGPU renderer.
+            /// </summary>
+            [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+            [JsonPropertyName("webgpu")]
+            public WebGPUOptions? WebGPU { get; set; }
         }
         /// <summary>
         /// Convenience class to create a new PixiJS application.<br/>

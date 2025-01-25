@@ -9,6 +9,7 @@ namespace SpawnDev.BlazorJS.PixiJS
         /// <summary>
         /// Application options supplied to the init method.<br/>
         /// https://pixijs.download/release/docs/app.ApplicationOptions.html
+        /// https://pixijs.download/dev/docs/app.ApplicationOptions.html
         /// </summary>
         public class ApplicationOptions : AutoDetectOptions
         {
@@ -39,6 +40,11 @@ namespace SpawnDev.BlazorJS.PixiJS
             [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
             public bool? ClearBeforeRender { get; set; }
             /// <summary>
+            /// Sets antialias
+            /// </summary>
+            [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+            public bool? Antialias { get; set; }
+            /// <summary>
             /// Element to automatically resize the renderer to.
             /// interface ResizePluginOptions
             /// </summary>
@@ -58,6 +64,8 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// </summary>
             [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
             public bool? SharedTicker { get; set; }
+
+
         }
     }
 }

@@ -1,11 +1,4 @@
-﻿using Microsoft.JSInterop;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SpawnDev.BlazorJS.PixiJS
+﻿namespace SpawnDev.BlazorJS.PixiJS
 {
     // https://cdn.jsdelivr.net/npm/pixi.js@8.x/dist/pixi.min.js
     // https://pixijs.download/release/docs/index.html
