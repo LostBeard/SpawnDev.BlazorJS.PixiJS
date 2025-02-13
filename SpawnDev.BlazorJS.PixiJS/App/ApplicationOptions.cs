@@ -8,8 +8,7 @@ namespace SpawnDev.BlazorJS.PixiJS
     {
         /// <summary>
         /// Application options supplied to the init method.<br/>
-        /// https://pixijs.download/release/docs/app.ApplicationOptions.html
-        /// https://pixijs.download/dev/docs/app.ApplicationOptions.html
+        /// https://api.pixijs.io/@pixi/app/PIXI/Application.html<br/>
         /// </summary>
         public class ApplicationOptions : AutoDetectOptions
         {

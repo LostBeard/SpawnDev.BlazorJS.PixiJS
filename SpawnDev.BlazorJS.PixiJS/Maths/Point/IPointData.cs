@@ -2,7 +2,11 @@
 {
     public static partial class PIXI
     {
-        public interface PointData
+        /// <summary>
+        /// Common interface for points. Both Point and ObservablePoint implement it<br/>
+        /// https://pixijs.download/release/docs/maths.PointData.html
+        /// </summary>
+        public interface IPointData
         {
             /// <summary>
             /// X coord

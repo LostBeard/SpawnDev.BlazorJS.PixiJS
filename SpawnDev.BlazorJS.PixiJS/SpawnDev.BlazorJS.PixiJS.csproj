@@ -22,13 +22,13 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Include="Assets\icon-128.png" Pack="true" PackagePath="\" />
 		<None Include="..\README.md" Pack="true" PackagePath="\" />
 		<None Include="..\LICENSE.txt" Pack="true" PackagePath="\" />
+		<None Include="icon-128.png" Pack="true" PackagePath="\" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="SpawnDev.BlazorJS" Version="2.5.37" />
+		<PackageReference Include="SpawnDev.BlazorJS" Version="2.5.39" />
 	</ItemGroup>
 
 	<ItemGroup Condition=" '$(TargetFramework)' == 'net6.0' ">

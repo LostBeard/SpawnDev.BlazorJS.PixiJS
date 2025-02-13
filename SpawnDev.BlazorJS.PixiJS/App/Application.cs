@@ -37,7 +37,7 @@ namespace SpawnDev.BlazorJS.PixiJS
         /// <summary>
         /// Convenience class to create a new PixiJS application.<br/>
         /// This class automatically creates the renderer, ticker and root container.<br/>
-        /// https://pixijs.download/release/docs/app.Application.html
+        /// https://api.pixijs.io/@pixi/app/PIXI/Application.html
         /// </summary>
         public class Application : JSObject
         {
