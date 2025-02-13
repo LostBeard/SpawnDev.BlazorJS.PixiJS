@@ -5,10 +5,12 @@
 @using SpawnDev.BlazorJS.JsonConverters
 @implements IDisposable
 
-<p>
-    Source: <a href="https://pixijs.com/8.x/examples/basic/blend-modes">Blend Modes Example</a>
-</p>
-<div style="width: 400px; height: 400px;" @ref="containerElRef"></div>
+<div class="container">
+    <p>
+        Source: <a href="https://pixijs.com/8.x/examples/basic/blend-modes">Blend Modes Example</a>
+    </p>
+    <div style="width: 400px; height: 400px;" @ref="containerElRef"></div>
+</div>
 @code {
     [Inject]
     BlazorJSRuntime JS { get; set; }

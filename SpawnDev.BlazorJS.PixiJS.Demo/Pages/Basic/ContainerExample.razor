@@ -1,15 +1,16 @@
-﻿@page "/"
-@page "/examples/basic/container"
+﻿@page "/examples/basic/container"
 
 @using SpawnDev.BlazorJS.JSObjects
 @using static SpawnDev.BlazorJS.PixiJS.PIXI
 @using SpawnDev.BlazorJS.JsonConverters
 @implements IDisposable
 
-<p>
-    Source: <a href="https://pixijs.com/8.x/examples/basic/container">Basic Container Example</a>
-</p>
-<div style="width: 400px; height: 400px;" @ref="containerElRef"></div>
+<div class="container">
+    <p>
+        Source: <a href="https://pixijs.com/8.x/examples/basic/container">Basic Container Example</a>
+    </p>
+    <div style="width: 400px; height: 400px;" @ref="containerElRef"></div>
+</div>
 @code {
     [Inject]
     BlazorJSRuntime JS { get; set; }

@@ -1,16 +1,49 @@
 ﻿@inherits LayoutComponentBase
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
 
-    <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+<PageTitle>@Title</PageTitle>
+
+<SpawnDev.BlazorJS.PixiJS.Demo.Layout.RadzenThemeContainer Theme="material-dark" />
+
+<link rel="stylesheet" href="css/radzen-tweak.css" />
+
+<RadzenComponents />
+<RadzenLayout Style="grid-template-columns: auto 1fr auto; grid-template-areas: 'rz-header rz-header rz-header' 'rz-sidebar rz-body rz-right-sidebar'">
+    <RadzenHeader>
+        <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Gap="0" JustifyContent="JustifyContent.SpaceBetween">
+            <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Gap="0" JustifyContent="JustifyContent.Left">
+                <RadzenSidebarToggle Style="margin: 0 0.5rem 0 0;" Click="@(() => leftSidebarExpanded = !leftSidebarExpanded)" />
+                <RadzenLabel Text="@Title" />
+            </RadzenStack>
+            <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Gap="0" JustifyContent="JustifyContent.Right">
+                <AppTrayArea></AppTrayArea>
+                <RadzenSidebarToggle Style="@($"margin: 0; {(rightSidebarEnabled ? "" : "display: none;")}")" Click="@(() => rightSidebarExpanded = !rightSidebarExpanded)" />
+            </RadzenStack>
+        </RadzenStack>
+    </RadzenHeader>
+    <RadzenSidebar @bind-Expanded="@leftSidebarExpanded" Responsive="true">
+        <RadzenPanelMenu>
+            <RadzenPanelMenuItem Text="Examples" Icon="home" Path="" Match="NavLinkMatch.All" />
+            <RadzenPanelMenuItem Text="Basic" Icon="home">
+                <RadzenPanelMenuItem Text="Container" Icon="home" Path="examples/basic/container" />
+                <RadzenPanelMenuItem Text="Blend Modes" Icon="home" Path="examples/basic/blendmodes" />
+            </RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Text" Icon="home">
+                <RadzenPanelMenuItem Text="Bitmap Text" Icon="home" Path="examples/basic/bitmap-text" />
+            </RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="GitHub Repo" Icon="code" Path="https://github.com/LostBeard/SpawnDev.BlazorJS.PixiJS" Target="_blank" />
+        </RadzenPanelMenu>
+        <div class="rz-p-4">
+            <!-- Left Sidebar -->
         </div>
-
-        <article class="content px-4">
+    </RadzenSidebar>
+    <RadzenBody Style="width: auto; position: relative; padding: 0;">
+        <div style="position: absolute; left: 0; top: 0; right: 0; bottom: 0;">
             @Body
-        </article>
-    </main>
-</div>
+        </div>
+    </RadzenBody>
+    <RadzenSidebar Responsive="false" @bind-Expanded="@rightSidebarExpanded" Style="grid-area: rz-right-sidebar">
+        <div class="rz-p-4">
+            <!-- Right Sidebar -->
+        </div>
+    </RadzenSidebar>
+</RadzenLayout>

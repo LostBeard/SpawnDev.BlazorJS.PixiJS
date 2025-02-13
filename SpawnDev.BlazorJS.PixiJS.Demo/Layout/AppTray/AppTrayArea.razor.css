@@ -1,0 +1,38 @@
+﻿
+.app-tray-area {
+    border-radius: 0.5rem;
+    border: 1px solid grey;
+    display: flex;
+    flex-direction: row;
+}
+
+.app-tray-icon {
+    position: relative;
+    height: 36px;
+    min-width: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin: 0 0;
+}
+
+    .app-tray-icon:hover {
+        background-color: #ffffff12;
+    }
+
+.app-tray-icon-tltext {
+    top: 0;
+    right: 0;
+    min-width: 1.2rem;
+    position: absolute;
+    padding: 0 0.2px;
+    background-color: #770000cc;
+    border: 1px solid #808080;
+    border-radius: 10px;
+    text-align: center;
+}
+
+    .app-tray-icon-tltext:empty {
+        display: none;
+    }

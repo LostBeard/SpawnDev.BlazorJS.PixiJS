@@ -1,0 +1,11 @@
+﻿<div class="app-tray-area">
+    @foreach (var trayIcon in TrayIconService.TrayIcons)
+    {
+        if (!trayIcon.Visible) continue;
+        var style = $"{trayIcon.Style}";
+        <div class="app-tray-icon" title="@trayIcon.Title" style="@trayIcon.Style" tabindex="0" @oncontextmenu="trayIcon.ContextCallback" @oncontextmenu:preventDefault=true @onclick="trayIcon.ClickCallback" @onclick:preventDefault=true>
+            <RadzenIcon IconStyle="@trayIcon.IconStyle" Icon="@trayIcon.Icon"></RadzenIcon>
+            <div class="app-tray-icon-tltext">@trayIcon.TLText</div>
+        </div>
+    }
+</div>
