@@ -1,0 +1,126 @@
+﻿@page "/examples/graphics/simple"
+
+@using SpawnDev.BlazorJS
+@using SpawnDev.BlazorJS.JSObjects
+@using static SpawnDev.BlazorJS.PixiJS.PIXI
+@using SpawnDev.BlazorJS.PixiJS
+@using SpawnDev.BlazorJS.JsonConverters
+@implements IDisposable
+
+<div class="container">
+    <p>
+        Source: <a href="https://pixijs.com/8.x/examples/text/from-font">From Font Example</a>
+    </p>
+    <div style="width: 800px; height: 600px;" @ref="containerElRef"></div>
+</div>
+@code {
+    [Inject]
+    BlazorJSRuntime JS { get; set; }
+    ElementReference containerElRef;
+    Application? app = null;
+    Container? container = null;
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await Init();
+        }
+    }
+    async Task Init()
+    {
+        using var document = JS.GetDocument();
+
+        // Create a new application
+        app = new Application();
+
+        // Initialize the application
+        await app.Init(new ApplicationOptions { Background = "#1099bb", ResizeTo = containerElRef });
+
+        // Append the application canvas to the document body
+        using var htmlElement = new HTMLElement(containerElRef);
+        htmlElement!.AppendChild(app.Canvas);
+
+        var graphics = new Graphics();
+
+        // Rectangle
+        graphics.Rect(50, 50, 100, 100);
+        graphics.Fill(0xde3249);
+
+        // Rectangle + line style 1
+        graphics.Rect(200, 50, 100, 100);
+        graphics.Fill(0x650a5a);
+        graphics.Stroke(new StrokeStyle { Width = 2, Color = 0xfeeb77 });
+
+        // Rectangle + line style 2
+        graphics.Rect(350, 50, 100, 100);
+        graphics.Fill(0xc34288);
+        graphics.Stroke(new StrokeStyle { Width = 10, Color = 0xffbd01 });
+
+        // Rectangle 2
+        graphics.Rect(530, 50, 140, 100);
+        graphics.Fill(0xaa4f08);
+        graphics.Stroke(new StrokeStyle { Width = 2, Color = 0xffffff });
+
+        // Circle
+        graphics.Circle(100, 250, 50);
+        graphics.Fill(0xde3249, 1);
+
+        // Circle + line style 1
+        graphics.Circle(250, 250, 50);
+        graphics.Fill(0x650a5a, 1);
+        graphics.Stroke(new StrokeStyle { Width = 2, Color = 0xfeeb77 });
+
+        // Circle + line style 2
+        graphics.Circle(400, 250, 50);
+        graphics.Fill(0xc34288, 1);
+        graphics.Stroke(new StrokeStyle { Width = 10, Color = 0xffbd01 });
+
+        // Ellipse + line style 2
+        graphics.Ellipse(600, 250, 80, 50);
+        graphics.Fill(0xaa4f08, 1);
+        graphics.Stroke(new StrokeStyle { Width = 2, Color = 0xffffff });
+
+        // Draw a shape
+        graphics.MoveTo(50, 350);
+        graphics.LineTo(250, 350);
+        graphics.LineTo(100, 400);
+        graphics.LineTo(50, 350);
+        graphics.Fill(0xff3300);
+        graphics.Stroke(new StrokeStyle { Width = 4, Color = 0xffd900 });
+
+        // Draw a rounded rectangle
+        graphics.RoundRect(50, 440, 100, 100, 16);
+        graphics.Fill(0x650a5a, 0.25f);
+        graphics.Stroke(new StrokeStyle { Width = 2, Color = 0xff00ff });
+
+        // Draw star
+        graphics.Star(360, 370, 5, 50);
+        graphics.Fill(0x35cc5a);
+        graphics.Stroke(new StrokeStyle { Width = 2, Color = 0xffffff });
+
+        // Draw star 2
+        graphics.Star(280, 510, 7, 50);
+        graphics.Fill(0xffcc5a);
+        graphics.Stroke(new StrokeStyle{ Width = 2, Color = 0xfffffd });
+
+        // Draw star 3
+        graphics.Star(470, 450, 4, 50);
+        graphics.Fill(0x55335a);
+        graphics.Stroke(new StrokeStyle { Width = 2, Color = 0xfffffd });
+
+        // Draw polygon
+        var path = new int[] { 600, 370, 700, 460, 780, 420, 730, 570, 590, 520 };
+
+        graphics.Poly(path);
+        graphics.Fill(0x3500fa);
+
+        app.Stage.AddChild(graphics);
+    }
+    public void Dispose()
+    {
+        if (app != null)
+        {
+            app.Dispose();
+        }
+    }
+}

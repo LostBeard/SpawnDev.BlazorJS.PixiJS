@@ -44,7 +44,7 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// A FillPattern for pattern/texture fills<br/>
             /// string | number | FillStyle | FillGradient | FillPattern
             /// </summary>
-            public Union<string, float, FillGradient, FillPattern, FillStyle>? Fill { get => JSRef!.Get<Union<string, float, FillGradient, FillPattern, FillStyle>?>("fill"); set => JSRef!.Set("fill", value); }
+            public Union<string, float, FillGradient, FillPattern, IFillStyle>? Fill { get => JSRef!.Get<Union<string, float, FillGradient, FillPattern, IFillStyle>?>("fill"); set => JSRef!.Set("fill", value); }
             /// <summary>
             /// The font family, can be a single font name, or a list of names where the first is the preferred font.
             /// </summary>
