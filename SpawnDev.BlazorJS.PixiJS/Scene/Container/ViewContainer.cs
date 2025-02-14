@@ -5,12 +5,13 @@ namespace SpawnDev.BlazorJS.PixiJS
     public static partial class PIXI
     {
         /// <summary>
-        /// A view is something that is able to be rendered by the renderer.
+        /// A ViewContainer is a type of container that represents a view. This view can be a Sprite, a Graphics object, or any other object that can be rendered. This class is abstract and should not be used directly.<br/>
+        /// https://pixijs.download/v8.7.1/docs/scene.ViewContainer.html
         /// </summary>
-        public class View : JSObject, IView
+        public class ViewContainer : Container, IView
         {
             /// <inheritdoc/>
-            public View(IJSInProcessObjectReference _ref) : base(_ref) { }
+            public ViewContainer(IJSInProcessObjectReference _ref) : base(_ref) { }
             /// <inheritdoc/>
             public long Uid => JSRef!.Get<long>("uid");
             /// <inheritdoc/>

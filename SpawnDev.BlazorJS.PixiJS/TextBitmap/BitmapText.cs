@@ -7,10 +7,9 @@ namespace SpawnDev.BlazorJS.PixiJS
         /// <summary>
         /// A BitmapText object will create a line or multiple lines of text using bitmap font.<br/>
         /// The primary advantage of this class over Text is that all of your textures are pre-generated and loading, meaning that rendering fast, and changing text has no performance implications.<br/>
-        /// https://api.pixijs.io/@pixi/text-bitmap/PIXI/BitmapText.html
-        /// https://pixijs.download/v4.3.1/docs/PIXI.extras.BitmapText.html
+        /// https://pixijs.download/v8.7.1/docs/scene.BitmapText.html
         /// </summary>
-        public class BitmapText : Container, View
+        public class BitmapText : AbstractText, IView
         {
             #region Constructors
             /// <summary>
@@ -24,6 +23,22 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// <param name="text"></param>
             /// <param name="style"></param>
             public BitmapText(string text, object style) : base(JS.New("PIXI.BitmapText", text, style)) { }
+            /// <summary>
+            /// Creates a new instance
+            /// </summary>
+            /// <param name="text"></param>
+            /// <param name="style"></param>
+            public BitmapText(string text, TextStyle style) : base(JS.New("PIXI.BitmapText", text, style)) { }
+            /// <summary>
+            /// Creates a new instance
+            /// </summary>
+            /// <param name="text"></param>
+            /// <param name="style"></param>
+            public BitmapText(string text, TextStyleOptions style) : base(JS.New("PIXI.BitmapText", text, style)) { }
+            /// <summary>
+            /// Creates a new instance
+            /// </summary>
+            public BitmapText(TextOptions textOptions) : base(JS.New("PIXI.BitmapText", textOptions)) { }
             #endregion
             #region Properties
             /// <summary>

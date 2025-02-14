@@ -7,7 +7,7 @@ namespace SpawnDev.BlazorJS.PixiJS
         /// <summary>
         /// The Sprite object is one of the most important objects in PixiJS. It is a drawing item that can be added to a scene and rendered to the screen.
         /// </summary>
-        public class Sprite : Container, View
+        public class Sprite : Container, IView
         {
             #region Constructors
             /// <summary>

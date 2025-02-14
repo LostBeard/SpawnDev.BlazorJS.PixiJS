@@ -1,33 +1,20 @@
 ﻿using Microsoft.JSInterop;
-using SpawnDev.BlazorJS.JSObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SpawnDev.BlazorJS.PixiJS
 {
     public static partial class PIXI
     {
-        public class AbstractText : JSObject
+        /// <summary>
+        /// https://pixijs.download/release/docs/scene.AbstractText.html
+        /// </summary>
+        public class AbstractText : ViewContainer
         {
-            #region Constructors
-            /// <summary>
-            /// Deserialization constructor
-            /// </summary>
-            /// <param name="_ref"></param>
+            /// <inheritdoc/>
             public AbstractText(IJSInProcessObjectReference _ref) : base(_ref) { }
-            #endregion
-            #region Properties
-
-            #endregion
-            #region Methods
-
-            #endregion
-            #region Events
-
-            #endregion
+            /// <summary>
+            /// The anchor sets the origin point of the text. The default is (0,0), this means the text's origin is the top left.
+            /// </summary>
+            public ObservablePoint Anchor { get => JSRef!.Get<ObservablePoint>("anchor"); set => JSRef!.Set("anchor", value); }
         }
     }
 }

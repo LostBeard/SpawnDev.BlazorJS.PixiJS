@@ -1,0 +1,129 @@
+﻿@page "/examples/basic/pixi-text"
+
+@using SpawnDev.BlazorJS
+@using SpawnDev.BlazorJS.JSObjects
+@using static SpawnDev.BlazorJS.PixiJS.PIXI
+@using SpawnDev.BlazorJS.PixiJS
+@using SpawnDev.BlazorJS.JsonConverters
+@implements IDisposable
+
+<div class="container">
+    <p>
+        Source: <a href="https://pixijs.com/8.x/examples/text/bitmap-text">Bitmap Text Example</a>
+    </p>
+    <div style="width: 800px; height: 600px;" @ref="containerElRef"></div>
+</div>
+@code {
+    [Inject]
+    BlazorJSRuntime JS { get; set; }
+    ElementReference containerElRef;
+    Application? app = null;
+    Container? container = null;
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await Init();
+        }
+    }
+    async Task Init()
+    {
+        using var document = JS.GetDocument();
+
+        // Create a new application
+        app = new Application();
+
+        // Initialize the application
+        await app.Init(new ApplicationOptions { Background = "#1099bb", ResizeTo = containerElRef });
+
+        // Append the application canvas to the document body
+        using var htmlElement = new HTMLElement(containerElRef);
+        htmlElement!.AppendChild(app.Canvas);
+
+        var basicText = new PIXI.Text(new TextOptions { Text = "Basic text in pixi" });
+
+        basicText.X = 50;
+        basicText.Y = 100;
+
+        app.Stage!.AddChild(basicText);
+
+        // Create gradient fill
+        var fill = new FillGradient(0, 0, 0, 36f * 1.7f * 7f);
+
+        var colors = new int[] { 0xffffff, 0x00ff99 }.ToList().Select((color) => Color.Shared.SetValue(color).ToNumber()).ToArray();
+
+        for (var i = 0; i < colors.Length; i++)
+        {
+            var number = colors[i];
+            var ratio = i / colors.Length;
+            fill.AddColorStop(ratio, number);
+        }
+
+        var style = new PIXI.TextStyle(new TextStyleOptions
+        {
+            FontFamily = "Arial",
+            FontSize = 36,
+            FontStyle = "italic",
+            FontWeight = "bold",
+            Fill = fill,
+            Stroke = new StrokeStyle { Color = "#4a1850", Width = 5, Join = "round" },
+            DropShadow = new TextDropShadow
+            {
+                Color = "#000000",
+                Blur = 4,
+                Angle = (float)(Math.PI / 6d),
+                Distance = 6,
+            },
+            WordWrap = true,
+            WordWrapWidth = 440,
+        });
+
+        var richText = new PIXI.Text(new TextOptions
+        {
+            Text = "Rich text with a lot of options and across multiple lines",
+            Style = style,
+        });
+
+        richText.X = 50;
+        richText.Y = 220;
+
+        app.Stage!.AddChild(richText);
+
+        var skewStyle = new PIXI.TextStyle(new TextStyleOptions
+        {
+            FontFamily = "Arial",
+            DropShadow = new TextDropShadow
+            {
+                Alpha = 0.8f,
+                Angle = 2.1f,
+                Blur = 4f,
+                Color = "0x111111",
+                Distance = 10,
+            },
+            Fill = "#ffffff",
+            Stroke = new StrokeStyle { Color = "#004620", Width = 12, Join = "round" },
+            FontSize = 60,
+            FontWeight = "lighter",
+        });
+
+        var skewText = new PIXI.Text(new TextOptions
+        {
+            Text = "SKEW IS COOL",
+            Style = skewStyle,
+        });
+
+        skewText.Skew.Set(0.65f, -0.3f);
+        skewText.Anchor.Set(0.5f, 0.5f);
+        skewText.X = 300;
+        skewText.Y = 480;
+
+        app.Stage.AddChild(skewText);
+    }
+    public void Dispose()
+    {
+        if (app != null)
+        {
+            app.Dispose();
+        }
+    }
+}
