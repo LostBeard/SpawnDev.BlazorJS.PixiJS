@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "SpawnDev.BlazorJS.PixiJS.Demo",
   "resources": {
-    "hash": "sha256-MbMhwW3Vo+6hQB3b/XSR14Y6SGRkGjyuGY9toSsm9sE=",
+    "hash": "sha256-7ZklG+iTiAxIVqZ2UcHGfvmLQDp4o9x50VVGBM0/xPw=",
     "jsModuleNative": {
       "dotnet.native.8.0.13.6wu7g3y5wv.js": "sha256-DVbu2r6twkTgubhBlbGPBbWaYIhX6IN00uTEtEmjhmI="
     },
@@ -36,8 +36,8 @@
       "Microsoft.JSInterop.wasm": "sha256-BcQjMDEJq0EPfYHdlOVRE3Izxe0HRdI1dwbqxslm5So=",
       "Microsoft.JSInterop.WebAssembly.wasm": "sha256-3/M5Qj+EeMp8ANXvZmxLvL3MA4eWTJvlxq/NsNWJChs=",
       "Radzen.Blazor.wasm": "sha256-gV+AOPBnKyP+CFQod7eaQ0sQATZq2JNbo2gnAVEYons=",
-      "SpawnDev.BlazorJS.PixiJS.Demo.wasm": "sha256-VB2optVb1mhxpLBKDA4rM+5pY3+XwMbkQCcZa+8YfJQ=",
-      "SpawnDev.BlazorJS.PixiJS.wasm": "sha256-7L3HUWnga3NdIBgJ9x1fZfXGIsBL2x5IK8UaLpKzfmA=",
+      "SpawnDev.BlazorJS.PixiJS.Demo.wasm": "sha256-ICVbs5g/SOtjRKSvYOrHiiGqIOfnIn+uxUW+/44BSLw=",
+      "SpawnDev.BlazorJS.PixiJS.wasm": "sha256-ShRHmTAxgPEwxDrXXz1CVROkTlSKNFVUcyEkSErCIKo=",
       "SpawnDev.BlazorJS.wasm": "sha256-v17mTcc6vtiD0y2ZAF/1qTYk1sWfJdLyHlp2MmbX1D4=",
       "System.Collections.Concurrent.wasm": "sha256-uQTIz5HJ8tTQqfVtUfFhjNlGWRsoGVgJLQhRGzWb0GQ=",
       "System.Collections.Immutable.wasm": "sha256-T8x7FUVUWd9ntvGggxiN1zkcR79zLoz/OZmbqLQ1D58=",
