@@ -1,0 +1,75 @@
+﻿@page "/examples/basic/from-font"
+
+@using SpawnDev.BlazorJS
+@using SpawnDev.BlazorJS.JSObjects
+@using static SpawnDev.BlazorJS.PixiJS.PIXI
+@using SpawnDev.BlazorJS.PixiJS
+@using SpawnDev.BlazorJS.JsonConverters
+@implements IDisposable
+
+<div class="container">
+    <p>
+        Source: <a href="https://pixijs.com/8.x/examples/text/from-font">From Font Example</a>
+    </p>
+    <div style="width: 800px; height: 600px;" @ref="containerElRef"></div>
+</div>
+@code {
+    [Inject]
+    BlazorJSRuntime JS { get; set; }
+    ElementReference containerElRef;
+    Application? app = null;
+    Container? container = null;
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await Init();
+        }
+    }
+    async Task Init()
+    {
+        using var document = JS.GetDocument();
+
+        // Create a new application
+        app = new Application();
+
+        // Initialize the application
+        await app.Init(new ApplicationOptions { Background = "#1099bb", ResizeTo = containerElRef });
+
+        // Append the application canvas to the document body
+        using var htmlElement = new HTMLElement(containerElRef);
+        htmlElement!.AppendChild(app.Canvas);
+
+        // Add font files to the bundle
+        Assets.AddBundle("fonts", new UnresolvedAsset[]{
+            new UnresolvedAsset{ Alias = "ChaChicle", Src = "https://pixijs.com/assets/webfont-loader/ChaChicle.ttf" },
+            new UnresolvedAsset{ Alias = "Lineal", Src = "https://pixijs.com/assets/webfont-loader/Lineal.otf" },
+            new UnresolvedAsset{ Alias = "Dotrice Regular", Src = "https://pixijs.com/assets/webfont-loader/Dotrice-Regular.woff" },
+            new UnresolvedAsset{ Alias = "Crosterian", Src = "https://pixijs.com/assets/webfont-loader/Crosterian.woff2" },
+        });
+
+        // Load the font bundle
+        await Assets.LoadBundle("fonts");
+
+        var text1 = new PIXI.Text(new TextOptions { Text = "ChaChicle.ttf", Style = new TextStyleOptions { FontFamily = "ChaChicle", FontSize = 50 } });
+        var text2 = new PIXI.Text(new TextOptions { Text = "Lineal.otf", Style = new TextStyleOptions { FontFamily = "Lineal", FontSize = 50 } });
+        var text3 = new PIXI.Text(new TextOptions { Text = "Dotrice Regular.woff", Style = new TextStyleOptions { FontFamily = "Dotrice Regular", FontSize = 50 } });
+        var text4 = new PIXI.Text(new TextOptions { Text = "Crosterian.woff2", Style = new TextStyleOptions { FontFamily = "Crosterian", FontSize = 50 } });
+
+        text2.Y = 150;
+        text3.Y = 300;
+        text4.Y = 450;
+
+        app.Stage.AddChild(text1);
+        app.Stage.AddChild(text2);
+        app.Stage.AddChild(text3);
+        app.Stage.AddChild(text4);
+    }
+    public void Dispose()
+    {
+        if (app != null)
+        {
+            app.Dispose();
+        }
+    }
+}

@@ -22,7 +22,7 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// <returns></returns>
             public async Task<T> Load<T>(string uri, ProgressCallbackDelegate? progressCallback = null)
             {
-                using var callback = progressCallback == null ? null : new ActionCallback<float>((progress)=> progressCallback(progress));
+                using var callback = progressCallback == null ? null : new ActionCallback<float>((progress) => progressCallback(progress));
                 return await JSRef!.CallAsync<T>("load", uri, callback);
             }
             /// <summary>
@@ -52,12 +52,46 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// <param name="uri"></param>
             /// <param name="progressCallback"></param>
             /// <returns></returns>
-            public async  Task<Dictionary<string, T>> Load<T>(IEnumerable<string> uri, ProgressCallbackDelegate? progressCallback = null)
+            public async Task<Dictionary<string, T>> Load<T>(IEnumerable<string> uri, ProgressCallbackDelegate? progressCallback = null)
             {
                 using var callback = progressCallback == null ? null : new ActionCallback<float>((progress) => progressCallback(progress));
                 return await JSRef!.CallAsync<Dictionary<string, T>>("load", uri, callback);
             }
             public delegate void ProgressCallbackDelegate(float progress);
+
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="bundleId"></param>
+            /// <returns></returns>
+            public Task LoadBundle(string bundleId)=>JSRef!.CallVoidAsync("loadBundle", bundleId);
+
+            /// <summary>
+            /// This adds a bundle of assets in one go so that you can load them as a group.
+            /// </summary>
+            /// <param name="bundleId"></param>
+            /// <param name="assets"></param>
+            public void AddBundle(string bundleId, IEnumerable<string> assets) => JSRef!.CallVoidAsync("addBundle", bundleId, assets);
+            /// <summary>
+            /// This adds a bundle of assets in one go so that you can load them as a group.
+            /// </summary>
+            /// <param name="bundleId"></param>
+            /// <param name="assets"></param>
+            public void AddBundle(string bundleId, IEnumerable<UnresolvedAsset> assets) => JSRef!.CallVoidAsync("addBundle", bundleId, assets);
+            /// <summary>
+            /// This adds a bundle of assets in one go so that you can load them as a group.
+            /// </summary>
+            /// <param name="bundleId"></param>
+            /// <param name="asset"></param>
+            public void AddBundle(string bundleId, string asset) => JSRef!.CallVoidAsync("addBundle", bundleId, asset);
+            /// <summary>
+            /// This adds a bundle of assets in one go so that you can load them as a group.
+            /// </summary>
+            /// <param name="bundleId"></param>
+            /// <param name="asset"></param>
+            public void AddBundle(string bundleId, UnresolvedAsset asset) => JSRef!.CallVoidAsync("addBundle", bundleId, asset);
+
+
             #region Constructors
             /// <summary>
             /// Deserialization constructor
