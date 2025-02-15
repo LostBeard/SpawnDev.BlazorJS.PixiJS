@@ -12,7 +12,7 @@
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.12" PrivateAssets="all" />
 		<PackageReference Include="Radzen.Blazor" Version="6.0.1" />
 		<PackageReference Include="BlazorMonaco" Version="3.3.0" />
-		<PackageReference Include="SpawnDev.BlazorJS.CodeRunner" Version="0.0.16" />
+		<PackageReference Include="SpawnDev.BlazorJS.CodeRunner" Version="0.0.17" />
 	</ItemGroup>
 
 	<ItemGroup>
