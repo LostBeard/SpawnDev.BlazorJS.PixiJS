@@ -1,0 +1,44 @@
+﻿@page "/playground"
+
+<div style="width: 100%; height: 100%;">
+    <RadzenSplitter Orientation="Orientation.Horizontal">
+        <RadzenSplitterPane Size="50%" Min="30px" Max="90%">
+            <RadzenSplitter Orientation="Orientation.Vertical">
+                <RadzenSplitterPane Size="38px">
+                    <div style="width: 100%;">
+                        <RadzenMenu>
+                            <RadzenMenuItem Disabled="@_busy" Click="CompileAndRun" Icon="play_circle" />
+                        </RadzenMenu>
+                    </div>
+                </RadzenSplitterPane>
+                <RadzenSplitterPane>
+                    <StandaloneCodeEditor @ref=_Editor CssClass="razor-editor" Id="my-code-editor" ConstructionOptions="EditorConstructionOptions" />
+                </RadzenSplitterPane>
+            </RadzenSplitter>
+        </RadzenSplitterPane>
+        <RadzenSplitterPane>
+            @if (CompiledType != null)
+            {
+                <DynamicComponent Type="@CompiledType"></DynamicComponent>
+            }
+            else if (_busy && CompileLog.Count == 0)
+            {
+                <span style="padding: 4px;">Compiling...</span>
+            }
+            else if (CompileLog.Count > 0)
+            {
+                <pre style="padding: 4px;">
+                    @string.Join("\r\n", CompileLog)
+                </pre>
+            }
+            else
+            {
+                <span style="padding: 4px;">Click <RadzenIcon Icon="play_circle" /> to Run</span>
+            }
+        </RadzenSplitterPane>
+    </RadzenSplitter>
+</div>
+
+@code {
+
+}

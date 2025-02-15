@@ -4,6 +4,10 @@ namespace SpawnDev.BlazorJS.PixiJS
 {
     public static partial class PIXI
     {
+        /// <summary>
+        /// The Graphics class is primarily used to render primitive shapes such as lines, circles and rectangles to the display, and to color and fill them. However, you can also use a Graphics object to build a list of primitives to use as a mask, or as a complex hitArea.<br/>
+        /// https://pixijs.download/release/docs/scene.Graphics.html
+        /// </summary>
         public class Graphics : ViewContainer
         {
             /// <inheritdoc/>

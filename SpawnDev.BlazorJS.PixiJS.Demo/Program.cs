@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Radzen;
 using SpawnDev.BlazorJS;
+using SpawnDev.BlazorJS.CodeRunner;
 using SpawnDev.BlazorJS.PixiJS;
 using SpawnDev.BlazorJS.PixiJS.Demo;
 using SpawnDev.BlazorJS.PixiJS.Demo.Layout;
@@ -23,5 +24,7 @@ builder.Services.AddRadzenComponents();
 builder.Services.AddScoped<AppTrayService>();
 builder.Services.AddScoped<MainLayoutService>();
 builder.Services.AddScoped<ThemeTrayIconService>();
+
+builder.Services.AddCompilerService();
 
 await builder.Build().BlazorJSRunAsync();
