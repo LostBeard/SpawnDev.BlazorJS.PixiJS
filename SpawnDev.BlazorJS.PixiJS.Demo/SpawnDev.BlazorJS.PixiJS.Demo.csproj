@@ -15,6 +15,16 @@
 		<PackageReference Include="SpawnDev.BlazorJS.CodeRunner" Version="0.0.17" />
 	</ItemGroup>
 
+	<PropertyGroup>
+		<!-- 
+		    SpawnDev.BlazorJS.CodeRunner requires Microsoft.CodeAnalysis.CSharp from their Azure package source.
+			https://github.com/dotnet/aspnetcore/blob/main/NuGet.config
+		-->
+		<RestoreAdditionalProjectSources>
+			https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-tools/nuget/v3/index.json;
+		</RestoreAdditionalProjectSources>
+	</PropertyGroup>
+
 	<ItemGroup>
 		<ProjectReference Include="..\SpawnDev.BlazorJS.PixiJS\SpawnDev.BlazorJS.PixiJS.csproj" />
 	</ItemGroup>
