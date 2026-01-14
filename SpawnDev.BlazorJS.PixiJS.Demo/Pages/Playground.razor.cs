@@ -24,6 +24,7 @@ namespace SpawnDev.BlazorJS.PixiJS.Demo.Pages
 @using SpawnDev.BlazorJS
 @using SpawnDev.BlazorJS.JSObjects
 @using static SpawnDev.BlazorJS.PixiJS.PIXI
+@using SpawnDev.BlazorJS.PixiJS
 @using SpawnDev.BlazorJS.JsonConverters
 @implements IDisposable
 
@@ -71,7 +72,7 @@ namespace SpawnDev.BlazorJS.PixiJS.Demo.Pages
         stage!.AddChild(container);
 
         // Load the bunny texture
-        using var texture = await Assets.Load<Texture>(""https://pixijs.com/assets/bunny.png"");
+        using var texture = await PIXI.Assets.Load<Texture>(""https://pixijs.com/assets/bunny.png"");
 
         // Create a 5x5 grid of bunnies in the container
         for (var i = 0; i < 25; i++)
@@ -112,6 +113,8 @@ namespace SpawnDev.BlazorJS.PixiJS.Demo.Pages
         container?.Dispose();
     }
 }
+
+
 
 
 ";
