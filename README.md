@@ -39,6 +39,7 @@ Source: [Basic Container Example](https://pixijs.com/8.x/examples/basic/containe
 @page "/examples/basic/container"
 @using SpawnDev.BlazorJS.JSObjects
 @using static SpawnDev.BlazorJS.PixiJS.PIXI
+@using SpawnDev.BlazorJS.PixiJS.PIXI
 @using SpawnDev.BlazorJS.JsonConverters
 @implements IDisposable
 
