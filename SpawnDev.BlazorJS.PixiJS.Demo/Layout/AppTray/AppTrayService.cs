@@ -1,6 +1,4 @@
-﻿using System.Collections.ObjectModel;
-
-namespace SpawnDev.BlazorJS.PixiJS.Demo.Layout.AppTray
+﻿namespace SpawnDev.BlazorJS.PixiJS.Demo.Layout.AppTray
 {
     public class AppTrayService
     {

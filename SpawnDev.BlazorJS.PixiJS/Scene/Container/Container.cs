@@ -1,5 +1,4 @@
 ﻿using Microsoft.JSInterop;
-using SpawnDev.BlazorJS.IJSInProcessObjectReferenceAnyKey;
 using SpawnDev.BlazorJS.JSObjects;
 using Array = SpawnDev.BlazorJS.JSObjects.Array;
 
@@ -178,7 +177,7 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// <summary>
             /// Tab index
             /// </summary>
-            public int TabIndex{ get => JSRef!.Get<int>("tabIndex"); set => JSRef!.Set("tabIndex", value); }
+            public int TabIndex { get => JSRef!.Get<int>("tabIndex"); set => JSRef!.Set("tabIndex", value); }
             /// <summary>
             /// The tint applied to the sprite. This is a hex value.
             /// </summary>

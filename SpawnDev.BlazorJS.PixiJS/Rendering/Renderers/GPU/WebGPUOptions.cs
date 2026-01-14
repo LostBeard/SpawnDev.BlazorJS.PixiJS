@@ -1,5 +1,4 @@
-﻿using SpawnDev.BlazorJS.JsonConverters;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace SpawnDev.BlazorJS.PixiJS
 {
@@ -22,7 +21,7 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// 'low-power' - will prioritize power saving over rendering performance<br/>
             /// </summary>
             [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-            public EnumString<GpuPowerPreference>? PowerPreference{ get; set; }
+            public EnumString<GpuPowerPreference>? PowerPreference { get; set; }
         }
     }
 }

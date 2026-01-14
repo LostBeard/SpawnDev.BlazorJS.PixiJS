@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace SpawnDev.BlazorJS.PixiJS
+﻿namespace SpawnDev.BlazorJS.PixiJS
 {
     public static partial class PIXI
     {

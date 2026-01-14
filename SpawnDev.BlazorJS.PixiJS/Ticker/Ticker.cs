@@ -40,7 +40,7 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// <summary>
             /// Whether or not this ticker should invoke the method {@link ticker.Ticker#start|start} automatically when a listener is added.
             /// </summary>
-            public bool AutoStart{ get => JSRef!.Get<bool>("autoStart"); set => JSRef!.Set("autoStart", value); }
+            public bool AutoStart { get => JSRef!.Get<bool>("autoStart"); set => JSRef!.Set("autoStart", value); }
             /// <summary>
             /// Scaler time elapsed in milliseconds from last frame to this frame. This value is capped by setting {@link ticker.Ticker#minFPS|minFPS} and is scaled with { @link ticker.Ticker#speed|speed}. *** Note:**The cap may be exceeded by scaling. If the platform supports DOMHighResTimeStamp, this value will have a precision of 1 µs.<br/> Defaults to target frame time<br/>@default 16.66
             /// </summary>
@@ -139,7 +139,8 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// </summary>
             /// <param name="actionCallback"></param>
             /// <returns></returns>
-            public Ticker Remove(Action<Ticker> actionCallback) {
+            public Ticker Remove(Action<Ticker> actionCallback)
+            {
 
                 var cb = CallbackRef.RefGet(actionCallback, false);
                 if (cb == null) return this;

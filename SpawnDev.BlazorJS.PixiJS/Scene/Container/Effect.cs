@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SpawnDev.BlazorJS.PixiJS
+﻿namespace SpawnDev.BlazorJS.PixiJS
 {
     /// <summary>
     /// An effect that can be applied to a container. This is used to create effects such as filters/masks etc.

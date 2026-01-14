@@ -64,7 +64,7 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// </summary>
             /// <param name="bundleId"></param>
             /// <returns></returns>
-            public Task LoadBundle(string bundleId)=>JSRef!.CallVoidAsync("loadBundle", bundleId);
+            public Task LoadBundle(string bundleId) => JSRef!.CallVoidAsync("loadBundle", bundleId);
 
             /// <summary>
             /// This adds a bundle of assets in one go so that you can load them as a group.

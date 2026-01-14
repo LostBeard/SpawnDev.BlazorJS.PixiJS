@@ -1,6 +1,4 @@
 ﻿using Microsoft.JSInterop;
-using SpawnDev.BlazorJS.JSObjects;
-using System.Text.Json.Serialization;
 
 namespace SpawnDev.BlazorJS.PixiJS
 {

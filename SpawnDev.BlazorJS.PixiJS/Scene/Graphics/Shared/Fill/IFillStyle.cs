@@ -1,5 +1,4 @@
-﻿using Microsoft.JSInterop;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace SpawnDev.BlazorJS.PixiJS
 {
@@ -25,11 +24,11 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// <summary>
             /// The matrix to apply.
             /// </summary>
-            Matrix? Matrix{ get; set; }
+            Matrix? Matrix { get; set; }
             /// <summary>
             /// The fill pattern to use.
             /// </summary>
-            Union<FillPattern,FillGradient>? Fill { get; set; }
+            Union<FillPattern, FillGradient>? Fill { get; set; }
             /// <summary>
             /// The fill units to use.
             /// </summary>
