@@ -49,7 +49,7 @@
         stage!.AddChild(container);
 
         // Load the bunny texture
-        using var texture = await Assets.Load<Texture>("https://pixijs.com/assets/bunny.png");
+        using var texture = await PIXI.Assets.Load<Texture>("https://pixijs.com/assets/bunny.png");
 
         // Create a 5x5 grid of bunnies in the container
         for (var i = 0; i < 25; i++)

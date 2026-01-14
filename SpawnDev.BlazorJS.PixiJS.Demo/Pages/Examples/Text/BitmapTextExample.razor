@@ -39,7 +39,7 @@
         using var htmlElement = new HTMLElement(containerElRef);
         htmlElement!.AppendChild(app.Canvas);
 
-        await Assets.Load("https://pixijs.com/assets/bitmap-font/desyrel.xml");
+        await PIXI.Assets.Load("https://pixijs.com/assets/bitmap-font/desyrel.xml");
 
         var bitmapFontText = new BitmapText(new TextOptions
         {

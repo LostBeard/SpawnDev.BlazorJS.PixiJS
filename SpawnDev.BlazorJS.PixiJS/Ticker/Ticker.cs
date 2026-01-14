@@ -153,7 +153,7 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// <summary>
             /// Register or unregister a handler for tick events. Registered handlers are called continuously unless removed or the ticker is stopped.
             /// </summary>
-            public JSEventCallback<Ticker> OnTick { get => new JSEventCallback<Ticker>(o => Add((ActionCallback<Ticker>)o), o => Remove((ActionCallback<Ticker>)o)); set { } }
+            public ActionEvent<Ticker> OnTick { get => new ActionEvent<Ticker>(o => Add((ActionCallback<Ticker>)o), o => Remove((ActionCallback<Ticker>)o)); set { } }
             #endregion
         }
     }

@@ -41,7 +41,7 @@
         htmlElement!.AppendChild(app.Canvas);
 
         // Add font files to the bundle
-        Assets.AddBundle("fonts", new UnresolvedAsset[]{
+        PIXI.Assets.AddBundle("fonts", new UnresolvedAsset[]{
             new UnresolvedAsset{ Alias = "ChaChicle", Src = "https://pixijs.com/assets/webfont-loader/ChaChicle.ttf" },
             new UnresolvedAsset{ Alias = "Lineal", Src = "https://pixijs.com/assets/webfont-loader/Lineal.otf" },
             new UnresolvedAsset{ Alias = "Dotrice Regular", Src = "https://pixijs.com/assets/webfont-loader/Dotrice-Regular.woff" },
@@ -49,7 +49,7 @@
         });
 
         // Load the font bundle
-        await Assets.LoadBundle("fonts");
+        await PIXI.Assets.LoadBundle("fonts");
 
         var text1 = new PIXI.Text(new TextOptions { Text = "ChaChicle.ttf", Style = new TextStyleOptions { FontFamily = "ChaChicle", FontSize = 50 } });
         var text2 = new PIXI.Text(new TextOptions { Text = "Lineal.otf", Style = new TextStyleOptions { FontFamily = "Lineal", FontSize = 50 } });
