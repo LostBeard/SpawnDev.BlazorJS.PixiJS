@@ -1,24 +1,63 @@
 ﻿@page "/"
 @page "/examples"
+@using Radzen.Blazor
 
-<div class="container">
-    <h3>Examples</h3>
+<RadzenStack AlignItems="AlignItems.Center" Gap="2rem" Style="padding: 2rem;">
+    <RadzenCard Variant="Variant.Filled" Class="rz-p-5" Style="max-width: 800px; width: 100%; text-align: center;">
+        <RadzenStack Gap="1rem">
+            <RadzenImage Path="favicon.png" Style="width: 128px; height: 128px; margin: 0 auto;" AlternateText="PixiJS Logo" />
+            <RadzenText TextStyle="TextStyle.DisplayH3" TagName="TagName.H1" TextAlign="TextAlign.Center">
+                SpawnDev.BlazorJS.PixiJS
+            </RadzenText>
+            <RadzenText TextStyle="TextStyle.Body1" TextAlign="TextAlign.Center">
+                Bring the power of PixiJS to Blazor WebAssembly with .NET bindings.
+                Create rich, interactive 2D graphics and games using C#.
+            </RadzenText>
+            
+            <RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.Center" Gap="1rem" Style="margin-top: 1rem;">
+                <RadzenButton Text="View Examples" Icon="play_arrow" ButtonStyle="ButtonStyle.Primary" Click="@(() => NavigationManager.NavigateTo("examples/basic/container"))" />
+                <RadzenButton Text="GitHub Repository" Icon="code" ButtonStyle="ButtonStyle.Secondary" Click="@OpenRepo" />
+            </RadzenStack>
+        </RadzenStack>
+    </RadzenCard>
 
-    <p>
-        Welcome to the PixiJS Examples page! Here you can find a variety of demos and code snippets to help you get started with PixiJS.
-    </p>
-
-    <p>Check out some of our featured examples below:</p>
-
-    <div>
-        <ul>
-            <li><NavLink href="examples/basic/container">Container</NavLink></li>
-            <li><NavLink href="examples/basic/blendmodes">Blend Modes</NavLink></li>
-            <li><NavLink href="examples/basic/bitmap-text">Bitmap Text</NavLink></li>
-        </ul>
-    </div>
-</div>
+    <RadzenStack Orientation="Orientation.Horizontal" Wrap="FlexWrap.Wrap" JustifyContent="JustifyContent.Center" Gap="1rem" Style="max-width: 1000px;">
+        <RadzenCard Style="width: 300px;">
+            <RadzenStack AlignItems="AlignItems.Center" Gap="0.5rem">
+                <RadzenIcon Icon="speed" Style="font-size: 3rem;" />
+                <RadzenText TextStyle="TextStyle.H6">High Performance</RadzenText>
+                <RadzenText TextStyle="TextStyle.Body2" TextAlign="TextAlign.Center">
+                    Leverages WebGL for hardware-accelerated 2D rendering in the browser.
+                </RadzenText>
+            </RadzenStack>
+        </RadzenCard>
+        <RadzenCard Style="width: 300px;">
+            <RadzenStack AlignItems="AlignItems.Center" Gap="0.5rem">
+                <RadzenIcon Icon="integration_instructions" Style="font-size: 3rem;" />
+                <RadzenText TextStyle="TextStyle.H6">Blazor Interop</RadzenText>
+                <RadzenText TextStyle="TextStyle.Body2" TextAlign="TextAlign.Center">
+                    Seamless integration with Blazor WebAssembly using SpawnDev.BlazorJS.
+                </RadzenText>
+            </RadzenStack>
+        </RadzenCard>
+        <RadzenCard Style="width: 300px;">
+            <RadzenStack AlignItems="AlignItems.Center" Gap="0.5rem">
+                <RadzenIcon Icon="collections" Style="font-size: 3rem;" />
+                <RadzenText TextStyle="TextStyle.H6">Rich Examples</RadzenText>
+                <RadzenText TextStyle="TextStyle.Body2" TextAlign="TextAlign.Center">
+                    Explore a wide range of examples demonstrating PixiJS features.
+                </RadzenText>
+            </RadzenStack>
+        </RadzenCard>
+    </RadzenStack>
+</RadzenStack>
 
 @code {
+    [Inject] NavigationManager NavigationManager { get; set; } = default!;
+    [Inject] IJSRuntime JSRuntime { get; set; } = default!;
 
+    void OpenRepo()
+    {
+        JSRuntime.InvokeVoidAsync("open", "https://github.com/LostBeard/SpawnDev.BlazorJS.PixiJS", "_blank");
+    }
 }
