@@ -14,19 +14,19 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// Deserialization constructor
             /// </summary>
             public AlphaFilter(IJSInProcessObjectReference _ref) : base(_ref) { }
-            
+
             /// <summary>
             /// Creates a new AlphaFilter instance.
             /// </summary>
             /// <param name="options">Options for the AlphaFilter</param>
             public AlphaFilter(AlphaFilterOptions options) : base(JS.New("PIXI.AlphaFilter", options)) { }
-            
+
             /// <summary>
             /// Creates a new AlphaFilter instance.
             /// </summary>
             /// <param name="alpha">The alpha value to use.</param>
             public AlphaFilter(float alpha = 1.0f) : this(new AlphaFilterOptions { Alpha = alpha }) { }
-            
+
             /// <summary>
             /// Coefficient for alpha multiplication
             /// </summary>

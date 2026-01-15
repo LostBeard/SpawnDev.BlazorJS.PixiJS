@@ -14,7 +14,7 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// Deserialization constructor
             /// </summary>
             public MeshRope(IJSInProcessObjectReference _ref) : base(_ref) { }
-            
+
             /// <summary>
             /// Creates a new MeshRope instance.
             /// </summary>

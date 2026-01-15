@@ -14,20 +14,20 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// Deserialization constructor
             /// </summary>
             public DisplacementFilter(IJSInProcessObjectReference _ref) : base(_ref) { }
-            
+
             /// <summary>
             /// Creates a new DisplacementFilter instance.
             /// </summary>
             /// <param name="options">Options for the DisplacementFilter</param>
             public DisplacementFilter(DisplacementFilterOptions options) : base(JS.New("PIXI.DisplacementFilter", options)) { }
-            
+
             /// <summary>
             /// Creates a new DisplacementFilter instance.
             /// </summary>
             /// <param name="sprite">The sprite used for the displacement map.</param>
             /// <param name="scale">The scale of the displacement.</param>
             public DisplacementFilter(Sprite sprite, float scale = 20) : this(new DisplacementFilterOptions { Sprite = sprite, Scale = scale }) { }
-            
+
             /// <summary>
             /// The scale to use for the displacement.
             /// </summary>

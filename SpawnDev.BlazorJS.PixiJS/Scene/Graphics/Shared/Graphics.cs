@@ -341,6 +341,7 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// <param name="color"></param>
             /// <returns></returns>
             public Graphics Stroke(ColorSource color) { JSRef!.CallVoid("stroke", color); return this; }
+
         }
     }
 }

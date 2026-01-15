@@ -1,4 +1,3 @@
-using SpawnDev.BlazorJS.JSObjects;
 using Microsoft.JSInterop;
 
 namespace SpawnDev.BlazorJS.PixiJS
@@ -14,7 +13,7 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// Deserialization constructor
             /// </summary>
             public NoiseFilterOptions(IJSInProcessObjectReference _ref) : base(_ref) { }
-            
+
             /// <summary>
             /// Creates a new instance
             /// </summary>
@@ -24,7 +23,7 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// The amount of noise to apply.
             /// </summary>
             public float? Noise { get => JSRef!.Get<float?>("noise"); set => JSRef!.Set("noise", value); }
-            
+
             /// <summary>
             /// A seed value to apply to the random noise generation.
             /// </summary>

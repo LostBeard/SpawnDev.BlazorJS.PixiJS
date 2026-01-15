@@ -1,6 +1,3 @@
-using SpawnDev.BlazorJS.JsonConverters;
-using SpawnDev.BlazorJS.JSObjects;
-using System.Text.Json.Serialization;
 using Microsoft.JSInterop;
 using static SpawnDev.BlazorJS.PixiJS.PIXI;
 
@@ -29,7 +26,7 @@ namespace SpawnDev.BlazorJS.PixiJS
         /// Reference to the source texture.
         /// </summary>
         public Texture TextureSource => JSRef!.Get<Texture>("textureSource");
-        
+
         /// <summary>
         /// Parser spritesheet from loaded data. This function can be called solely on a spritesheet that has not been parsed yet.
         /// </summary>

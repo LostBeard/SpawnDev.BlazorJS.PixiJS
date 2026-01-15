@@ -14,13 +14,13 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// Deserialization constructor
             /// </summary>
             public Polygon(IJSInProcessObjectReference _ref) : base(_ref) { }
-            
+
             /// <summary>
             /// Creates a new instance
             /// </summary>
             /// <param name="points">An array of Points that make up the polygon</param>
             public Polygon(Point[] points) : base(JS.New("PIXI.Polygon", (object)points)) { }
-             
+
             /// <summary>
             /// Creates a new instance
             /// </summary>
@@ -31,7 +31,7 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// An array of numbers that make up the polygon
             /// </summary>
             public float[] Points { get => JSRef!.Get<float[]>("points"); set => JSRef!.Set("points", value); }
-            
+
             /// <summary>
             /// Whether to close the stroke
             /// </summary>

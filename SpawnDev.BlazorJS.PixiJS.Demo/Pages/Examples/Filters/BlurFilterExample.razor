@@ -1,0 +1,75 @@
+@page "/examples/filters/blur-filter"
+@using SpawnDev.BlazorJS.JSObjects
+@using SpawnDev.BlazorJS.PixiJS
+@using static SpawnDev.BlazorJS.PixiJS.PIXI
+@implements IDisposable
+
+<h3>Blur Filter Example</h3>
+<div @ref="containerElRef" style="width: 800px; height: 600px;"></div>
+
+@code {
+    [Inject] BlazorJSRuntime JS { get; set; } = default!;
+    ElementReference? containerElRef;
+    Application? app;
+    Sprite? bgSprite;
+    Sprite? littleDudes;
+    Sprite? littleRobot;
+    BlurFilter? blurFilter1;
+    BlurFilter? blurFilter2;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await Init();
+        }
+    }
+
+    async Task Init()
+    {
+        app = new Application();
+        await app.Init(new ApplicationOptions { Background = "#1099bb", ResizeTo = containerElRef });
+        using var htmlElement = new HTMLElement(containerElRef!.Value);
+        htmlElement!.AppendChild(app.Canvas);
+
+        var graphics1 = new Graphics();
+        graphics1.Circle(300, 300, 50);
+        graphics1.Fill(0xFF0000);
+        app.Stage.AddChild(graphics1);
+
+        var graphics2 = new Graphics();
+        graphics2.Rect(500, 250, 100, 100);
+        graphics2.Fill(0x0000FF);
+        app.Stage.AddChild(graphics2);
+
+        // Assign to fields for filter application (reusing the sprite fields types is murky, better to use local vars or new fields, but for this quick fix let's just apply filters to these graphics)
+        
+        blurFilter1 = new BlurFilter();
+        graphics1.Filters = new Filter[] { blurFilter1 };
+
+        blurFilter2 = new BlurFilter();
+        graphics2.Filters = new Filter[] { blurFilter2 };
+
+        // Filters are already assigned to graphics1 and graphics2 above.
+        // We do not need to assign them again or to null sprites.
+
+        var count = 0f;
+        
+        app.Ticker.Add((Ticker ticker) => {
+            count += 0.005f * ticker.DeltaTime;
+            var blurAmount1 = (float)Math.Cos(count);
+            var blurAmount2 = (float)Math.Sin(count);
+
+            blurFilter1.Blur = 20 * (blurAmount1);
+            blurFilter2.Blur = 20 * (blurAmount2);
+        });
+    }
+
+    public void Dispose()
+    {
+        if (app != null)
+        {
+            app.Dispose();
+        }
+    }
+}

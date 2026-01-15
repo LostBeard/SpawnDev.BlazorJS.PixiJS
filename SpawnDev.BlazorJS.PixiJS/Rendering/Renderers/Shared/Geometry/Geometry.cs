@@ -15,7 +15,7 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// Deserialization constructor
             /// </summary>
             public Geometry(IJSInProcessObjectReference _ref) : base(_ref) { }
-            
+
             /// <summary>
             /// Creates a new Geometry instance.
             /// </summary>
@@ -37,7 +37,7 @@ namespace SpawnDev.BlazorJS.PixiJS
                 JSRef!.CallVoid("addAttribute", id, buffer, size, normalized, type, stride, start);
                 return this;
             }
-            
+
             /// <summary>
             /// Adds an index buffer to the geometry.
             /// </summary>
@@ -59,15 +59,15 @@ namespace SpawnDev.BlazorJS.PixiJS
                 JSRef!.CallVoid("addIndex", new Uint32Array(buffer)); // Pixi accepts array or typed array, usually converts to Buffer internaly
                 return this;
             }
-             /// <summary>
+            /// <summary>
             /// Adds an index buffer to the geometry from an array.
             /// </summary>
             /// <param name="buffer">The index data.</param>
             /// <returns>This geometry instance.</returns>
             public Geometry AddIndex(int[] buffer)
             {
-                 JSRef!.CallVoid("addIndex", new Int32Array(buffer));
-                 return this;
+                JSRef!.CallVoid("addIndex", new Int32Array(buffer));
+                return this;
             }
         }
     }

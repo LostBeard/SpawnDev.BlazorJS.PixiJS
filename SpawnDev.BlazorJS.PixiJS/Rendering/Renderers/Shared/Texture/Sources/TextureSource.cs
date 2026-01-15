@@ -1,6 +1,3 @@
-using SpawnDev.BlazorJS.JsonConverters;
-using SpawnDev.BlazorJS.JSObjects;
-using System.Text.Json.Serialization;
 using Microsoft.JSInterop;
 
 namespace SpawnDev.BlazorJS.PixiJS
@@ -15,12 +12,12 @@ namespace SpawnDev.BlazorJS.PixiJS
         public string Format { get => JSRef!.Get<string>("format"); }
         public int PixelWidth { get => JSRef!.Get<int>("pixelWidth"); }
         public int PixelHeight { get => JSRef!.Get<int>("pixelHeight"); }
-        
+
         /// <summary>
         /// Width of source.
         /// </summary>
         public float SourceWidth { get => JSRef!.Get<float>("width"); }
-        
+
         /// <summary>
         /// Height of source.
         /// </summary>

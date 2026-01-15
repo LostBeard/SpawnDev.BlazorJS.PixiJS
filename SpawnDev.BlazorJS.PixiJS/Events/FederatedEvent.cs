@@ -15,7 +15,7 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// Deserialization constructor
             /// </summary>
             public FederatedEvent(IJSInProcessObjectReference _ref) : base(_ref) { }
-            
+
             /// <summary>
             /// The propagation of the event will be stopped.
             /// </summary>
@@ -27,7 +27,7 @@ namespace SpawnDev.BlazorJS.PixiJS
             public EventTarget Target => JSRef!.Get<EventTarget>("target");
             public float TimeStamp => JSRef!.Get<float>("timeStamp");
             public string Type => JSRef!.Get<string>("type");
-            
+
             public void StopPropagation() => JSRef!.CallVoid("stopPropagation");
             public void StopImmediatePropagation() => JSRef!.CallVoid("stopImmediatePropagation");
             public void PreventDefault() => JSRef!.CallVoid("preventDefault");

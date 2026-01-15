@@ -1,4 +1,3 @@
-using SpawnDev.BlazorJS.JSObjects;
 using Microsoft.JSInterop;
 
 namespace SpawnDev.BlazorJS.PixiJS
@@ -14,7 +13,7 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// Deserialization constructor
             /// </summary>
             public TilingSpriteOptions(IJSInProcessObjectReference _ref) : base(_ref) { }
-            
+
             /// <summary>
             /// Creates a new instance
             /// </summary>
@@ -24,12 +23,12 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// The texture of the tiling sprite.
             /// </summary>
             public Texture Texture { get => JSRef!.Get<Texture>("texture"); set => JSRef!.Set("texture", value); }
-            
+
             /// <summary>
             /// The width of the tiling sprite.
             /// </summary>
             public float? Width { get => JSRef!.Get<float?>("width"); set => JSRef!.Set("width", value); }
-            
+
             /// <summary>
             /// The height of the tiling sprite.
             /// </summary>

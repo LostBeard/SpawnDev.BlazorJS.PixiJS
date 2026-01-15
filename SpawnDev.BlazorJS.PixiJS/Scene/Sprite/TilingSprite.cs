@@ -1,5 +1,4 @@
 using Microsoft.JSInterop;
-using SpawnDev.BlazorJS.JSObjects;
 
 namespace SpawnDev.BlazorJS.PixiJS
 {
@@ -15,7 +14,7 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// Deserialization constructor
             /// </summary>
             public TilingSprite(IJSInProcessObjectReference _ref) : base(_ref) { }
-            
+
             /// <summary>
             /// Creates a new TilingSprite instance.
             /// </summary>
@@ -29,17 +28,17 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// <param name="width">The width of the tiling sprite.</param>
             /// <param name="height">The height of the tiling sprite.</param>
             public TilingSprite(Texture texture, float width = 100, float height = 100) : this(new TilingSpriteOptions { Texture = texture, Width = width, Height = height }) { }
-            
+
             /// <summary>
             /// The offset of the image that is being tiled
             /// </summary>
             public ObservablePoint TilePosition => JSRef!.Get<ObservablePoint>("tilePosition");
-            
+
             /// <summary>
             /// The scaling of the image that is being tiled
             /// </summary>
             public ObservablePoint TileScale => JSRef!.Get<ObservablePoint>("tileScale");
-            
+
             public void ClampMargin(float margin) => JSRef!.CallVoid("clampMargin", margin);
         }
     }

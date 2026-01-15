@@ -14,7 +14,7 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// Deserialization constructor
             /// </summary>
             public FederatedMouseEvent(IJSInProcessObjectReference _ref) : base(_ref) { }
-            
+
             /// <summary>
             /// Whether the 'alt' key was pressed when this event occurred.
             /// </summary>

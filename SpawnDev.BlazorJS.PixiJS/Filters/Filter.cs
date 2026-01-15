@@ -14,13 +14,13 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// Deserialization constructor
             /// </summary>
             public Filter(IJSInProcessObjectReference _ref) : base(_ref) { }
-            
+
             /// <summary>
             /// Creates a new Filter instance.
             /// </summary>
             /// <param name="options">The options for the filter.</param>
             public Filter(object? options = null) : base(JS.New("PIXI.Filter", options)) { }
-            
+
             /// <summary>
             /// If enabled is true the filter is applied, if false it will not.
             /// </summary>

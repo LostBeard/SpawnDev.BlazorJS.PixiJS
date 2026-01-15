@@ -1,4 +1,3 @@
-using SpawnDev.BlazorJS.JSObjects;
 using Microsoft.JSInterop;
 
 namespace SpawnDev.BlazorJS.PixiJS
@@ -14,7 +13,7 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// Deserialization constructor
             /// </summary>
             public AlphaFilterOptions(IJSInProcessObjectReference _ref) : base(_ref) { }
-            
+
             /// <summary>
             /// Creates a new instance
             /// </summary>

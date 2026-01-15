@@ -1,4 +1,3 @@
-using SpawnDev.BlazorJS.JSObjects;
 using Microsoft.JSInterop;
 
 namespace SpawnDev.BlazorJS.PixiJS
@@ -14,7 +13,7 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// Deserialization constructor
             /// </summary>
             public BlurFilterOptions(IJSInProcessObjectReference _ref) : base(_ref) { }
-            
+
             /// <summary>
             /// Creates a new instance
             /// </summary>
@@ -24,17 +23,17 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// The strength of the blur properties.
             /// </summary>
             public float? Strength { get => JSRef!.Get<float?>("strength"); set => JSRef!.Set("strength", value); }
-            
+
             /// <summary>
             /// The quality of the blur properties.
             /// </summary>
             public int? Quality { get => JSRef!.Get<int?>("quality"); set => JSRef!.Set("quality", value); }
-            
+
             /// <summary>
             /// The resolution of the blur properties.
             /// </summary>
             public int? Resolution { get => JSRef!.Get<int?>("resolution"); set => JSRef!.Set("resolution", value); }
-            
+
             /// <summary>
             /// The kernelSize of the blur properties.
             /// </summary>

@@ -1,4 +1,3 @@
-using SpawnDev.BlazorJS.JSObjects;
 using Microsoft.JSInterop;
 
 namespace SpawnDev.BlazorJS.PixiJS
@@ -14,7 +13,7 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// Deserialization constructor
             /// </summary>
             public DisplacementFilterOptions(IJSInProcessObjectReference _ref) : base(_ref) { }
-            
+
             /// <summary>
             /// Creates a new instance
             /// </summary>
@@ -24,7 +23,7 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// The sprite used for the displacement map.
             /// </summary>
             public Sprite Sprite { get => JSRef!.Get<Sprite>("sprite"); set => JSRef!.Set("sprite", value); }
-            
+
             /// <summary>
             /// The scale of the displacement.
             /// </summary>

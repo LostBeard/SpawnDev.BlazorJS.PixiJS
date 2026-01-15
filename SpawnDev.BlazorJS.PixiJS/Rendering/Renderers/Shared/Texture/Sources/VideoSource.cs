@@ -1,19 +1,17 @@
-using SpawnDev.BlazorJS.JsonConverters;
-using SpawnDev.BlazorJS.JSObjects;
-using System.Text.Json.Serialization;
 using Microsoft.JSInterop;
+using SpawnDev.BlazorJS.JSObjects;
 
 namespace SpawnDev.BlazorJS.PixiJS
 {
     public class VideoSource : TextureSource
     {
         public VideoSource(IJSInProcessObjectReference _ref) : base(_ref) { }
-        
+
         /// <summary>
         /// When true, the texture will auto-update from the video.
         /// </summary>
         public bool AutoUpdate { get => JSRef!.Get<bool>("autoUpdate"); set => JSRef!.Set("autoUpdate", value); }
-        
+
         /// <summary>
         /// How many times a second the texture should be updated from the video. 
         /// Leave at 0 to update at every render.

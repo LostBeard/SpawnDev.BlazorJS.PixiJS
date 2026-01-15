@@ -1,8 +1,8 @@
 using BlazorMonaco.Editor;
 using Microsoft.AspNetCore.Components;
+using Radzen;
 using SpawnDev.BlazorJS.CodeRunner;
 using SpawnDev.BlazorJS.PixiJS.Demo.Layout;
-using Radzen;
 
 namespace SpawnDev.BlazorJS.PixiJS.Demo.Pages
 {

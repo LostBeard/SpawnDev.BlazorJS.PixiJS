@@ -1,4 +1,3 @@
-using SpawnDev.BlazorJS.JSObjects;
 using Microsoft.JSInterop;
 
 namespace SpawnDev.BlazorJS.PixiJS
@@ -14,7 +13,7 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// Deserialization constructor
             /// </summary>
             public AnimatedSpriteOptions(IJSInProcessObjectReference _ref) : base(_ref) { }
-            
+
             /// <summary>
             /// Creates a new instance
             /// </summary>
@@ -24,7 +23,7 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// An array of Texture objects that make up the animation.
             /// </summary>
             public Texture[] Textures { get => JSRef!.Get<Texture[]>("textures"); set => JSRef!.Set("textures", value); }
-            
+
             /// <summary>
             /// Whether to use PIXI.Ticker.shared to auto update animation time.
             /// </summary>

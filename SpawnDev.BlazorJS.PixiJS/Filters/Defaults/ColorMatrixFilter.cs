@@ -14,12 +14,12 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// Deserialization constructor
             /// </summary>
             public ColorMatrixFilter(IJSInProcessObjectReference _ref) : base(_ref) { }
-            
+
             /// <summary>
             /// Creates a new ColorMatrixFilter instance.
             /// </summary>
             public ColorMatrixFilter() : base(JS.New("PIXI.ColorMatrixFilter")) { }
-            
+
             /// <summary>
             /// Adjusts brightness.
             /// </summary>

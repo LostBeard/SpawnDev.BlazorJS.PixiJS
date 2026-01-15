@@ -1,5 +1,4 @@
 using Microsoft.JSInterop;
-using SpawnDev.BlazorJS.JSObjects;
 
 namespace SpawnDev.BlazorJS.PixiJS
 {
@@ -15,7 +14,7 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// Deserialization constructor
             /// </summary>
             public RenderTexture(IJSInProcessObjectReference _ref) : base(_ref) { }
-            
+
             /// <summary>
             /// A helper method that creates a new RenderTexture.
             /// </summary>
@@ -41,7 +40,7 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// Deserialization constructor
             /// </summary>
             public RenderTextureOptions(IJSInProcessObjectReference _ref) : base(_ref) { }
-            
+
             /// <summary>
             /// Creates a new instance
             /// </summary>
@@ -51,12 +50,12 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// The width of the render texture.
             /// </summary>
             public int? Width { get => JSRef!.Get<int?>("width"); set => JSRef!.Set("width", value); }
-            
+
             /// <summary>
             /// The height of the render texture.
             /// </summary>
             public int? Height { get => JSRef!.Get<int?>("height"); set => JSRef!.Set("height", value); }
-            
+
             /// <summary>
             /// The resolution of the render texture.
             /// </summary>

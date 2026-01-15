@@ -14,22 +14,22 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// Deserialization constructor
             /// </summary>
             public FederatedWheelEvent(IJSInProcessObjectReference _ref) : base(_ref) { }
-            
+
             /// <summary>
             /// The horizontal scroll amount.
             /// </summary>
             public float DeltaX => JSRef!.Get<float>("deltaX");
-            
+
             /// <summary>
             /// The vertical scroll amount.
             /// </summary>
             public float DeltaY => JSRef!.Get<float>("deltaY");
-            
+
             /// <summary>
             /// The z-axis scroll amount.
             /// </summary>
             public float DeltaZ => JSRef!.Get<float>("deltaZ");
-            
+
             /// <summary>
             /// The unit of the delta values. 0: pixels, 1: lines, 2: pages.
             /// </summary>

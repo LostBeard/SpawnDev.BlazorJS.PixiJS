@@ -15,7 +15,7 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// Deserialization constructor
             /// </summary>
             public Buffer(IJSInProcessObjectReference _ref) : base(_ref) { }
-            
+
             /// <summary>
             /// Creates a new Buffer instance.
             /// </summary>
@@ -27,13 +27,13 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// </summary>
             /// <param name="data">The data to store in the buffer.</param>
             public Buffer(float[] data) : base(JS.New("PIXI.Buffer", new Float32Array(data))) { }
-             /// <summary>
+            /// <summary>
             /// Creates a new Buffer instance from an int array.
             /// </summary>
             /// <param name="data">The data to store in the buffer.</param>
             public Buffer(int[] data) : base(JS.New("PIXI.Buffer", new Int32Array(data))) { }
-            
-             /// <summary>
+
+            /// <summary>
             /// Creates a new Buffer instance from a uint array.
             /// </summary>
             /// <param name="data">The data to store in the buffer.</param>

@@ -1,4 +1,3 @@
-using SpawnDev.BlazorJS.JSObjects;
 using Microsoft.JSInterop;
 
 namespace SpawnDev.BlazorJS.PixiJS
@@ -15,7 +14,7 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// Creates a new instance
             /// </summary>
             public TextureOptions() : base(JS.New("Object")) { }
-            
+
             // Add properties as needed based on PixiJS docs
             // public string? ScaleMode { get => JSRef!.Get<string?>("scaleMode"); set => JSRef!.Set("scaleMode", value); }
         }

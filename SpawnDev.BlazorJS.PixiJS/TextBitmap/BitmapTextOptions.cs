@@ -1,4 +1,3 @@
-using SpawnDev.BlazorJS.JSObjects;
 using Microsoft.JSInterop;
 
 namespace SpawnDev.BlazorJS.PixiJS
@@ -14,7 +13,7 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// Deserialization constructor
             /// </summary>
             public BitmapTextOptions(IJSInProcessObjectReference _ref) : base(_ref) { }
-            
+
             /// <summary>
             /// Creates a new instance
             /// </summary>
@@ -24,12 +23,12 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// The text to display.
             /// </summary>
             public string? Text { get => JSRef!.Get<string?>("text"); set => JSRef!.Set("text", value); }
-            
+
             /// <summary>
             /// The style object.
             /// </summary>
             public TextStyle? Style { get => JSRef!.Get<TextStyle?>("style"); set => JSRef!.Set("style", value); }
-             /// <summary>
+            /// <summary>
             /// The resolution of the text.
             /// </summary>
             public float? Resolution { get => JSRef!.Get<float?>("resolution"); set => JSRef!.Set("resolution", value); }

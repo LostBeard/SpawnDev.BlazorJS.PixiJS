@@ -1,0 +1,70 @@
+@page "/examples/masks/graphics-mask"
+@using SpawnDev.BlazorJS.JSObjects
+@using SpawnDev.BlazorJS.PixiJS
+@using static SpawnDev.BlazorJS.PixiJS.PIXI
+@implements IDisposable
+
+<h3>Graphics Mask Example</h3>
+<div @ref="containerElRef" style="width: 800px; height: 600px;"></div>
+
+@code {
+    [Inject] BlazorJSRuntime JS { get; set; } = default!;
+    ElementReference? containerElRef;
+    Application? app;
+    Container? container;
+    Graphics? mask;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await Init();
+        }
+    }
+
+    async Task Init()
+    {
+        app = new Application();
+        await app.Init(new ApplicationOptions { Background = "#1099bb", ResizeTo = containerElRef });
+        using var htmlElement = new HTMLElement(containerElRef!.Value);
+        htmlElement!.AppendChild(app.Canvas);
+
+        container = new Container();
+        container.X = 400;
+        container.Y = 300;
+        app.Stage.AddChild(container);
+
+        var bg = await PIXI.Assets.Load<Texture>("https://pixijs.com/assets/bg_rotate.jpg");
+        var bgSprite = new Sprite(bg);
+        bgSprite.Anchor.Set(0.5f);
+        container.AddChild(bgSprite);
+
+        // Create a mask graphics
+        mask = new Graphics();
+        mask.Rect(-100, -100, 200, 200);
+        mask.Fill(0x000000); // Color doesn't matter for mask (unless using alpha)
+        
+        container.Mask = mask;
+        container.AddChild(mask);
+
+        app.Ticker.Add(OnTick);
+    }
+
+    void OnTick(Ticker ticker)
+    {
+        if (container != null && mask != null)
+        {
+            container.Rotation += 0.01f * ticker.DeltaTime;
+            mask.Rotation -= 0.01f * ticker.DeltaTime;
+        }
+    }
+
+    public void Dispose()
+    {
+        if (app != null)
+        {
+            app.Ticker.Remove(OnTick);
+            app.Dispose();
+        }
+    }
+}

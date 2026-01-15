@@ -22,7 +22,7 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// </summary>
             /// <param name="options"></param>
             public BitmapText(BitmapTextOptions options) : base(JS.New("PIXI.BitmapText", options)) { }
-            
+
             /// <summary>
             /// Creates a new instance
             /// </summary>

@@ -14,7 +14,7 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// Deserialization constructor
             /// </summary>
             public MaskData(IJSInProcessObjectReference _ref) : base(_ref) { }
-            
+
             /// <summary>
             /// Creates a new MaskData instance.
             /// </summary>
@@ -30,7 +30,7 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// Whether the mask is a sprite or a mesh.
             /// </summary>
             public bool Type { get => JSRef!.Get<bool>("type"); set => JSRef!.Set("type", value); }
-            
+
         }
     }
 }

@@ -289,6 +289,14 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// <summary>
             /// Removes an event listener
             /// </summary>
+            /// <summary>
+            /// Sets a mask for the displayObject. A mask is an object that limits the visibility of an object to the shape of the mask applied to it. In PixiJS a regular mask must be a PIXI.Graphics or a PIXI.Sprite object. This allows for much faster masking in canvas as it utilises shape clipping. To remove a mask, set this property to null.
+            /// </summary>
+            public Container? Mask { get => JSRef!.Get<Container?>("mask"); set => JSRef!.Set("mask", value); }
+
+            /// <summary>
+            /// Removes an event listener
+            /// </summary>
             public void Off<T>(string eventName, Action<T> callback) => JSRef!.CallVoid("off", eventName, callback);
             #endregion
         }

@@ -14,13 +14,13 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// Deserialization constructor
             /// </summary>
             public BlurFilter(IJSInProcessObjectReference _ref) : base(_ref) { }
-            
+
             /// <summary>
             /// Creates a new BlurFilter instance.
             /// </summary>
             /// <param name="options">Options for the BlurFilter</param>
             public BlurFilter(BlurFilterOptions options) : base(JS.New("PIXI.BlurFilter", options)) { }
-            
+
             /// <summary>
             /// Creates a new BlurFilter instance.
             /// </summary>
@@ -28,7 +28,7 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// <param name="quality">The quality of the blur properties.</param>
             /// <param name="resolution">The resolution of the blur properties.</param>
             /// <param name="kernelSize">The kernelSize of the blur properties.</param>
-            public BlurFilter(float strength = 8, int quality = 4, int? resolution = null, int? kernelSize = null) 
+            public BlurFilter(float strength = 8, int quality = 4, int? resolution = null, int? kernelSize = null)
                 : this(CreateOptions(strength, quality, resolution, kernelSize)) { }
 
             private static BlurFilterOptions CreateOptions(float strength, int quality, int? resolution, int? kernelSize)
@@ -40,7 +40,7 @@ namespace SpawnDev.BlazorJS.PixiJS
                 if (kernelSize.HasValue) options.KernelSize = kernelSize;
                 return options;
             }
-            
+
             public float Blur { get => JSRef!.Get<float>("blur"); set => JSRef!.Set("blur", value); }
             public float BlurX { get => JSRef!.Get<float>("blurX"); set => JSRef!.Set("blurX", value); }
             public float BlurY { get => JSRef!.Get<float>("blurY"); set => JSRef!.Set("blurY", value); }

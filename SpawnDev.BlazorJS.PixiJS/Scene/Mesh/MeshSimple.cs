@@ -15,7 +15,7 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// Deserialization constructor
             /// </summary>
             public MeshSimple(IJSInProcessObjectReference _ref) : base(_ref) { }
-            
+
             /// <summary>
             /// Creates a new MeshSimple instance.
             /// </summary>
@@ -26,22 +26,22 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// <param name="drawMode">the drawMode to be used</param>
             public MeshSimple(Texture texture, float[]? vertices = null, float[]? uvs = null, ushort[]? indices = null, int? drawMode = null)
                 : base(JS.New("PIXI.MeshSimple", texture, vertices, uvs, indices, drawMode)) { }
-            
+
             /// <summary>
             /// Collection of vertices data.
             /// </summary>
             public Float32Array Vertices => JSRef!.Get<Float32Array>("vertices");
-            
+
             /// <summary>
             /// Collection of uvs data.
             /// </summary>
             public Float32Array Uvs => JSRef!.Get<Float32Array>("uvs");
-            
+
             /// <summary>
             /// Collection of indices data.
             /// </summary>
             public Uint16Array Indices => JSRef!.Get<Uint16Array>("indices");
-            
+
             /// <summary>
             /// upload vertices buffer each frame
             /// </summary>
