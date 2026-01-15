@@ -19,12 +19,18 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// <summary>
             /// Creates a new Mesh instance.
             /// </summary>
+            /// <param name="options">The options to use.</param>
+            public Mesh(MeshOptions options) : base(JS.New("PIXI.Mesh", options)) { }
+
+            /// <summary>
+            /// Creates a new Mesh instance.
+            /// </summary>
             /// <param name="geometry">The geometry the mesh will use.</param>
             /// <param name="shader">The shader the mesh will use.</param>
             /// <param name="state">The state that will be used to render the mesh.</param>
             /// <param name="drawMode">The drawMode to be used when rendering the mesh.</param>
             public Mesh(JSObject geometry, JSObject shader, JSObject? state = null, int? drawMode = null)
-                : base(JS.New("PIXI.Mesh", geometry, shader, state, drawMode)) { }
+                : this(new MeshOptions { Geometry = geometry, Shader = shader, State = state, DrawMode = drawMode }) { }
 
             /// <summary>
             /// Includes vertex positions, face indices, normals, colors, UVs and custom attributes within buffers.

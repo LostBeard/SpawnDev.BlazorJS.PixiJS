@@ -1,0 +1,124 @@
+@page "/examples/advanced/star-warp"
+@using SpawnDev.BlazorJS.JSObjects
+@using SpawnDev.BlazorJS.PixiJS
+@using static SpawnDev.BlazorJS.PixiJS.PIXI
+@implements IDisposable
+
+<div class="container">
+    <p>
+        Source: <a href="https://pixijs.com/8.x/examples/advanced/star-warp">Star Warp Example</a>
+    </p>
+    <div style="width: 800px; height: 600px;" @ref="containerElRef"></div>
+</div>
+
+@code {
+    [Inject] BlazorJSRuntime JS { get; set; } = default!;
+    ElementReference containerElRef;
+    Application? app = null;
+    
+    // Star state
+    class Star
+    {
+        public Sprite Sprite { get; set; } = default!;
+        public float X { get; set; }
+        public float Y { get; set; }
+        public float Z { get; set; }
+    }
+
+    List<Star> stars = new List<Star>();
+    const int starCount = 500;
+    const float fov = 20;
+    float speed = 0;
+    float warpSpeed = 0;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await Init();
+        }
+    }
+
+    async Task Init()
+    {
+        app = new Application();
+        await app.Init(new ApplicationOptions { Background = "#000000", ResizeTo = containerElRef });
+
+        using var htmlElement = new HTMLElement(containerElRef);
+        htmlElement!.AppendChild(app.Canvas);
+
+        var starTexture = await PIXI.Assets.Load<Texture>("https://pixijs.com/assets/star.png");
+
+        var random = new Random();
+
+        for (var i = 0; i < starCount; i++)
+        {
+            var star = new Star
+            {
+                Sprite = new Sprite(starTexture),
+                X = (float)(random.NextDouble() * 1000 - 500),
+                Y = (float)(random.NextDouble() * 1000 - 500),
+                Z = (float)(random.NextDouble() * 1000),
+            };
+            
+            star.Sprite.Anchor.Set(0.5f, 0.7f);
+            app.Stage.AddChild(star.Sprite);
+            stars.Add(star);
+        }
+
+        app.Ticker.Add(OnTick);
+        
+        // Randomly change speed every few seconds
+        _ = ChangeSpeedLoop();
+    }
+
+    async Task ChangeSpeedLoop()
+    {
+        var random = new Random();
+        while (app != null)
+        {
+            warpSpeed = (float)random.NextDouble();
+            await Task.Delay(5000);
+        }
+    }
+
+    void OnTick(Ticker ticker)
+    {
+        speed += (warpSpeed - speed) / 20 * ticker.DeltaTime;
+        
+        var cameraZ = 0f;
+        var centerX = app!.Screen.Width / 2;
+        var centerY = app!.Screen.Height / 2;
+
+        foreach (var star in stars)
+        {
+            star.Z -= speed * 10 * ticker.DeltaTime;
+
+            if (star.Z <= 0)
+            {
+                star.Z += 1000;
+            }
+
+            var deg = (float)(Math.Atan2(star.Y, star.X) * (180 / Math.PI)) + 90;
+            star.Sprite.Rotation = deg * (float)(Math.PI / 180);
+            
+            var x = star.X * (fov / (star.Z - cameraZ));
+            var y = star.Y * (fov / (star.Z - cameraZ));
+            
+            star.Sprite.X = x + centerX;
+            star.Sprite.Y = y + centerY;
+            
+            var s = (float)(1 - (star.Z / 1000));
+            star.Sprite.Scale.Set(s, s);
+        }
+    }
+
+    public void Dispose()
+    {
+        if (app != null)
+        {
+            app.Ticker.Remove(OnTick);
+            app.Dispose();
+        }
+    }
+}

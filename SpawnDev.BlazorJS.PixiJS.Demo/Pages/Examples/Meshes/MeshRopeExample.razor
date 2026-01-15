@@ -1,0 +1,78 @@
+@page "/examples/meshes/mesh-rope"
+@using SpawnDev.BlazorJS.JSObjects
+@using SpawnDev.BlazorJS.PixiJS
+@using static SpawnDev.BlazorJS.PixiJS.PIXI
+@implements IDisposable
+
+<div class="container">
+    <p>
+        Source: <a href="https://pixijs.com/8.x/examples/mesh-and-shaders/snake">MeshRope (Snake) Example</a>
+    </p>
+    <div style="width: 800px; height: 600px;" @ref="containerElRef"></div>
+</div>
+
+@code {
+    [Inject] BlazorJSRuntime JS { get; set; } = default!;
+    ElementReference containerElRef;
+    Application? app = null;
+    MeshRope? rope = null;
+    PIXI.Point[] points = [];
+    const int ropeLength = 45;
+    float count = 0;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await Init();
+        }
+    }
+
+    async Task Init()
+    {
+        app = new Application();
+        await app.Init(new ApplicationOptions { Background = "#1099bb", ResizeTo = containerElRef });
+
+        using var htmlElement = new HTMLElement(containerElRef);
+        htmlElement!.AppendChild(app.Canvas);
+
+        // Load texture
+        var texture = await PIXI.Assets.Load<Texture>("https://pixijs.com/assets/snake.png");
+
+        // Build points
+        points = new PIXI.Point[20];
+        for (var i = 0; i < points.Length; i++)
+        {
+            points[i] = new PIXI.Point(i * ropeLength, 0);
+        }
+
+        rope = new MeshRope(texture, points);
+        rope.X = -40;
+        rope.Y = 300;
+
+        app.Stage.AddChild(rope);
+
+        app.Ticker.Add(OnTick);
+    }
+
+    void OnTick(Ticker ticker)
+    {
+        count += 0.1f * ticker.DeltaTime;
+
+        // Make the snake move
+        for (var i = 0; i < points.Length; i++)
+        {
+            points[i].Y = (float)Math.Sin((i * 0.5f) + count) * 30;
+            points[i].X = (i * ropeLength) + (float)Math.Cos((i * 0.3f) + count) * 20;
+        }
+    }
+
+    public void Dispose()
+    {
+        if (app != null)
+        {
+            app.Ticker.Remove(OnTick);
+            app.Dispose();
+        }
+    }
+}

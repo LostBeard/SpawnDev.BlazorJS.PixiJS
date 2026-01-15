@@ -19,13 +19,19 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// <summary>
             /// Creates a new MeshSimple instance.
             /// </summary>
+            /// <param name="options">The options to use.</param>
+            public MeshSimple(MeshSimpleOptions options) : base(JS.New("PIXI.MeshSimple", options)) { }
+
+            /// <summary>
+            /// Creates a new MeshSimple instance.
+            /// </summary>
             /// <param name="texture">The texture to use</param>
             /// <param name="vertices">if you want to specify the vertices</param>
             /// <param name="uvs">if you want to specify the uvs</param>
             /// <param name="indices">if you want to specify the indices</param>
             /// <param name="drawMode">the drawMode to be used</param>
             public MeshSimple(Texture texture, float[]? vertices = null, float[]? uvs = null, ushort[]? indices = null, int? drawMode = null)
-                : base(JS.New("PIXI.MeshSimple", texture, vertices, uvs, indices, drawMode)) { }
+                : this(new MeshSimpleOptions { Texture = texture, Vertices = vertices, Uvs = uvs, Indices = indices, DrawMode = drawMode }) { }
 
             /// <summary>
             /// Collection of vertices data.
