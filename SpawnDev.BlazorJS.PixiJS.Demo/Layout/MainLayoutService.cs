@@ -17,8 +17,8 @@ namespace SpawnDev.BlazorJS.PixiJS.Demo.Layout
         }
         string _Title { get; set; } = "SpawnDev.BlazorJS.PixiJS";
         public delegate void AfterRender(MainLayout mainLayout, bool firstRender);
-        public event AfterRender OnAfterRender;
-        public event Action OnTitleChanged;
+        public event AfterRender? OnAfterRender;
+        public event Action? OnTitleChanged;
         public void TriggerOnAfterRender(MainLayout mainLayout, bool firstRender)
         {
             OnAfterRender?.Invoke(mainLayout, firstRender);

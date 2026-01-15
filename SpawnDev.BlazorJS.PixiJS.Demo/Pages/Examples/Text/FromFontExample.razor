@@ -14,11 +14,9 @@
     <div style="width: 800px; height: 600px;" @ref="containerElRef"></div>
 </div>
 @code {
-    [Inject]
-    BlazorJSRuntime JS { get; set; }
+    [Inject] BlazorJSRuntime JS { get; set; } = default!;
     ElementReference containerElRef;
     Application? app = null;
-    Container? container = null;
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)

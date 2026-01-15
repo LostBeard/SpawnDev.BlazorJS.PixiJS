@@ -39,7 +39,10 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// </summary>
             /// <returns></returns>
             public Rectangle Uvs => JSRef!.Get<Rectangle>("uvs");
-            // source
+            /// <summary>
+            /// The source that the texture is being rendered from.
+            /// </summary>
+            public TextureSource Source => JSRef!.Get<TextureSource>("source");
             #endregion
             #region Methods
             /// <summary>

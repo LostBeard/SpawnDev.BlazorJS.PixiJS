@@ -1,20 +1,23 @@
-﻿using BlazorMonaco.Editor;
+using BlazorMonaco.Editor;
 using Microsoft.AspNetCore.Components;
 using SpawnDev.BlazorJS.CodeRunner;
+using SpawnDev.BlazorJS.PixiJS.Demo.Layout;
+using Radzen;
 
 namespace SpawnDev.BlazorJS.PixiJS.Demo.Pages
 {
     public partial class Playground
     {
-        [Inject]
-        BlazorJSRuntime JS { get; set; }
+        [Inject] BlazorJSRuntime JS { get; set; } = default!;
+        [Inject] MainLayoutService MainLayoutService { get; set; } = default!;
+        [Inject] ThemeService ThemeService { get; set; } = default!;
 
         [Inject]
         CompilationService CompilationService { get; set; } = default!;
 
         Type? CompiledType = null;
 
-        StandaloneCodeEditor _Editor;
+        StandaloneCodeEditor _Editor = default!;
 
         string _textarea = @"@using System
 @using System.Threading.Tasks

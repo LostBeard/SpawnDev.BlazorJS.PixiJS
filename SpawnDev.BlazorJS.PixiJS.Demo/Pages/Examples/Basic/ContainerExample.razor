@@ -12,8 +12,7 @@
     <div style="width: 400px; height: 400px;" @ref="containerElRef"></div>
 </div>
 @code {
-    [Inject]
-    BlazorJSRuntime JS { get; set; }
+    [Inject] BlazorJSRuntime JS { get; set; } = default!;
     ElementReference? containerElRef = null;
     Application? app = null;
     Container? container = null;

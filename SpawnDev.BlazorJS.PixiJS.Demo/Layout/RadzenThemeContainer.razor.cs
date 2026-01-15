@@ -13,7 +13,7 @@ namespace SpawnDev.BlazorJS.PixiJS.Demo.Layout
         /// Gets or sets the theme.
         /// </summary>
         [Parameter]
-        public string Theme { get; set; }
+        public string? Theme { get; set; }
 
         /// <summary>
         /// Enables WCAG contrast requirements. If set to true additional CSS file will be loaded.
@@ -21,7 +21,7 @@ namespace SpawnDev.BlazorJS.PixiJS.Demo.Layout
         [Parameter]
         public bool Wcag { get; set; }
 
-        private string theme;
+        private string? theme;
 
         private bool wcag;
 

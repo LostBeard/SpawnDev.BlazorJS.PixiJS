@@ -9,7 +9,7 @@ namespace SpawnDev.BlazorJS.PixiJS.Demo.Layout.AppTray
         BlazorJSRuntime JS;
         AppTrayService TrayIconService;
         Storage? LocalStorage;
-        AppTrayIcon ThemeTrayIcon;
+        AppTrayIcon? ThemeTrayIcon;
         ThemeService ThemeService;
         ContextMenuService ContextMenuService;
         public string Theme => ThemeService.Theme;
@@ -104,8 +104,11 @@ namespace SpawnDev.BlazorJS.PixiJS.Demo.Layout.AppTray
         private void ThemeService_ThemeChanged()
         {
             SaveUserTheme();
-            ThemeTrayIcon.Icon = GetThemeIcon();
-            ThemeTrayIcon.Title = IsDarkTheme ? $"{ThemeName} Dark" : ThemeName;
+            if (ThemeTrayIcon != null)
+            {
+                ThemeTrayIcon.Icon = GetThemeIcon();
+                ThemeTrayIcon.Title = IsDarkTheme ? $"{ThemeName} Dark" : ThemeName;
+            }
             TrayIconService.StateHasChanged();
         }
         void ThemeMenu_Click(MenuItemEventArgs args)

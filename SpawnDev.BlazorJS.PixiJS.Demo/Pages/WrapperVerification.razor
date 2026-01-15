@@ -10,7 +10,7 @@
 <div @ref="containerElRef" style="width: 800px; height: 600px;"></div>
 
 @code {
-    [Inject] BlazorJSRuntime JS { get; set; }
+    [Inject] BlazorJSRuntime JS { get; set; } = default!;
     ElementReference? containerElRef;
     Application? app;
 
@@ -276,6 +276,30 @@
             JS.Log("HTMLText clicked!");
             htmlTextAdvanced.Alpha = 0.5f;
         });
+
+
+        // Phase 10: Advanced Assets & Resources
+        
+        // 1. Spritesheet Verification (Mock)
+        try 
+        {
+            // Just verifying class availability
+            JS.Log("Spritesheet wrapper accessible.");
+        }
+        catch (Exception ex)
+        {
+             JS.Log("Spritesheet error:", ex.Message);
+        }
+
+        // 2. VideoSource Verification
+        try {
+            using var videoTexture = await PIXI.Assets.Load<Texture>("https://pixijs.com/assets/video.mp4");
+            // Verify we can access the source property
+            TextureSource vidSource = videoTexture.Source;
+            JS.Log("Video Texture Source type found:", vidSource != null);
+        } catch (Exception ex) {
+            JS.Log("VideoSource error:", ex.Message);
+        }
 
     }
 

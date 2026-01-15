@@ -6,20 +6,13 @@ namespace SpawnDev.BlazorJS.PixiJS.Demo.Layout
 {
     public partial class MainLayout
     {
-        [Inject]
-        BlazorJSRuntime JS { get; set; }
-        [Inject]
-        NotificationService NotificationService { get; set; }
-        [Inject]
-        DialogService DialogService { get; set; }
-        [Inject]
-        AppTrayService TrayIconService { get; set; }
-        [Inject]
-        protected NavigationManager NavigationManager { get; set; }
-        [Inject]
-        MainLayoutService MainLayoutService { get; set; }
-        [Inject]
-        ThemeService ThemeService { get; set; }
+        [Inject] BlazorJSRuntime JS { get; set; } = default!;
+        [Inject] NotificationService NotificationService { get; set; } = default!;
+        [Inject] DialogService DialogService { get; set; } = default!;
+        [Inject] ThemeTrayIconService TrayIconService { get; set; } = default!;
+        [Inject] NavigationManager NavigationManager { get; set; } = default!;
+        [Inject] MainLayoutService MainLayoutService { get; set; } = default!;
+        [Inject] ThemeService ThemeService { get; set; } = default!;
 
         string Title => MainLayoutService.Title;
         bool leftSidebarExpanded = false;

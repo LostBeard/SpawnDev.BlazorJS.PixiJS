@@ -4,7 +4,7 @@
     {
         List<AppTrayIcon> _TrayIcons { get; } = new List<AppTrayIcon>();
         public IEnumerable<AppTrayIcon> TrayIcons => ReverseOrder ? _TrayIcons.AsReadOnly().Reverse() : _TrayIcons.AsReadOnly();
-        public event Action OnStateHasChanged;
+        public event Action? OnStateHasChanged;
         public bool ReverseOrder { get; set; } = true;
         public AppTrayService()
         {
