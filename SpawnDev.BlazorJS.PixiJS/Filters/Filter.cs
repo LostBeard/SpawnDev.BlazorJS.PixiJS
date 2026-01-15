@@ -25,9 +25,21 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// If enabled is true the filter is applied, if false it will not.
             /// </summary>
             public bool Enabled { get => JSRef!.Get<bool>("enabled"); set => JSRef!.Set("enabled", value); }
+            /// <summary>
+            /// The resolution of the filter.
+            /// </summary>
             public float Resolution { get => JSRef!.Get<float>("resolution"); set => JSRef!.Set("resolution", value); }
+            /// <summary>
+            /// The padding of the filter.
+            /// </summary>
             public float Padding { get => JSRef!.Get<float>("padding"); set => JSRef!.Set("padding", value); }
+            /// <summary>
+            /// Whether or not to antialias the filter.
+            /// </summary>
             public bool AntiAlias { get => JSRef!.Get<bool>("antialias"); set => JSRef!.Set("antialias", value); }
+            /// <summary>
+            /// The blend mode of the filter.
+            /// </summary>
             public int BlendMode { get => JSRef!.Get<int>("blendMode"); set => JSRef!.Set("blendMode", value); }
         }
     }

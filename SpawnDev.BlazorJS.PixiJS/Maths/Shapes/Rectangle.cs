@@ -24,9 +24,21 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// </summary>
             public Rectangle() : base(JS.New("PIXI.Rectangle")) { }
             #region Properties
+            /// <summary>
+            /// The X coordinate of the top-left corner of the rectangle
+            /// </summary>
             public float X { get => JSRef!.Get<float>("x"); set => JSRef!.Set("x", value); }
+            /// <summary>
+            /// The Y coordinate of the top-left corner of the rectangle
+            /// </summary>
             public float Y { get => JSRef!.Get<float>("y"); set => JSRef!.Set("y", value); }
+            /// <summary>
+            /// The width of the rectangle
+            /// </summary>
             public float Width { get => JSRef!.Get<float>("width"); set => JSRef!.Set("width", value); }
+            /// <summary>
+            /// The height of the rectangle
+            /// </summary>
             public float Height { get => JSRef!.Get<float>("height"); set => JSRef!.Set("height", value); }
             #endregion
         }

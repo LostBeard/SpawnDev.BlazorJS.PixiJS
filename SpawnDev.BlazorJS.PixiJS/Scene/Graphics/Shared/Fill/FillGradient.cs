@@ -5,25 +5,41 @@ namespace SpawnDev.BlazorJS.PixiJS
 {
     public static partial class PIXI
     {
+        /// <summary>
+        /// Texture space
+        /// </summary>
         public class TextureSpace
         {
 
         }
+        /// <summary>
+        /// Options for gradient
+        /// </summary>
         public class GradientOptions
         {
 
 
         }
+        /// <summary>
+        /// Options for radial gradient
+        /// </summary>
         public class RadialGradientOptions
         {
 
 
         }
+        /// <summary>
+        /// Options for linear gradient
+        /// </summary>
         public class LinearGradientOptions
         {
 
 
         }
+        /// <summary>
+        /// A gradient filler
+        /// https://pixijs.download/release/docs/scene.FillGradient.html
+        /// </summary>
         public class FillGradient : CanvasGradient
         {
             /// <inheritdoc/>

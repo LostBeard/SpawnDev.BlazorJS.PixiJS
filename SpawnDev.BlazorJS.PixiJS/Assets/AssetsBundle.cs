@@ -10,11 +10,11 @@
             /// <summary>
             /// The name of the bundle
             /// </summary>
-            public string Name { get; set; }
+            public string Name { get; set; } = default!;
             /// <summary>
             /// The assets in the bundle
             /// </summary>
-            public Union<IEnumerable<string>, IEnumerable<UnresolvedAsset>, UnresolvedAsset, string> Assets { get; set; }
+            public Union<IEnumerable<string>, IEnumerable<UnresolvedAsset>, UnresolvedAsset, string> Assets { get; set; } = default!;
         }
     }
 }

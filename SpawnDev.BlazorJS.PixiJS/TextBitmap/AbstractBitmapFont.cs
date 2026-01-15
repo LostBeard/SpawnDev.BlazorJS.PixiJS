@@ -4,6 +4,10 @@ namespace SpawnDev.BlazorJS.PixiJS
 {
     public static partial class PIXI
     {
+        /// <summary>
+        /// Abstract class for bitmap fonts.
+        /// https://pixijs.download/release/docs/text-bitmap.AbstractBitmapFont.html
+        /// </summary>
         public class AbstractBitmapFont : JSObject
         {
             #region Constructors

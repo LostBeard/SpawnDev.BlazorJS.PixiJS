@@ -5,7 +5,13 @@ namespace SpawnDev.BlazorJS.PixiJS
     public static partial class PIXI
     {
         static AssetsClass? _Assets = null;
+        /// <summary>
+        /// A singleton instance of the Assets class.
+        /// </summary>
         public static AssetsClass Assets => _Assets ??= JS.Get<AssetsClass>("PIXI.Assets");
+        /// <summary>
+        /// The Assets class provides a way to load assets.
+        /// </summary>
         public class AssetsClass : JSObject
         {
 
@@ -57,6 +63,9 @@ namespace SpawnDev.BlazorJS.PixiJS
                 using var callback = progressCallback == null ? null : new ActionCallback<float>((progress) => progressCallback(progress));
                 return await JSRef!.CallAsync<Dictionary<string, T>>("load", uri, callback);
             }
+            /// <summary>
+            /// Callback for load progress.
+            /// </summary>
             public delegate void ProgressCallbackDelegate(float progress);
 
             /// <summary>

@@ -4,6 +4,10 @@ namespace SpawnDev.BlazorJS.PixiJS
 {
     public static partial class PIXI
     {
+        /// <summary>
+        /// A Text Object will create a line or multiple lines of text.
+        /// https://pixijs.download/release/docs/scene.Text.html
+        /// </summary>
         public class Text : AbstractText, IView
         {
             /// <inheritdoc/>

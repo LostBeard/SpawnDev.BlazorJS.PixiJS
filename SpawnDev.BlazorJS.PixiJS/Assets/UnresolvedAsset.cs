@@ -12,7 +12,7 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// <summary>
             /// Asset id
             /// </summary>
-            public string Key { get; set; }
+            public string Key { get; set; } = default!;
             /// <summary>
             /// The URL or relative path to the asset
             /// </summary>

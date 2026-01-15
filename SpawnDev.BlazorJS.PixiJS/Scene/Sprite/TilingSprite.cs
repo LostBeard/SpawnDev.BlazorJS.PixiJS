@@ -39,6 +39,10 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// </summary>
             public ObservablePoint TileScale => JSRef!.Get<ObservablePoint>("tileScale");
 
+            /// <summary>
+            /// Changes the margin used for clamping the texture coords.
+            /// </summary>
+            /// <param name="margin"></param>
             public void ClampMargin(float margin) => JSRef!.CallVoid("clampMargin", margin);
         }
     }

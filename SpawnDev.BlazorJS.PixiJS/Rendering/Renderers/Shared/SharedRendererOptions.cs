@@ -5,6 +5,10 @@ namespace SpawnDev.BlazorJS.PixiJS
     public static partial class PIXI
     {
         // https://pixijs.download/release/docs/rendering.SharedRendererOptions.html
+        /// <summary>
+        /// Options for the shared renderer
+        /// https://pixijs.download/release/docs/rendering.SharedRendererOptions.html
+        /// </summary>
         public class SharedRendererOptions
         {
 

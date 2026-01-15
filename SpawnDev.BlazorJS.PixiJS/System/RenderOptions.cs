@@ -4,9 +4,18 @@ namespace SpawnDev.BlazorJS.PixiJS
 {
     public static partial class PIXI
     {
+        /// <summary>
+        /// Options for rendering
+        /// </summary>
         public class RenderOptions : JSObject
         {
+            /// <summary>
+            /// Deserialization constructor
+            /// </summary>
             public RenderOptions(IJSInProcessObjectReference _ref) : base(_ref) { }
+            /// <summary>
+            /// Creates a new instance
+            /// </summary>
             public RenderOptions() : base(JS.New("Object")) { }
 
             /// <summary>

@@ -92,7 +92,7 @@ namespace SpawnDev.BlazorJS.PixiJS
             [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
             public string? TextBaseline { get; set; }
             /// <summary>
-            /// Determines whether newlines & spaces are collapsed or preserved "normal" (collapse, collapse), "pre" (preserve, preserve) | "pre-line" (preserve, collapse). It needs wordWrap to be set to true.<br/>
+            /// Determines whether newlines and spaces are collapsed or preserved "normal" (collapse, collapse), "pre" (preserve, preserve) | "pre-line" (preserve, collapse). It needs wordWrap to be set to true.<br/>
             /// 'normal' | 'pre' | 'pre-line'	
             /// </summary>
             [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]

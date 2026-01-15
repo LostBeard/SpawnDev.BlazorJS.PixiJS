@@ -51,7 +51,7 @@
 
     void CreateBunny(float x, float y)
     {
-        var bunny = new Sprite(texture);
+        var bunny = new Sprite(texture!);
 
         // Enable interactivity
         bunny.EventMode = "static";
@@ -64,7 +64,7 @@
         bunny.X = x;
         bunny.Y = y;
 
-        app!.Stage.AddChild(bunny);
+        app!.Stage!.AddChild(bunny);
     }
 
     // Tracking state
@@ -76,9 +76,10 @@
         draggingBunny = bunny;
         bunny.Alpha = 0.5f;
 
-        app!.Stage.On<FederatedPointerEvent>("pointermove", OnDragMove);
-        app!.Stage.On<FederatedPointerEvent>("pointerup", OnDragEnd);
-        app!.Stage.On<FederatedPointerEvent>("pointerupoutside", OnDragEnd);
+        using var stage = app!.Stage!;
+        stage.OnPointerMove += OnDragMove;
+        stage.OnPointerUp += OnDragEnd;
+        stage.OnPointerUpOutside += OnDragEnd;
     }
 
     void OnDragEnd(FederatedPointerEvent e)
@@ -86,9 +87,10 @@
         if (draggingBunny != null)
         {
             draggingBunny.Alpha = 1f;
-            app!.Stage.Off<FederatedPointerEvent>("pointermove", OnDragMove);
-            app!.Stage.Off<FederatedPointerEvent>("pointerup", OnDragEnd);
-            app!.Stage.Off<FederatedPointerEvent>("pointerupoutside", OnDragEnd);
+            using var stage = app!.Stage!;
+            stage.OnPointerMove -= OnDragMove;
+            stage.OnPointerUp -= OnDragEnd;
+            stage.OnPointerUpOutside -= OnDragEnd;
             draggingBunny = null;
         }
     }

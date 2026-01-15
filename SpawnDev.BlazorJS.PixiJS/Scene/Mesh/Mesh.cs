@@ -46,8 +46,17 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// Includes vertex positions, face indices, normals, colors, UVs and custom attributes within buffers.
             /// </summary>
             public JSObject Geometry => JSRef!.Get<JSObject>("geometry");
+            /// <summary>
+            /// The shader that the mesh will use.
+            /// </summary>
             public JSObject Shader => JSRef!.Get<JSObject>("shader");
+            /// <summary>
+            /// The texture that the mesh uses.
+            /// </summary>
             public Texture Texture { get => JSRef!.Get<Texture>("texture"); set => JSRef!.Set("texture", value); }
+            /// <summary>
+            /// The way the Mesh should be drawn, can be any of the PixiJS DrawModes enums.
+            /// </summary>
             public int CurrentDrawMode => JSRef!.Get<int>("drawMode");
         }
     }

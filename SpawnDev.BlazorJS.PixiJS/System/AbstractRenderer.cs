@@ -4,6 +4,10 @@ namespace SpawnDev.BlazorJS.PixiJS
 {
     public static partial class PIXI
     {
+        /// <summary>
+        /// The AbstractRenderer is the base for a PixiJS Renderer. It is developed using the WebGL API.
+        /// https://pixijs.download/release/docs/rendering.AbstractRenderer.html
+        /// </summary>
         public class AbstractRenderer : JSObject
         {
             #region Constructors

@@ -28,11 +28,29 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// This is a shared object, if you want to modify it consider creating a new Matrix
             /// </summary>
             public static Matrix IDENTITY => JS.Get<Matrix>("PIXI.Matrix.IDENTITY");
+            /// <summary>
+            /// X scale
+            /// </summary>
             public float A { get => JSRef!.Get<float>("a"); set => JSRef!.Set("a", value); }
+            /// <summary>
+            /// Y skew
+            /// </summary>
             public float B { get => JSRef!.Get<float>("b"); set => JSRef!.Set("b", value); }
+            /// <summary>
+            /// X skew
+            /// </summary>
             public float C { get => JSRef!.Get<float>("c"); set => JSRef!.Set("c", value); }
+            /// <summary>
+            /// Y scale
+            /// </summary>
             public float D { get => JSRef!.Get<float>("d"); set => JSRef!.Set("d", value); }
+            /// <summary>
+            /// X translation
+            /// </summary>
             public float TX { get => JSRef!.Get<float>("tx"); set => JSRef!.Set("tx", value); }
+            /// <summary>
+            /// Y translation
+            /// </summary>
             public float TY { get => JSRef!.Get<float>("ty"); set => JSRef!.Set("ty", value); }
             /// <summary>
             /// An array of the current matrix. Only populated when toArray is called

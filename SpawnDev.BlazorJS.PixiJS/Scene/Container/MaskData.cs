@@ -19,7 +19,7 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// Creates a new MaskData instance.
             /// </summary>
             /// <param name="maskObject">The object to use as the mask.</param>
-            public MaskData(Container maskObject = null) : base(JS.New("PIXI.MaskData", maskObject)) { }
+            public MaskData(Container? maskObject = null) : base(JS.New("PIXI.MaskData", maskObject)) { }
 
             /// <summary>
             /// The object that is being used as the mask.

@@ -19,7 +19,7 @@
             /// an identifier that is used to identify the type of system that will be used to render this renderable<br/>
             /// eg, 'sprite' will use the sprite system(based on the systems name
             /// </summary>
-            string RenderPipeId { get; }
+            string? RenderPipeId { get; }
             /// <summary>
             /// Whether or not to round the x/y position of the object.
             /// </summary>
@@ -27,7 +27,7 @@
             /// <summary>
             /// this is the AABB rectangle bounds of the view in local untransformed space.
             /// </summary>
-            BoundsData Bounds { get; set; }
+            BoundsData? Bounds { get; set; }
             /// <summary>
             /// Checks if the point is within the view
             /// </summary>

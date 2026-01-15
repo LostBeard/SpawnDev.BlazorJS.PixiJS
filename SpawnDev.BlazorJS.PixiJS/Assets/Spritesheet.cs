@@ -6,6 +6,9 @@ using static SpawnDev.BlazorJS.PixiJS.PIXI;
 
 namespace SpawnDev.BlazorJS.PixiJS
 {
+    /// <summary>
+    /// Utility class for maintaining reference to a collection of textures on a single SpriteSheet.
+    /// </summary>
     public class Spritesheet : JSObject
     {
         /// <inheritdoc/>
@@ -43,6 +46,11 @@ namespace SpawnDev.BlazorJS.PixiJS
         /// <param name="destroyBase">Whether to destroy the base texture as well.</param>
         public void Destroy(bool destroyBase = false) => JSRef!.CallVoid("destroy", destroyBase);
 
+        /// <summary>
+        /// Creates a new Spritesheet instance.
+        /// </summary>
+        /// <param name="texture">The source texture.</param>
+        /// <param name="data">The sprite sheet data.</param>
         public Spritesheet(Texture texture, object data) : base(JS.New("PIXI.Spritesheet", texture, data)) { }
     }
 }

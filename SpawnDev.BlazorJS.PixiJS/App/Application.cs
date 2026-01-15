@@ -61,6 +61,9 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// </summary>
             public Rectangle Screen => JSRef!.Get<Rectangle>("screen");
 
+            /// <summary>
+            /// Ticker for the application.
+            /// </summary>
             public Ticker Ticker => JSRef!.Get<Ticker>("ticker");
             /// <summary>
             /// The renderer used by this application.
@@ -106,7 +109,13 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// Clean up the ticker, scoped to application
             /// </summary>
             public void Destroy() => JSRef!.CallVoid("destroy");
+            /// <summary>
+            /// Stop the Ticker.
+            /// </summary>
             public void Stop() => JSRef!.CallVoid("stop");
+            /// <summary>
+            /// Start the Ticker.
+            /// </summary>
             public void Start() => JSRef!.CallVoid("start");
             #endregion
             #region Events

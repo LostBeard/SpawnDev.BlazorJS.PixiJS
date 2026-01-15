@@ -3,8 +3,15 @@ using SpawnDev.BlazorJS.JSObjects;
 
 namespace SpawnDev.BlazorJS.PixiJS
 {
+    /// <summary>
+    /// A texture source that comes from a video.
+    /// https://pixijs.download/release/docs/rendering.VideoSource.html
+    /// </summary>
     public class VideoSource : TextureSource
     {
+        /// <summary>
+        /// Deserialization constructor
+        /// </summary>
         public VideoSource(IJSInProcessObjectReference _ref) : base(_ref) { }
 
         /// <summary>

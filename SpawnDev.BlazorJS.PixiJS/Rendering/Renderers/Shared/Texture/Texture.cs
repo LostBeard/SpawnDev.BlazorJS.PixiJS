@@ -4,6 +4,10 @@ namespace SpawnDev.BlazorJS.PixiJS
 {
     public static partial class PIXI
     {
+        /// <summary>
+        /// A texture stores the information that represents an image or part of an image.
+        /// https://pixijs.download/release/docs/rendering.Texture.html
+        /// </summary>
         public class Texture : JSObject
         {
             #region Constructors

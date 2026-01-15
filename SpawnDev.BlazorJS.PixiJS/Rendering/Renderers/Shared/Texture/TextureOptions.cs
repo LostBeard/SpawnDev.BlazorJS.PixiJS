@@ -4,6 +4,9 @@ namespace SpawnDev.BlazorJS.PixiJS
 {
     public static partial class PIXI
     {
+        /// <summary>
+        /// Options for creating a texture
+        /// </summary>
         public class TextureOptions : JSObject
         {
             /// <summary>

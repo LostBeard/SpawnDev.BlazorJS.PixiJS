@@ -11,6 +11,9 @@
     {
         static BlazorJSRuntime JS => BlazorJSRuntime.JS;
         static Task? _Init = null;
+        /// <summary>
+        /// Initializes the PixiJS library
+        /// </summary>
         public static Task Init()
         {
             _Init ??= JS.LoadScript("_content/SpawnDev.BlazorJS.PixiJS/pixi.min.js", "PIXI");

@@ -1,4 +1,4 @@
-﻿namespace SpawnDev.BlazorJS.PixiJS.Maths.Misc
+﻿namespace SpawnDev.BlazorJS.PixiJS
 {
     public static partial class PIXI
     {

@@ -14,6 +14,10 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// Deserialization constructor
             /// </summary>
             public HTMLText(IJSInProcessObjectReference _ref) : base(_ref) { }
+            /// <summary>
+            /// Creates a new HTMLText instance.
+            /// </summary>
+            /// <param name="options">The options to use.</param>
             public HTMLText(HTMLTextOptions options) : base(JS.New("PIXI.HTMLText", options)) { }
 
             /// <summary>

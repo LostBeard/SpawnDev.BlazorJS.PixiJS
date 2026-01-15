@@ -41,10 +41,25 @@ namespace SpawnDev.BlazorJS.PixiJS
                 return options;
             }
 
+            /// <summary>
+            /// Sets the strength of both the blurX and blurY properties simultaneously
+            /// </summary>
             public float Blur { get => JSRef!.Get<float>("blur"); set => JSRef!.Set("blur", value); }
+            /// <summary>
+            /// Sets the strength of the blurX property
+            /// </summary>
             public float BlurX { get => JSRef!.Get<float>("blurX"); set => JSRef!.Set("blurX", value); }
+            /// <summary>
+            /// Sets the strength of the blurY property
+            /// </summary>
             public float BlurY { get => JSRef!.Get<float>("blurY"); set => JSRef!.Set("blurY", value); }
+            /// <summary>
+            /// The number of passes to perform to blur the image.
+            /// </summary>
             public int Quality { get => JSRef!.Get<int>("quality"); set => JSRef!.Set("quality", value); }
+            /// <summary>
+            /// If set to true, the edge of the target will be clamped
+            /// </summary>
             public bool RepeatEdgePixels { get => JSRef!.Get<bool>("repeatEdgePixels"); set => JSRef!.Set("repeatEdgePixels", value); }
         }
     }

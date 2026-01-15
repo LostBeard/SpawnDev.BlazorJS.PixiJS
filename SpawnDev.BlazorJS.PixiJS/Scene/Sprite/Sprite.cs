@@ -28,10 +28,6 @@ namespace SpawnDev.BlazorJS.PixiJS
             #endregion
             #region Properties
             /// <summary>
-            /// a unique id for this view
-            /// </summary>
-            public long Uid => JSRef!.Get<long>("uid");
-            /// <summary>
             /// whether or not this view should be batched
             /// </summary>
             public bool Batched { get => JSRef!.Get<bool>("batched"); set => JSRef!.Set("batched", value); }

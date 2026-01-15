@@ -20,7 +20,8 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// <inheritdoc/>
             public bool RoundPixels { get => JSRef!.Get<bool>("roundPixels"); set => JSRef!.Set("roundPixels", value); }
             /// <inheritdoc/>
-            public BoundsData Bounds { get => JSRef!.Get<BoundsData>("bounds"); set => JSRef!.Set("bounds", value); }
+            /// <inheritdoc/>
+            public BoundsData? Bounds { get => JSRef!.Get<BoundsData?>("bounds"); set => JSRef!.Set("bounds", value); }
             /// <inheritdoc/>
             public bool ContainsPoint(Point point) => JSRef!.Call<bool>("containsPoint");
         }
