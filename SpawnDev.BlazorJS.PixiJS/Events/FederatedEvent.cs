@@ -23,8 +23,8 @@ namespace SpawnDev.BlazorJS.PixiJS
             public bool Cancelable => JSRef!.Get<bool>("cancelable");
             public bool DefaultPrevented => JSRef!.Get<bool>("defaultPrevented");
             public float Detail => JSRef!.Get<float>("detail");
-            public EventTarget CurrentTarget => JSRef!.Get<EventTarget>("currentTarget");
-            public EventTarget Target => JSRef!.Get<EventTarget>("target");
+            public EventEmitter CurrentTarget => JSRef!.Get<EventEmitter>("currentTarget");
+            public EventEmitter Target => JSRef!.Get<EventEmitter>("target");
             public float TimeStamp => JSRef!.Get<float>("timeStamp");
             public string Type => JSRef!.Get<string>("type");
 

@@ -11,7 +11,7 @@ namespace SpawnDev.BlazorJS.PixiJS
         /// It is the base class of all display objects that act as a container for other objects, including Graphics and Sprite.<br/>
         /// https://pixijs.download/v8.7.1/docs/scene.Container.html
         /// </summary>
-        public class Container : EventTarget
+        public class Container : EventEmitter
         {
             #region Constructors
             /// <summary>
@@ -227,6 +227,10 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// <summary>
             /// Interaction shape. Children will be hit first, then this shape will be checked.
             /// </summary>
+            public JSObject? HitArea { get => JSRef!.Get<JSObject?>("hitArea"); set => JSRef!.Set("hitArea", value); }
+            /// <summary>
+            /// Interaction shape. Children will be hit first, then this shape will be checked.
+            /// </summary>
             public string? Cursor { get => JSRef!.Get<string?>("cursor"); set => JSRef!.Set("cursor", value); }
             /// <summary>
             /// Enable interaction events for the Container. Touch, pointer, etc.
@@ -236,6 +240,11 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// Whether the container is interactive. Deprecated in favor of EventMode.
             /// </summary>
             public bool Interactive { get => JSRef!.Get<bool>("interactive"); set => JSRef!.Set("interactive", value); }
+
+            /// <summary>
+            /// Sets a mask for the displayObject. A mask is an object that limits the visibility of an object to the shape of the mask applied to it. In PixiJS a regular mask must be a PIXI.Graphics or a PIXI.Sprite object. This allows for much faster masking in canvas as it utilises shape clipping. To remove a mask, set this property to null.
+            /// </summary>
+            public Container? Mask { get => JSRef!.Get<Container?>("mask"); set => JSRef!.Set("mask", value); }
             #endregion
             #region Methods
             /// <summary>
@@ -281,29 +290,41 @@ namespace SpawnDev.BlazorJS.PixiJS
             #endregion
             #region Events
             /// <summary>
-            /// Adds an event listener
+            /// Fires when the pointer is pressed.
             /// </summary>
-            public void On(string eventName, Action callback) => JSRef!.CallVoid("on", eventName, callback);
+            public ActionEvent<FederatedPointerEvent> OnPointerDown { get => new ActionEvent<FederatedPointerEvent>("pointerdown", On, Off); set { } }
             /// <summary>
-            /// Adds an event listener
+            /// Fires when the pointer is released.
             /// </summary>
-            public void On<T>(string eventName, Action<T> callback) => JSRef!.CallVoid("on", eventName, callback);
+            public ActionEvent<FederatedPointerEvent> OnPointerUp { get => new ActionEvent<FederatedPointerEvent>("pointerup", On, Off); set { } }
             /// <summary>
-            /// Removes an event listener
+            /// Fires when the pointer is moved.
             /// </summary>
-            public void Off(string eventName, Action callback) => JSRef!.CallVoid("off", eventName, callback);
+            public ActionEvent<FederatedPointerEvent> OnPointerMove { get => new ActionEvent<FederatedPointerEvent>("pointermove", On, Off); set { } }
             /// <summary>
-            /// Removes an event listener
+            /// Fires when the pointer is moved over the object.
             /// </summary>
+            public ActionEvent<FederatedPointerEvent> OnPointerOver { get => new ActionEvent<FederatedPointerEvent>("pointerover", On, Off); set { } }
             /// <summary>
-            /// Sets a mask for the displayObject. A mask is an object that limits the visibility of an object to the shape of the mask applied to it. In PixiJS a regular mask must be a PIXI.Graphics or a PIXI.Sprite object. This allows for much faster masking in canvas as it utilises shape clipping. To remove a mask, set this property to null.
+            /// Fires when the pointer is moved out of the object.
             /// </summary>
-            public Container? Mask { get => JSRef!.Get<Container?>("mask"); set => JSRef!.Set("mask", value); }
-
+            public ActionEvent<FederatedPointerEvent> OnPointerOut { get => new ActionEvent<FederatedPointerEvent>("pointerout", On, Off); set { } }
             /// <summary>
-            /// Removes an event listener
+            /// Fires when the pointer is released outside the object.
             /// </summary>
-            public void Off<T>(string eventName, Action<T> callback) => JSRef!.CallVoid("off", eventName, callback);
+            public ActionEvent<FederatedPointerEvent> OnPointerUpOutside { get => new ActionEvent<FederatedPointerEvent>("pointerupoutside", On, Off); set { } }
+            /// <summary>
+            /// Fires when the pointer is clicked/tapped.
+            /// </summary>
+            public ActionEvent<FederatedPointerEvent> OnPointerTap { get => new ActionEvent<FederatedPointerEvent>("pointertap", On, Off); set { } }
+            /// <summary>
+            /// Fires when the object is clicked.
+            /// </summary>
+            public ActionEvent<FederatedPointerEvent> OnClick { get => new ActionEvent<FederatedPointerEvent>("click", On, Off); set { } }
+            /// <summary>
+            /// Fires when the object is tapped.
+            /// </summary>
+            public ActionEvent<FederatedPointerEvent> OnTap { get => new ActionEvent<FederatedPointerEvent>("tap", On, Off); set { } }
             #endregion
         }
     }

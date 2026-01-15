@@ -16,5 +16,9 @@
             _Init ??= JS.LoadScript("_content/SpawnDev.BlazorJS.PixiJS/pixi.min.js", "PIXI");
             return _Init;
         }
+        /// <summary>
+        /// The version of the PixiJS library
+        /// </summary>
+        public static string Version => JS.Get<string>("PIXI.VERSION");
     }
 }

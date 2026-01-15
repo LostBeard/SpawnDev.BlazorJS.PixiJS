@@ -26,13 +26,17 @@
         app = new Application();
         await app.Init(new ApplicationOptions { Background = "#1099bb", ResizeTo = containerElRef });
         using var htmlElement = new HTMLElement(containerElRef!.Value);
-        htmlElement!.AppendChild(app.Canvas);
+        htmlElement!.AppendChild(app!.Canvas);
+
+        // Enable interactivity on the stage
+        app!.Stage!.EventMode = "static";
+        app!.Stage!.HitArea = app.Screen;
 
         texture = await PIXI.Assets.Load<Texture>("https://pixijs.com/assets/bunny.png");
 
         // Scale mode for pixelation
         // wrapper now has ScaleMode
-        texture.Source.ScaleMode = "nearest";
+        texture!.Source.ScaleMode = "nearest";
 
         // Use System.Random and System.Math
         var rand = new Random();
@@ -56,43 +60,34 @@
         bunny.Scale.Set(3);
 
         bunny.On("pointerdown", (FederatedPointerEvent e) => OnDragStart(bunny));
-        
-        // Note: In PixiJS v8, listeners are attached to the stage or object. 
-        // For global drag, usually we attach move/up to stage or window, 
-        // but here we can attach to the bunny and use 'global' events or just standard ones if checking capture.
-        // The official example attaches to the object.
-        // We will store the drag state on the C# wrapper object isn't easy without a custom class, 
-        // so we'll use a closure or a dictionary if needed. 
-        // Actually, we can just use the lambda closure.
-        
-        // However, to mimic 'this.data' from JS, we need to capture the event data.
-        // Let's use a simpler closure approach for this demo.
-        
+
         bunny.X = x;
         bunny.Y = y;
-        
+
         app!.Stage.AddChild(bunny);
     }
-    
+
     // Tracking state
     Sprite? draggingBunny = null;
-    FederatedPointerEvent? dragEvent = null;
-    float dragOffsetX = 0;
-    float dragOffsetY = 0;
 
     void OnDragStart(Sprite bunny)
     {
         // We need to listen to global move on the stage to handle fast movement
         draggingBunny = bunny;
         bunny.Alpha = 0.5f;
-        
+
+        JS.Log(">> OnDragStart");
+
         app!.Stage.On<FederatedPointerEvent>("pointermove", OnDragMove);
         app!.Stage.On<FederatedPointerEvent>("pointerup", OnDragEnd);
         app!.Stage.On<FederatedPointerEvent>("pointerupoutside", OnDragEnd);
+
+        JS.Log("<< OnDragStart");
     }
 
     void OnDragEnd(FederatedPointerEvent e)
     {
+        JS.Log("OnDragEnd: draggingBunny != null ==", draggingBunny != null);
         if (draggingBunny != null)
         {
             draggingBunny.Alpha = 1f;

@@ -11,9 +11,9 @@
     [Inject] BlazorJSRuntime JS { get; set; } = default!;
     ElementReference? containerElRef;
     Application? app;
-    Sprite? bgSprite;
-    Sprite? littleDudes;
-    Sprite? littleRobot;
+    //Sprite? bgSprite;
+    //Sprite? littleDudes;
+    //Sprite? littleRobot;
     BlurFilter? blurFilter1;
     BlurFilter? blurFilter2;
 
@@ -60,8 +60,8 @@
             var blurAmount1 = (float)Math.Cos(count);
             var blurAmount2 = (float)Math.Sin(count);
 
-            blurFilter1.Blur = 20 * (blurAmount1);
-            blurFilter2.Blur = 20 * (blurAmount2);
+            blurFilter1!.Blur = 20 * (blurAmount1);
+            blurFilter2!.Blur = 20 * (blurAmount2);
         });
     }
 

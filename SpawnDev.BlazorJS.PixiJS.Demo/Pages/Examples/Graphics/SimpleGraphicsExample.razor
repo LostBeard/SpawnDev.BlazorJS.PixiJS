@@ -22,6 +22,7 @@
         if (firstRender)
         {
             await Init();
+            JS.Log($"PIXI Version: {PIXI.Version}");
         }
     }
     async Task Init()
@@ -37,6 +38,10 @@
         // Append the application canvas to the document body
         using var htmlElement = new HTMLElement(containerElRef);
         htmlElement!.AppendChild(app.Canvas);
+
+        // Enable interactivity on the stage
+        app!.Stage!.EventMode = "static";
+        app!.Stage!.HitArea = app.Screen;
 
         var graphics = new Graphics();
 
@@ -111,6 +116,17 @@
 
         graphics.Poly(path);
         graphics.Fill(0x3500fa);
+
+        graphics.EventMode = "static";
+        // Also set Interactive just in case
+        graphics.Interactive = true;
+        graphics.Cursor = "pointer";
+        graphics.OnClick += (e) =>
+        {
+            JS.Log("Graphics clicked!");
+            // visual feedback
+            graphics.Tint = 0x00FF00;
+        };
 
         app.Stage!.AddChild(graphics);
     }
