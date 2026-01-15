@@ -335,6 +335,12 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// <param name="style"></param>
             /// <returns></returns>
             public Graphics Stroke(StrokeStyle style) { JSRef!.CallVoid("stroke", style); return this; }
+            /// <summary>
+            /// Strokes the current path with the current stroke style.
+            /// </summary>
+            /// <param name="color"></param>
+            /// <returns></returns>
+            public Graphics Stroke(ColorSource color) { JSRef!.CallVoid("stroke", color); return this; }
         }
     }
 }

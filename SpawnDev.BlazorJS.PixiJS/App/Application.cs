@@ -63,6 +63,13 @@ namespace SpawnDev.BlazorJS.PixiJS
 
             public Ticker Ticker => JSRef!.Get<Ticker>("ticker");
             /// <summary>
+            /// The renderer used by this application.
+            /// </summary>
+            public AbstractRenderer Renderer => JSRef!.Get<AbstractRenderer>("renderer");
+            /// <summary>
+            /// The root display container that's rendered.
+            /// </summary>
+            /// <summary>
             /// The root display container that's rendered.
             /// </summary>
             public Container? Stage { get => JSRef!.Get<Container>("stage"); set => JSRef!.Set("stage", value); }

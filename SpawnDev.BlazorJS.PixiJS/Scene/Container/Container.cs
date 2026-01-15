@@ -206,15 +206,82 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// The position of the container on the y axis relative to the local coordinates of the parent. An alias to position.y
             /// </summary>
             public float Y { get => JSRef!.Get<float>("y"); set => JSRef!.Set("y", value); }
+            /// <summary>
+            /// The zIndex of the displayObject.
+            /// </summary>
+            public int ZIndex { get => JSRef!.Get<int>("zIndex"); set => JSRef!.Set("zIndex", value); }
+
+            /// <summary>
+            /// Sets the filters for the displayObject.
+            /// * IMPORTANT: This is a pass-through property that sets/gets the filter array. 
+            /// * Getting it returns a NEW array reference from JS. Modifying that array won't affect the container unless you assign it back.
+            /// </summary>
+            public Filter[]? Filters { get => JSRef!.Get<Filter[]?>("filters"); set => JSRef!.Set("filters", value); }
+
+            /// <summary>
+            /// Interaction shape. Children will be hit first, then this shape will be checked.
+            /// </summary>
+            public string? Cursor { get => JSRef!.Get<string?>("cursor"); set => JSRef!.Set("cursor", value); }
+            /// <summary>
+            /// Enable interaction events for the Container. Touch, pointer, etc.
+            /// </summary>
+            public string? EventMode { get => JSRef!.Get<string?>("eventMode"); set => JSRef!.Set("eventMode", value); }
+            /// <summary>
+            /// Whether the container is interactive. Deprecated in favor of EventMode.
+            /// </summary>
+            public bool Interactive { get => JSRef!.Get<bool>("interactive"); set => JSRef!.Set("interactive", value); }
             #endregion
             #region Methods
             /// <summary>
             /// Adds one or more children to the container.
             /// </summary>
             public void AddChild(params Container[] children) => JSRef!.CallApplyVoid("addChild", children);
+            /// <summary>
+            /// Removes one or more children from the container.
+            /// </summary>
+            public void RemoveChild(params Container[] children) => JSRef!.CallApplyVoid("removeChild", children);
+            /// <summary>
+            /// Removes all children from this container that are within the begin and end indexes.
+            /// </summary>
+            public void RemoveChildren(int beginIndex = 0, int endIndex = -1)
+            {
+                if (endIndex == -1) JSRef!.CallVoid("removeChildren", beginIndex);
+                else JSRef!.CallVoid("removeChildren", beginIndex, endIndex);
+            }
+            /// <summary>
+            /// Returns the child at the specified index
+            /// </summary>
+            public Container GetChildAt(int index) => JSRef!.Call<Container>("getChildAt", index);
+            /// <summary>
+            /// Returns the index position of a child DisplayObject instance
+            /// </summary>
+            public int GetChildIndex(Container child) => JSRef!.Call<int>("getChildIndex", child);
+            /// <summary>
+            /// Changes the position of an existing child in the display object container
+            /// </summary>
+            public void SetChildIndex(Container child, int index) => JSRef!.CallVoid("setChildIndex", child, index);
+            /// <summary>
+            /// Swaps the position of 2 Display Objects within this container.
+            /// </summary>
+            public void SwapChildren(Container child, Container child2) => JSRef!.CallVoid("swapChildren", child, child2);
+            /// <summary>
+            /// Calculates the global position of the display object
+            /// </summary>
+            public Point ToGlobal(Point position, Point? point = null, bool? skipUpdate = null) => JSRef!.Call<Point>("toGlobal", position, point, skipUpdate);
+            /// <summary>
+            /// Calculates the local position of the display object relative to another point
+            /// </summary>
+            public Point ToLocal(Point position, Container? from = null, Point? point = null, bool? skipUpdate = null) => JSRef!.Call<Point>("toLocal", position, from, point, skipUpdate);
             #endregion
             #region Events
-
+            /// <summary>
+            /// Adds an event listener
+            /// </summary>
+            public void On(string eventName, Action callback) => JSRef!.CallVoid("on", eventName, callback);
+            /// <summary>
+            /// Adds an event listener
+            /// </summary>
+            public void On<T>(string eventName, Action<T> callback) => JSRef!.CallVoid("on", eventName, callback);
             #endregion
         }
     }

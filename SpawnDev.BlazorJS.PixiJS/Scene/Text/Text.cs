@@ -13,17 +13,17 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// </summary>
             /// <param name="text"></param>
             /// <param name="style"></param>
-            public Text(string text, TextStyle style) : base(JS.New("PIXI.BitmapText", text, style)) { }
+            public Text(string text, TextStyle style) : base(JS.New("PIXI.Text", text, style)) { }
             /// <summary>
             /// Creates a new instance
             /// </summary>
             /// <param name="text"></param>
             /// <param name="style"></param>
-            public Text(string text, TextStyleOptions style) : base(JS.New("PIXI.BitmapText", text, style)) { }
+            public Text(string text, TextStyleOptions style) : base(JS.New("PIXI.Text", text, style)) { }
             /// <summary>
             /// Creates a new instance
             /// </summary>
-            public Text(TextOptions textOptions) : base(JS.New("PIXI.BitmapText", textOptions)) { }
+            public Text(TextOptions textOptions) : base(JS.New("PIXI.Text", textOptions)) { }
         }
     }
 }

@@ -1,0 +1,166 @@
+@page "/verification"
+@using SpawnDev.BlazorJS.PixiJS
+@using static SpawnDev.BlazorJS.PixiJS.PIXI
+@using SpawnDev.BlazorJS.JsonConverters
+@using SpawnDev.BlazorJS.JSObjects
+@using System.Threading.Tasks
+@implements IDisposable
+
+<h3>Wrapper Verification</h3>
+<div @ref="containerElRef" style="width: 800px; height: 600px;"></div>
+
+@code {
+    [Inject] BlazorJSRuntime JS { get; set; }
+    ElementReference? containerElRef;
+    Application? app;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await Init();
+        }
+    }
+
+    async Task Init()
+    {
+        app = new Application();
+        await app.Init(new ApplicationOptions { Background = "#1099bb", ResizeTo = containerElRef });
+        using var htmlElement = new HTMLElement(containerElRef!.Value);
+        htmlElement!.AppendChild(app.Canvas);
+
+        // Test Application.Renderer
+        var renderer = app.Renderer;
+        JS.Log("Renderer found:", renderer);
+
+        // Test Graphics Stroke(ColorSource)
+        using var graphics = new Graphics();
+        graphics.Rect(50, 50, 100, 100);
+        graphics.Fill(0xFF0000);
+        graphics.Stroke(0xFFFFFF); // Test overload
+        app.Stage!.AddChild(graphics);
+
+        // Test Sprite Anchor & Texture properties
+        using var texture = await PIXI.Assets.Load<Texture>("https://pixijs.com/assets/bunny.png");
+        var sprite = new Sprite(texture);
+        sprite.Anchor.Set(0.5f); // Anchor property
+        sprite.X = 300;
+        sprite.Y = 300;
+        sprite.Scale.Set(3);
+        sprite.Texture = texture; // Texture property setter check
+        
+        // Test Container props
+        sprite.Cursor = "pointer";
+        sprite.EventMode = "static";
+        sprite.ZIndex = 10;
+        
+        app.Stage.AddChild(sprite);
+
+        sprite.On("pointerdown", () => 
+        {
+            JS.Log("Sprite clicked!");
+            sprite.Alpha = sprite.Alpha == 1 ? 0.5f : 1f;
+        });
+
+
+        // Test Container Methods
+        var container = new Container();
+        container.X = 100;
+        container.Y = 400;
+        app.Stage.AddChild(container);
+        
+        var child1 = new Graphics();
+        child1.Rect(0,0,50,50).Fill(0x00FF00);
+        container.AddChild(child1);
+        
+        var child2 = new Graphics();
+        child2.Rect(60,0,50,50).Fill(0x0000FF);
+        container.AddChild(child2);
+        
+        // Swap
+        container.SwapChildren(child1, child2);
+        
+        // GetChildAt
+        var c1 = container.GetChildAt(0);
+        JS.Log("Child at 0 is child2 (blue)?", c1.Equals(child2)); // Should be true after swap if they were 0 and 1
+
+        // Phase 2: Text & Texture Verification
+        var style = new PIXI.TextStyle { FontSize = 36, Fill = "white", Stroke = "red", DropShadow = new TextDropShadow { Alpha = 0.5f, Angle = 0.5f, Blur = 2, Color = "#111111", Distance = 10 } };
+        var text = new PIXI.Text("Hello Blazor!", style);
+        text.X = 400;
+        text.Y = 100;
+        app.Stage.AddChild(text);
+
+        // Texture.From
+        var textureFrom = Texture.From("https://pixijs.com/assets/bunny.png");
+        var spriteFrom = new Sprite(textureFrom);
+        spriteFrom.X = 500;
+        spriteFrom.Y = 100;
+        app.Stage.AddChild(spriteFrom);
+        JS.Log("Texture dimensions:", textureFrom.Width, textureFrom.Height);
+
+        // Phase 3: TilingSprite & Filters
+        var tilingSprite = new TilingSprite(textureFrom, 200, 100);
+        tilingSprite.X = 100;
+        tilingSprite.Y = 500;
+        tilingSprite.TileScale.Set(0.5f);
+        app.Stage.AddChild(tilingSprite);
+
+        // Apply BlurFilter to TilingSprite
+        var blurFilter = new BlurFilter(5);
+        tilingSprite.Filters = new Filter[] { blurFilter };
+
+        // Test AnimatedSprite
+        // Load a second texture to make animation visible
+        using var texture2 = await PIXI.Assets.Load<Texture>("https://pixijs.com/assets/flowerTop.png");
+        var textures = new Texture[] { textureFrom, texture2 };
+        var animSprite = new AnimatedSprite(textures);
+        animSprite.X = 400;
+        animSprite.Y = 500;
+        animSprite.AnimationSpeed = 0.1f;
+        animSprite.Play();
+        app.Stage.AddChild(animSprite);
+        JS.Log("AnimatedSprite playing:", animSprite.Playing);
+
+        // Phase 4: NineSliceSprite, HTMLText, Mesh, Filters, Events
+        
+        // NineSliceSprite
+        var nineSlice = new NineSliceSprite(textureFrom, 10, 10, 10, 10);
+        nineSlice.Width = 150;
+        nineSlice.Height = 80;
+        nineSlice.X = 50;
+        nineSlice.Y = 200;
+        app.Stage.AddChild(nineSlice);
+
+        // HTMLText
+        var htmlStyle = new HTMLTextStyle { Fill = "cyan", FontSize = 24 };
+        var htmlText = new HTMLText("<strong>HTML</strong> Text!", htmlStyle);
+        htmlText.X = 250;
+        htmlText.Y = 200;
+        app.Stage.AddChild(htmlText);
+
+        // MeshPlane (Perspective)
+        var meshPlane = new MeshPlane(textureFrom, 4, 4);
+        meshPlane.X = 550;
+        meshPlane.Y = 200;
+        app.Stage.AddChild(meshPlane);
+        
+        // ColorMatrixFilter (Grayscale)
+        var colorMatrix = new ColorMatrixFilter();
+        meshPlane.Filters = new Filter[] { colorMatrix };
+        colorMatrix.Greyscale(0.5f, false);
+        
+        // Events: Click listener using FederatedPointerEvent
+        nineSlice.EventMode = "static";
+        nineSlice.Cursor = "pointer";
+        nineSlice.On<FederatedPointerEvent>("pointerdown", (e) => {
+            JS.Log("NineSlice clicked at global:", e.Global.X, e.Global.Y);
+            nineSlice.Alpha = 0.5f;
+        });
+    }
+
+    public void Dispose()
+    {
+        app?.Dispose();
+    }
+}

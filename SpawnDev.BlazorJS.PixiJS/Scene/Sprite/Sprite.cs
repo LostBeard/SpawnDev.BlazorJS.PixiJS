@@ -48,6 +48,16 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// this is the AABB rectangle bounds of the view in local untransformed space.
             /// </summary>
             public BoundsData? Bounds { get => JSRef!.Get<BoundsData?>("bounds"); set => JSRef!.Set("bounds", value); }
+            /// <summary>
+            /// The anchor sets the origin point of the texture. The default is 0,0 this means the texture's origin is the top left.
+            /// Setting the anchor to 0.5,0.5 means the texture's origin is centered.
+            /// Setting the anchor to 1,1 would mean the texture's origin point will be the bottom right corner.
+            /// </summary>
+            public ObservablePoint Anchor { get => JSRef!.Get<ObservablePoint>("anchor"); set => JSRef!.Set("anchor", value); }
+            /// <summary>
+            /// The texture that the sprite is using
+            /// </summary>
+            public Texture Texture { get => JSRef!.Get<Texture>("texture"); set => JSRef!.Set("texture", value); }
             #endregion
             #region Methods
             /// <summary>
