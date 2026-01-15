@@ -1,0 +1,80 @@
+@page "/examples/sprite/animated-sprite"
+@using SpawnDev.BlazorJS.JSObjects
+@using SpawnDev.BlazorJS.PixiJS
+@using static SpawnDev.BlazorJS.PixiJS.PIXI
+@implements IDisposable
+
+<h3>Animated Sprite Example</h3>
+<p>Animating a sprite sequence...</p>
+<div @ref="containerElRef" style="width: 800px; height: 600px;"></div>
+
+@code {
+    [Inject] BlazorJSRuntime JS { get; set; } = default!;
+    ElementReference? containerElRef;
+    Application? app;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await Init();
+        }
+    }
+
+    async Task Init()
+    {
+        app = new Application();
+        await app.Init(new ApplicationOptions { Background = "#1099bb", ResizeTo = containerElRef });
+
+        using var htmlElement = new HTMLElement(containerElRef!.Value);
+        htmlElement!.AppendChild(app!.Canvas);
+
+        // Load the spritesheet
+        // In PixiJS v8, Assets.load with a json file usually returns the processed resource.
+        // For spritesheets, it returns the Spritesheet object.
+        var spritesheet = await PIXI.Assets.Load<Spritesheet>("assets/fighter.json");
+
+        JS.Set("_spritesheet", spritesheet);
+        JS.Log("_spritesheet", spritesheet);
+
+        if (spritesheet != null) {
+            // Create an AnimatedSprite with the 'roll' animation
+            // The JSON does not define animations, so we construct the frame list manually
+            var textures = new List<Texture>();
+            for (var i = 0; i < 30; i++)
+            {
+                var key = $"rollSequence{i:D4}.png";
+                // Check if key exists (assuming Record acts like Dictionary or JSObject)
+                // If Record is a Dictionary wrapper, it might have ContainsKey
+                // Use safe retrieval if possible or assume it's there if index is valid
+                var texture = spritesheet.Textures[key];
+                 if (texture != null)
+                {
+                    textures.Add(texture);
+                }
+            }
+            
+            var anim = new AnimatedSprite(textures.ToArray());
+            anim.X = app.Screen.Width / 2;
+            anim.Y = app.Screen.Height / 2;
+            anim.Anchor.Set(0.5f);
+            anim.AnimationSpeed = 0.5f;
+            anim.Play();
+
+            app.Stage!.AddChild(anim);
+        }
+        else 
+        {
+            Console.WriteLine("Failed to load spritesheet.");
+        }
+    }
+
+    public void Dispose()
+    {
+        if (app != null)
+        {
+            app.Dispose();
+            app = null;
+        }
+    }
+}

@@ -1,0 +1,82 @@
+@page "/examples/sprite/basic"
+@using SpawnDev.BlazorJS.JSObjects
+@using SpawnDev.BlazorJS.PixiJS
+@using static SpawnDev.BlazorJS.PixiJS.PIXI
+@implements IDisposable
+
+<h3>Basic Sprite Example</h3>
+<p>Click the bunny to scale it up!</p>
+<div @ref="containerElRef" style="width: 800px; height: 600px;"></div>
+
+@code {
+    [Inject] BlazorJSRuntime JS { get; set; } = default!;
+    ElementReference? containerElRef;
+    Application? app;
+    Sprite? bunny;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await Init();
+        }
+    }
+
+    async Task Init()
+    {
+        app = new Application();
+        await app.Init(new ApplicationOptions { Background = "#1099bb", ResizeTo = containerElRef });
+        
+        using var htmlElement = new HTMLElement(containerElRef!.Value);
+        htmlElement!.AppendChild(app!.Canvas);
+
+        // Load the texture
+        var texture = await PIXI.Assets.Load<Texture>("https://pixijs.com/assets/bunny.png");
+
+        // Create the sprite
+        bunny = new Sprite(texture);
+
+        // Center the anchor point
+        bunny.Anchor.Set(0.5f);
+
+        // Move the sprite to the center of the screen
+        bunny.X = app.Screen.Width / 2;
+        bunny.Y = app.Screen.Height / 2;
+
+        // Scale it up a bit
+        bunny.Scale.Set(4f);
+
+        // Enable interactivity
+        bunny.EventMode = "static";
+        bunny.Cursor = "pointer";
+
+        // Add click listener
+        bunny.OnClick += (e) =>
+        {
+            bunny.Scale.X *= 1.25f;
+            bunny.Scale.Y *= 1.25f;
+        };
+
+        app.Stage!.AddChild(bunny);
+
+        // Add a ticker callback to rotate the bunny
+        app.Ticker.Add(OnTick);
+    }
+
+    void OnTick(Ticker ticker)
+    {
+        if (bunny != null && !bunny.Destroyed)
+        {
+            bunny.Rotation += 0.1f * ticker.DeltaTime;
+        }
+    }
+
+    public void Dispose()
+    {
+        if (app != null)
+        {
+            app.Dispose();
+            app = null;
+        }
+    }
+}

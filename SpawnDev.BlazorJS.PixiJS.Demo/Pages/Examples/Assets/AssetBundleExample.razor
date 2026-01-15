@@ -1,0 +1,82 @@
+@page "/examples/assets/asset-bundle"
+@using SpawnDev.BlazorJS.JSObjects
+@using SpawnDev.BlazorJS.PixiJS
+@using static SpawnDev.BlazorJS.PixiJS.PIXI
+@implements IDisposable
+
+<h3>Asset Bundle Example</h3>
+<p>Loading assets via bundle...</p>
+<div @ref="containerElRef" style="width: 800px; height: 600px;"></div>
+
+@code {
+    [Inject] BlazorJSRuntime JS { get; set; } = default!;
+    ElementReference? containerElRef;
+    Application? app;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await Init();
+        }
+    }
+
+    async Task Init()
+    {
+        app = new Application();
+        await app.Init(new ApplicationOptions { Background = "#1099bb", ResizeTo = containerElRef });
+        
+        using var htmlElement = new HTMLElement(containerElRef!.Value);
+        htmlElement!.AppendChild(app!.Canvas);
+
+        // Define bundle
+        // We set Key and Alias to be safe, as the wrapper defines Key
+        var assets = new UnresolvedAsset[]
+        {
+            new UnresolvedAsset { Key = "bunny", Alias = "bunny", Src = "https://pixijs.com/assets/bunny.png" },
+            new UnresolvedAsset { Key = "eggHead", Alias = "eggHead", Src = "https://pixijs.com/assets/eggHead.png" },
+            new UnresolvedAsset { Key = "flowerTop", Alias = "flowerTop", Src = "https://pixijs.com/assets/flowerTop.png" }
+        };
+
+        // Add bundle
+        PIXI.Assets.AddBundle("animals", assets);
+
+        // Load bundle
+        await PIXI.Assets.LoadBundle("animals");
+
+        // Use loaded assets
+        var bunnyTexture = await PIXI.Assets.Load<Texture>("bunny");
+        var eggHeadTexture = await PIXI.Assets.Load<Texture>("eggHead");
+        var flowerTopTexture = await PIXI.Assets.Load<Texture>("flowerTop");
+
+        var bunny = new Sprite(bunnyTexture);
+        bunny.Anchor.Set(0.5f);
+        bunny.X = app.Screen.Width / 2 - 150;
+        bunny.Y = app.Screen.Height / 2;
+        bunny.Scale.Set(3);
+        app.Stage!.AddChild(bunny);
+
+        var eggHead = new Sprite(eggHeadTexture);
+        eggHead.Anchor.Set(0.5f);
+        eggHead.X = app.Screen.Width / 2;
+        eggHead.Y = app.Screen.Height / 2;
+        eggHead.Scale.Set(0.5f);
+        app.Stage!.AddChild(eggHead);
+        
+        var flowerTop = new Sprite(flowerTopTexture);
+        flowerTop.Anchor.Set(0.5f);
+        flowerTop.X = app.Screen.Width / 2 + 150;
+        flowerTop.Y = app.Screen.Height / 2;
+        flowerTop.Scale.Set(0.5f);
+        app.Stage!.AddChild(flowerTop);
+    }
+
+    public void Dispose()
+    {
+        if (app != null)
+        {
+            app.Dispose();
+            app = null;
+        }
+    }
+}

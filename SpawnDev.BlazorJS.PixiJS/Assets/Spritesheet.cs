@@ -1,10 +1,14 @@
 using Microsoft.JSInterop;
+using SpawnDev.BlazorJS.IJSInProcessObjectReferenceAnyKey;
+using SpawnDev.BlazorJS.JSObjects;
+using System.Collections;
 using static SpawnDev.BlazorJS.PixiJS.PIXI;
 
 namespace SpawnDev.BlazorJS.PixiJS
 {
     public class Spritesheet : JSObject
     {
+        /// <inheritdoc/>
         public Spritesheet(IJSInProcessObjectReference _ref) : base(_ref) { }
 
         /// <summary>
@@ -15,12 +19,12 @@ namespace SpawnDev.BlazorJS.PixiJS
         /// <summary>
         /// The textures generated for the spritesheet.
         /// </summary>
-        public Dictionary<string, Texture> Textures { get => JSRef!.Get<Dictionary<string, Texture>>("textures"); }
+        public Record<string, Texture> Textures { get => JSRef!.Get<Record<string, Texture>>("textures"); }
 
         /// <summary>
         /// The animations generated for the spritesheet.
         /// </summary>
-        public Dictionary<string, Texture[]> Animations { get => JSRef!.Get<Dictionary<string, Texture[]>>("animations"); }
+        public Record<string, Texture[]> Animations { get => JSRef!.Get<Record<string, Texture[]>>("animations"); }
 
         /// <summary>
         /// Reference to the source texture.
