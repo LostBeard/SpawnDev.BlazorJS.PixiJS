@@ -18,6 +18,11 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// <summary>
             /// Creates a new HTMLTextStyle instance.
             /// </summary>
+            public HTMLTextStyle(HTMLTextStyleOptions options) : base(JS.New("PIXI.HTMLTextStyle", options)) { }
+
+            /// <summary>
+            /// Creates a new HTMLTextStyle instance.
+            /// </summary>
             public HTMLTextStyle() : base(JS.New("PIXI.HTMLTextStyle")) { }
             // HTMLTextStyle often inherits mostly from TextStyle but renders differently
             // Check docs if it has specific extra properties basically allows CSS logic

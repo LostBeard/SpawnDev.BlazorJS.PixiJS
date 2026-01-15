@@ -24,7 +24,10 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// The text to render.
             /// </summary>
             public string Text { get => JSRef!.Get<string>("text"); set => JSRef!.Set("text", value); }
-            public HTMLTextStyle Style { get => JSRef!.Get<HTMLTextStyle>("style"); set => JSRef!.Set("style", value); }
+            /// <summary>
+            /// The style to use.
+            /// </summary>
+            public Union<HTMLTextStyle, HTMLTextStyleOptions>? Style { get => JSRef!.Get<Union<HTMLTextStyle, HTMLTextStyleOptions>?>("style"); set => JSRef!.Set("style", value); }
         }
     }
 }

@@ -15,6 +15,10 @@ namespace SpawnDev.BlazorJS.PixiJS
             #endregion
             #region Properties
 
+            /// <summary>
+            /// The EventSystem instance.
+            /// </summary>
+            public EventSystem Events => JSRef!.Get<EventSystem>("events");
             #endregion
             #region Methods
             /// <summary>

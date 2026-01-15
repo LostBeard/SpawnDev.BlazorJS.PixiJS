@@ -245,7 +245,37 @@
         
         // However, we can create a Mesh with it if we had a proper shader. 
         // For now, let's just confirm it doesn't throw.
-        // var customMesh = new Mesh(geometry, shader); // Shader creation is scope creep for this exact step.
+        // customMesh...
+
+        // Phase 8: Advanced Text & Interaction
+        
+        // HTMLText with simple styling
+        // Note: HTMLText uses DOM so standard styles apply
+        var htmlTextAdvanced = new HTMLText(new HTMLTextOptions 
+        { 
+            Text = "HTML Text",
+            Style = new HTMLTextStyleOptions 
+            { 
+                FontSize = 30,
+                Fill = "white",
+                Align = "center"
+            }
+        });
+        htmlTextAdvanced.X = 650;
+        htmlTextAdvanced.Y = 550;
+        app.Stage.AddChild(htmlTextAdvanced);
+        
+        // Event System Check
+        JS.Log("Event System Cursor:", app.Renderer.Events.Cursor);
+        
+        // Interaction Check
+        htmlTextAdvanced.EventMode = "static";
+        htmlTextAdvanced.Cursor = "pointer";
+        htmlTextAdvanced.On("pointerdown", (FederatedPointerEvent e) => 
+        {
+            JS.Log("HTMLText clicked!");
+            htmlTextAdvanced.Alpha = 0.5f;
+        });
 
     }
 
