@@ -20,25 +20,27 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// <summary>
             /// Creates a new instance
             /// </summary>
-            /// <param name="text"></param>
-            /// <param name="style"></param>
-            public BitmapText(string text, object style) : base(JS.New("PIXI.BitmapText", text, style)) { }
+            /// <param name="options"></param>
+            public BitmapText(BitmapTextOptions options) : base(JS.New("PIXI.BitmapText", options)) { }
+            
             /// <summary>
             /// Creates a new instance
             /// </summary>
             /// <param name="text"></param>
             /// <param name="style"></param>
-            public BitmapText(string text, TextStyle style) : base(JS.New("PIXI.BitmapText", text, style)) { }
+            public BitmapText(string text, object style) : this(new BitmapTextOptions { Text = text, Style = style as TextStyle }) { }
+            /// <summary>
+            /// Creates a new instance
+            /// </summary>
+            /// <param name="text"></param>
+            /// <param name="style"></param>
+            public BitmapText(string text, TextStyle style) : this(new BitmapTextOptions { Text = text, Style = style }) { }
             /// <summary>
             /// Creates a new instance
             /// </summary>
             /// <param name="text"></param>
             /// <param name="style"></param>
             public BitmapText(string text, TextStyleOptions style) : base(JS.New("PIXI.BitmapText", text, style)) { }
-            /// <summary>
-            /// Creates a new instance
-            /// </summary>
-            public BitmapText(TextOptions textOptions) : base(JS.New("PIXI.BitmapText", textOptions)) { }
             #endregion
             #region Properties
             /// <summary>

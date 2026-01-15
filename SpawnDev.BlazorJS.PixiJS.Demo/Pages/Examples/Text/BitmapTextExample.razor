@@ -41,10 +41,10 @@
 
         await PIXI.Assets.Load("https://pixijs.com/assets/bitmap-font/desyrel.xml");
 
-        var bitmapFontText = new BitmapText(new TextOptions
+        var bitmapFontText = new BitmapText(new BitmapTextOptions
         {
             Text = "bitmap fonts are supported!\nWoo yay!",
-            Style = new PIXI.TextStyleOptions
+            Style = new PIXI.TextStyle
             {
                 FontFamily = "Desyrel",
                 FontSize = 55,

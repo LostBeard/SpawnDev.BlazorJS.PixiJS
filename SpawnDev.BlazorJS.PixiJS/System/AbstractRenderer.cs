@@ -17,7 +17,12 @@ namespace SpawnDev.BlazorJS.PixiJS
 
             #endregion
             #region Methods
-
+            /// <summary>
+            /// Renders the object to its view.
+            /// </summary>
+            /// <param name="container">The container to render.</param>
+            /// <param name="options">Object containing render options.</param>
+            public void Render(Container container, RenderOptions options) => JSRef!.CallVoid("render", container, options);
             #endregion
             #region Events
 

@@ -22,6 +22,16 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// </summary>
             public Ticker() : base(JS.New("PIXI.Ticker")) { }
             #endregion
+
+            /// <summary>
+            /// The shared ticker instance used by {@link ticker.Ticker.shared|shared}.
+            /// </summary>
+            public static Ticker Shared => JS.Get<Ticker>("PIXI.Ticker.shared");
+
+            /// <summary>
+            /// The system ticker instance used by {@link ticker.Ticker.system|system}.
+            /// </summary>
+            public static Ticker System => JS.Get<Ticker>("PIXI.Ticker.system");
             #region Properties
             /// <summary>
             /// Scalar time value from last frame to this frame.<br/>

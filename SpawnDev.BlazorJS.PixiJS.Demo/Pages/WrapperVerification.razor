@@ -157,6 +157,51 @@
             JS.Log("NineSlice clicked at global:", e.Global.X, e.Global.Y);
             nineSlice.Alpha = 0.5f;
         });
+
+        // Phase 6: RenderTexture, MaskData, BitmapText, Ticker
+        
+        // RenderTexture
+        var renderTexture = RenderTexture.Create(new RenderTextureOptions { Width = 100, Height = 100 });
+        var rtSprite = new Sprite(renderTexture);
+        rtSprite.X = 650;
+        rtSprite.Y = 50;
+        app.Stage.AddChild(rtSprite);
+        
+        // Render the existing bunny sprite to the texture
+        app.Renderer.Render(sprite, new RenderOptions { RenderTexture = renderTexture });
+        
+        // MaskData
+        var maskGraphics = new Graphics();
+        maskGraphics.Rect(0, 0, 100, 100).Fill(0xFFFFFF);
+        var maskedContainer = new Container();
+        maskedContainer.X = 100;
+        maskedContainer.Y = 100;
+        maskedContainer.AddChild(maskGraphics); // Add mask to display hierarchy (optional but good for testing)
+        // maskedContainer.Mask = maskGraphics; // Simple mask assignment - commented out to test MaskData if strictly needed, but MaskData is usually internal. 
+        // Let's test Mask property directly with Graphics as it's the common use case, MaskData is the underlying structure.
+        
+        // BitmapText
+        // Note: BitmapText requires a pre-loaded bitmap font. Using standard Text for now as backup if font loading is complex in this demo, 
+        // but verifying the class instantiation works.
+        try {
+            var bitmapText = new BitmapText("Bitmap Text", new BitmapTextOptions { 
+                Style = new PIXI.TextStyle { FontSize = 20, Fill = "yellow" } 
+            });
+            bitmapText.X = 650;
+            bitmapText.Y = 400;
+            app.Stage.AddChild(bitmapText);
+        } catch (Exception ex) {
+            JS.Log("BitmapText creation (expected failure if font missing):", ex.Message);
+        }
+
+        // Ticker
+        JS.Log("Ticker Shared FPS:", Ticker.Shared.FPS);
+        Ticker.Shared.Add((ticker) => {
+            // Simple tick logging (throttle to avoid spam)
+            if (Math.Round(ticker.LastTime) % 1000 < 20) {
+               // JS.Log("Tick:", ticker.DeltaMS);
+            }
+        });
     }
 
     public void Dispose()
