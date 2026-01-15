@@ -23,6 +23,12 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// Creates a new instance
             /// </summary>
             public Container() : base(JS.New("PIXI.Container")) { }
+
+            /// <summary>
+            /// Creates a new instance
+            /// </summary>
+            /// <param name="options"></param>
+            public Container(ContainerOptions options) : base(JS.New("PIXI.Container", options)) { }
             #endregion
             #region Properties
             /// <summary>

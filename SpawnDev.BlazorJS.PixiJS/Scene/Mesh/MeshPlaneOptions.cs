@@ -1,30 +1,28 @@
-using Microsoft.JSInterop;
+using System.Text.Json.Serialization;
 
 namespace SpawnDev.BlazorJS.PixiJS
 {
     public static partial class PIXI
     {
         /// <summary>
-        /// Options for the MeshPlane constructor.
+        /// Options for the MeshPlane constructor.<br/>
+        /// https://pixijs.download/release/docs/scene.MeshPlaneOptions.html
         /// </summary>
-        public class MeshPlaneOptions : JSObject
+        public class MeshPlaneOptions : MeshSimpleOptions
         {
             /// <summary>
-            /// Deserialization constructor
+            /// The number of vertices on the x-axis.
             /// </summary>
-            public MeshPlaneOptions(IJSInProcessObjectReference _ref) : base(_ref) { }
+            [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+            [JsonPropertyName("verticesX")]
+            public int? VerticesX { get; set; }
 
             /// <summary>
-            /// Creates a new instance
+            /// The number of vertices on the y-axis.
             /// </summary>
-            public MeshPlaneOptions() : base(JS.New("Object")) { }
-
-            /// <summary>
-            /// The texture to use.
-            /// </summary>
-            public Texture Texture { get => JSRef!.Get<Texture>("texture"); set => JSRef!.Set("texture", value); }
-            public int? VerticesX { get => JSRef!.Get<int?>("verticesX"); set => JSRef!.Set("verticesX", value); }
-            public int? VerticesY { get => JSRef!.Get<int?>("verticesY"); set => JSRef!.Set("verticesY", value); }
+            [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+            [JsonPropertyName("verticesY")]
+            public int? VerticesY { get; set; }
         }
     }
 }

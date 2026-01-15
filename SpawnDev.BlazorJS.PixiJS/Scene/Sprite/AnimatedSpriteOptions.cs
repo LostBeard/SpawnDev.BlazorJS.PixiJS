@@ -1,33 +1,28 @@
-using Microsoft.JSInterop;
+using System.Text.Json.Serialization;
 
 namespace SpawnDev.BlazorJS.PixiJS
 {
     public static partial class PIXI
     {
         /// <summary>
-        /// Options for the AnimatedSprite constructor.
+        /// Options for the AnimatedSprite constructor.<br/>
+        /// https://pixijs.download/release/docs/scene.AnimatedSpriteOptions.html
         /// </summary>
-        public class AnimatedSpriteOptions : JSObject
+        public class AnimatedSpriteOptions : SpriteOptions
         {
-            /// <summary>
-            /// Deserialization constructor
-            /// </summary>
-            public AnimatedSpriteOptions(IJSInProcessObjectReference _ref) : base(_ref) { }
-
-            /// <summary>
-            /// Creates a new instance
-            /// </summary>
-            public AnimatedSpriteOptions() : base(JS.New("Object")) { }
-
             /// <summary>
             /// An array of Texture objects that make up the animation.
             /// </summary>
-            public Texture[] Textures { get => JSRef!.Get<Texture[]>("textures"); set => JSRef!.Set("textures", value); }
+            [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+            [JsonPropertyName("textures")]
+            public Texture[]? Textures { get; set; }
 
             /// <summary>
             /// Whether to use PIXI.Ticker.shared to auto update animation time.
             /// </summary>
-            public bool? AutoUpdate { get => JSRef!.Get<bool?>("autoUpdate"); set => JSRef!.Set("autoUpdate", value); }
+            [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+            [JsonPropertyName("autoUpdate")]
+            public bool? AutoUpdate { get; set; }
         }
     }
 }

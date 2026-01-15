@@ -1,38 +1,28 @@
-using Microsoft.JSInterop;
+using System.Text.Json.Serialization;
 
 namespace SpawnDev.BlazorJS.PixiJS
 {
     public static partial class PIXI
     {
         /// <summary>
-        /// Options for the TilingSprite constructor.
+        /// Options for the TilingSprite constructor.<br/>
+        /// https://pixijs.download/release/docs/scene.TilingSpriteOptions.html
         /// </summary>
-        public class TilingSpriteOptions : JSObject
+        public class TilingSpriteOptions : SpriteOptions
         {
-            /// <summary>
-            /// Deserialization constructor
-            /// </summary>
-            public TilingSpriteOptions(IJSInProcessObjectReference _ref) : base(_ref) { }
-
-            /// <summary>
-            /// Creates a new instance
-            /// </summary>
-            public TilingSpriteOptions() : base(JS.New("Object")) { }
-
-            /// <summary>
-            /// The texture of the tiling sprite.
-            /// </summary>
-            public Texture Texture { get => JSRef!.Get<Texture>("texture"); set => JSRef!.Set("texture", value); }
-
             /// <summary>
             /// The width of the tiling sprite.
             /// </summary>
-            public float? Width { get => JSRef!.Get<float?>("width"); set => JSRef!.Set("width", value); }
+            [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+            [JsonPropertyName("width")]
+            public float? Width { get; set; }
 
             /// <summary>
             /// The height of the tiling sprite.
             /// </summary>
-            public float? Height { get => JSRef!.Get<float?>("height"); set => JSRef!.Set("height", value); }
+            [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+            [JsonPropertyName("height")]
+            public float? Height { get; set; }
         }
     }
 }

@@ -184,7 +184,8 @@
         // Note: BitmapText requires a pre-loaded bitmap font. Using standard Text for now as backup if font loading is complex in this demo, 
         // but verifying the class instantiation works.
         try {
-            var bitmapText = new BitmapText("Bitmap Text", new BitmapTextOptions { 
+            var bitmapText = new BitmapText(new BitmapTextOptions { 
+                Text = "Bitmap Text",
                 Style = new PIXI.TextStyle { FontSize = 20, Fill = "yellow" } 
             });
             bitmapText.X = 650;

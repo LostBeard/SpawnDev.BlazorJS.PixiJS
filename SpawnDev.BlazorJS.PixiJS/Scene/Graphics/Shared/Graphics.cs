@@ -17,6 +17,11 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// </summary>
             public Graphics() : base(JS.New("PIXI.Graphics")) { }
             /// <summary>
+            /// Create a new instance
+            /// </summary>
+            /// <param name="options"></param>
+            public Graphics(GraphicsOptions options) : base(JS.New("PIXI.Graphics", options)) { }
+            /// <summary>
             /// Adds an arc to the current path, which is centered at (x, y) with the specified radius, starting and ending angles, and direction.
             /// </summary>
             /// <param name="x">The x-coordinate of the arc's center.</param>
