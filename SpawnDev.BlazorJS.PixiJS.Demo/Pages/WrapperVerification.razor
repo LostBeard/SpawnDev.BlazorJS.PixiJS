@@ -196,12 +196,57 @@
 
         // Ticker
         JS.Log("Ticker Shared FPS:", Ticker.Shared.FPS);
-        Ticker.Shared.Add((ticker) => {
-            // Simple tick logging (throttle to avoid spam)
-            if (Math.Round(ticker.LastTime) % 1000 < 20) {
-               // JS.Log("Tick:", ticker.DeltaMS);
-            }
-        });
+        // Phase 7: Math Shapes and Geometry
+
+        // Math Shapes - Draw them using Graphics
+        var shapesGraphics = new Graphics();
+        
+        // Circle
+        shapesGraphics.Circle(650, 500, 30).Fill("red");
+        
+        // Ellipse
+        shapesGraphics.Ellipse(750, 500, 50, 30).Fill("green");
+        
+        // RoundedRectangle
+        shapesGraphics.RoundRect(850, 480, 60, 40, 10).Fill("blue");
+        
+        // Polygon
+        shapesGraphics.Poly(new float[] { 950, 500, 970, 480, 990, 500 }).Fill("purple");
+        
+        app.Stage.AddChild(shapesGraphics);
+
+        // Geometry and Mesh
+        // Create a simple quad geometry
+        var geometry = new Geometry();
+        geometry.AddAttribute("aPosition", new PIXI.Buffer(new float[] 
+        {
+            -50, -50, // x, y
+             50, -50,
+             50,  50,
+            -50,  50
+        }), 2);
+        geometry.AddAttribute("aUV", new PIXI.Buffer(new float[]
+        {
+            0, 0, // u, v
+            1, 0,
+            1, 1,
+            0, 1
+        }), 2);
+        
+        // geometry.AddIndex([0, 1, 2, 0, 2, 3]); // Pixi usually infers indices from draw order if missing or we can add them
+        geometry.AddIndex(new PIXI.Buffer(new int[] { 0, 1, 2, 0, 2, 3 }));
+
+        // Use the existing bunny texture for the mesh
+        // Note: Mesh requires a specific shader usually, but we can try MeshSimple (if compatible) or just verify Geometry instantiation.
+        // MeshSimple overrides geometry locally usually. 
+        // Let's just log create success to verify the wrappers work without crashing 
+        // as creating a full custom shader/mesh setup is advanced for a basic verification test.
+        JS.Log("Custom Geometry created with attributes and index buffer.");
+        
+        // However, we can create a Mesh with it if we had a proper shader. 
+        // For now, let's just confirm it doesn't throw.
+        // var customMesh = new Mesh(geometry, shader); // Shader creation is scope creep for this exact step.
+
     }
 
     public void Dispose()
