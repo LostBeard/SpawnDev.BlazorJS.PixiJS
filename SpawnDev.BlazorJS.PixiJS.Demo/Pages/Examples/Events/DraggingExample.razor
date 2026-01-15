@@ -76,18 +76,13 @@
         draggingBunny = bunny;
         bunny.Alpha = 0.5f;
 
-        JS.Log(">> OnDragStart");
-
         app!.Stage.On<FederatedPointerEvent>("pointermove", OnDragMove);
         app!.Stage.On<FederatedPointerEvent>("pointerup", OnDragEnd);
         app!.Stage.On<FederatedPointerEvent>("pointerupoutside", OnDragEnd);
-
-        JS.Log("<< OnDragStart");
     }
 
     void OnDragEnd(FederatedPointerEvent e)
     {
-        JS.Log("OnDragEnd: draggingBunny != null ==", draggingBunny != null);
         if (draggingBunny != null)
         {
             draggingBunny.Alpha = 1f;
@@ -112,6 +107,7 @@
     {
         if (app != null)
         {
+            app.Destroy();
             app.Dispose();
         }
     }
