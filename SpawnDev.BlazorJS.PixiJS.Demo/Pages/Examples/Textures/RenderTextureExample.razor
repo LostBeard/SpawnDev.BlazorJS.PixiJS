@@ -1,0 +1,127 @@
+@page "/examples/textures/render-texture"
+@using SpawnDev.BlazorJS.JSObjects
+@using SpawnDev.BlazorJS.PixiJS
+@using static SpawnDev.BlazorJS.PixiJS.PIXI
+@implements IDisposable
+
+<h3>Render Texture Example</h3>
+<div @ref="containerElRef" style="width: 800px; height: 600px;"></div>
+
+@code {
+    [Inject] BlazorJSRuntime JS { get; set; } = default!;
+    ElementReference? containerElRef;
+    Application? app;
+    RenderTexture? renderTexture;
+    Sprite? outputSprite;
+    Container? stuffContainer;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await Init();
+        }
+    }
+
+    async Task Init()
+    {
+        try 
+        {
+            Console.WriteLine("Init started");
+            app = new Application();
+            Console.WriteLine("App created");
+            await app.Init(new ApplicationOptions { Background = "#1099bb", ResizeTo = containerElRef });
+            Console.WriteLine("App init done");
+            
+            if (containerElRef == null) throw new Exception("containerElRef is null");
+            if (app.Canvas == null) throw new Exception("app.Canvas is null");
+
+            using var htmlElement = new HTMLElement(containerElRef!.Value);
+            htmlElement!.AppendChild(app.Canvas);
+            Console.WriteLine("Canvas appended");
+
+            Texture? texture = null;
+            try {
+                texture = await PIXI.Assets.Load<Texture>("https://pixijs.com/assets/bunny.png");
+                Console.WriteLine("Texture loaded");
+            } catch (Exception ex) {
+                Console.WriteLine("Texture load failed: " + ex);
+                throw;
+            }
+
+            // containerElRef is already set by Blazor
+            // containerElRef = app.Canvas.GetBoundingClientRect();
+            stuffContainer = new Container();
+            JS.Log("StuffContainer created");
+            stuffContainer.X = 400;
+            stuffContainer.Y = 300;
+            app.Stage.AddChild(stuffContainer);
+            JS.Log("StuffContainer added");
+
+            // Add lots of fruits/bunnies to the container
+            var rand = new Random();
+            for (int i = 0; i < 20; i++)
+            {
+                var bunny = new Sprite(texture);
+                bunny.X = (float)rand.NextDouble() * 400 - 200;
+                bunny.Y = (float)rand.NextDouble() * 400 - 200;
+                bunny.Rotation = (float)rand.NextDouble() * 2 * (float)Math.PI;
+                stuffContainer.AddChild(bunny);
+            }
+            JS.Log("Bunnies added");
+
+            // Create RenderTexture
+            renderTexture = RenderTexture.Create(new RenderTextureOptions 
+            { 
+                Width = 800, 
+                Height = 600 
+            });
+            JS.Log("RenderTexture created");
+
+            // Create sprite to display the render texture
+            outputSprite = new Sprite(renderTexture);
+            outputSprite.X = 400;
+            outputSprite.Y = 300;
+            outputSprite.Anchor.Set(0.5f);
+            
+            app.Stage.AddChild(outputSprite);
+            JS.Log("OutputSprite added");
+
+            stuffContainer.Visible = false;
+
+            app.Ticker.Add(OnTick);
+            JS.Log("Ticker added");
+        }
+        catch (Exception ex)
+        {
+            JS.Log("RenderTextureExample Error:", ex.ToString());
+        }
+    }
+    
+    // Ticker logic
+    void OnTick(Ticker ticker)
+    {
+        if (stuffContainer != null && renderTexture != null && app != null)
+        {
+            // Rotate the container content
+            stuffContainer.Rotation -= 0.01f * ticker.DeltaTime;
+            
+            // Manual render
+            // Note: In v8, we use renderer.render({ container, target })
+            // Wrapper check: RenderOptions usage
+            app.Renderer.Render(stuffContainer, new RenderOptions { RenderTexture = renderTexture });
+            
+            // Also rotate the output sprite
+            outputSprite!.Rotation += 0.01f * ticker.DeltaTime;
+        }
+    }
+
+    public void Dispose()
+    {
+        if (app != null)
+        {
+            app.Ticker.Remove(OnTick);
+            app.Dispose();
+        }
+    }
+}

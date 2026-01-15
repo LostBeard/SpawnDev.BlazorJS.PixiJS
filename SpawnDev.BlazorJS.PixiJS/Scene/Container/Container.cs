@@ -282,6 +282,14 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// Adds an event listener
             /// </summary>
             public void On<T>(string eventName, Action<T> callback) => JSRef!.CallVoid("on", eventName, callback);
+            /// <summary>
+            /// Removes an event listener
+            /// </summary>
+            public void Off(string eventName, Action callback) => JSRef!.CallVoid("off", eventName, callback);
+            /// <summary>
+            /// Removes an event listener
+            /// </summary>
+            public void Off<T>(string eventName, Action<T> callback) => JSRef!.CallVoid("off", eventName, callback);
             #endregion
         }
     }

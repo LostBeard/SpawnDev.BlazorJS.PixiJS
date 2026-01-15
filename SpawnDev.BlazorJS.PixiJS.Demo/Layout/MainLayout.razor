@@ -4,7 +4,7 @@
 
 <SpawnDev.BlazorJS.PixiJS.Demo.Layout.RadzenThemeContainer Theme="material-dark" />
 
-<link rel="stylesheet" href="css/radzen-tweak.css" />
+<!-- <link rel="stylesheet" href="css/radzen-tweak.css" /> -->
 
 <RadzenComponents />
 <RadzenLayout Style="grid-template-columns: auto 1fr auto; grid-template-areas: 'rz-header rz-header rz-header' 'rz-sidebar rz-body rz-right-sidebar'">
@@ -25,6 +25,7 @@
             <RadzenPanelMenuItem Text="Examples" Icon="home" Path="" Match="NavLinkMatch.All" />
             <RadzenPanelMenuItem Text="Basic" Icon="folder">
                 <RadzenPanelMenuItem Text="Container" Icon="" Path="examples/basic/container" />
+                <RadzenPanelMenuItem Text="Container Pivot" Icon="" Path="examples/basic/container-pivot" />
                 <RadzenPanelMenuItem Text="Blend Modes" Icon="" Path="examples/basic/blendmodes" />
             </RadzenPanelMenuItem>
             <RadzenPanelMenuItem Text="Text" Icon="folder">
@@ -35,6 +36,12 @@
             </RadzenPanelMenuItem>
             <RadzenPanelMenuItem Text="Graphics" Icon="">
                 <RadzenPanelMenuItem Text="Simple" Icon="" Path="examples/graphics/simple" />
+            </RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Events" Icon="">
+                <RadzenPanelMenuItem Text="Dragging" Icon="" Path="examples/events/dragging" />
+            </RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Textures" Icon="">
+                <RadzenPanelMenuItem Text="RenderTexture" Icon="" Path="examples/textures/render-texture" />
             </RadzenPanelMenuItem>
             <RadzenPanelMenuItem Text="Tests" Icon="folder">
                 <RadzenPanelMenuItem Text="Wrapper Verification" Icon="" Path="verification" />

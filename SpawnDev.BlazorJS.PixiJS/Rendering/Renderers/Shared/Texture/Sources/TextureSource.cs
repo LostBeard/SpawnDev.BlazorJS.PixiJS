@@ -25,5 +25,10 @@ namespace SpawnDev.BlazorJS.PixiJS
         /// Height of source.
         /// </summary>
         public float SourceHeight { get => JSRef!.Get<float>("height"); }
+
+        /// <summary>
+        /// Scale mode to apply when scaling this texture.
+        /// </summary>
+        public string ScaleMode { get => JSRef!.Get<string>("scaleMode"); set => JSRef!.Set("scaleMode", value); }
     }
 }
