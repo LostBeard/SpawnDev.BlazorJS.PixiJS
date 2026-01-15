@@ -1,4 +1,4 @@
-using Microsoft.JSInterop;
+using System.Text.Json.Serialization;
 
 namespace SpawnDev.BlazorJS.PixiJS
 {
@@ -11,39 +11,39 @@ namespace SpawnDev.BlazorJS.PixiJS
         public class MeshOptions : ContainerOptions
         {
             /// <summary>
-            /// Deserialization constructor
-            /// </summary>
-            public MeshOptions(IJSInProcessObjectReference _ref) : base(_ref) { }
-
-            /// <summary>
-            /// Creates a new instance
-            /// </summary>
-            public MeshOptions() : base(JS.New("Object")) { }
-
-            /// <summary>
             /// The geometry the mesh will use.
             /// </summary>
-            public JSObject? Geometry { get => JSRef!.Get<JSObject?>("geometry"); set => JSRef!.Set("geometry", value); }
+            [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+            [JsonPropertyName("geometry")]
+            public JSObject? Geometry { get; set; }
 
             /// <summary>
             /// The shader the mesh will use.
             /// </summary>
-            public JSObject? Shader { get => JSRef!.Get<JSObject?>("shader"); set => JSRef!.Set("shader", value); }
+            [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+            [JsonPropertyName("shader")]
+            public JSObject? Shader { get; set; }
 
             /// <summary>
             /// The state that will be used to render the mesh.
             /// </summary>
-            public JSObject? State { get => JSRef!.Get<JSObject?>("state"); set => JSRef!.Set("state", value); }
+            [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+            [JsonPropertyName("state")]
+            public JSObject? State { get; set; }
 
             /// <summary>
             /// The drawMode to be used when rendering the mesh.
             /// </summary>
-            public int? DrawMode { get => JSRef!.Get<int?>("drawMode"); set => JSRef!.Set("drawMode", value); }
+            [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+            [JsonPropertyName("drawMode")]
+            public int? DrawMode { get; set; }
 
             /// <summary>
             /// Whether or not to round the x/y position of the object.
             /// </summary>
-            public bool? RoundPixels { get => JSRef!.Get<bool?>("roundPixels"); set => JSRef!.Set("roundPixels", value); }
+            [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+            [JsonPropertyName("roundPixels")]
+            public bool? RoundPixels { get; set; }
         }
     }
 }

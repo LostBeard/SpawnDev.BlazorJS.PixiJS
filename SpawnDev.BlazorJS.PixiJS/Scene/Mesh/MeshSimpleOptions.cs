@@ -1,4 +1,4 @@
-using Microsoft.JSInterop;
+using System.Text.Json.Serialization;
 
 namespace SpawnDev.BlazorJS.PixiJS
 {
@@ -11,39 +11,39 @@ namespace SpawnDev.BlazorJS.PixiJS
         public class MeshSimpleOptions : MeshOptions
         {
             /// <summary>
-            /// Deserialization constructor
-            /// </summary>
-            public MeshSimpleOptions(IJSInProcessObjectReference _ref) : base(_ref) { }
-
-            /// <summary>
-            /// Creates a new instance
-            /// </summary>
-            public MeshSimpleOptions() : base(JS.New("Object")) { }
-
-            /// <summary>
             /// The texture to use on the mesh.
             /// </summary>
-            public Texture? Texture { get => JSRef!.Get<Texture?>("texture"); set => JSRef!.Set("texture", value); }
+            [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+            [JsonPropertyName("texture")]
+            public Texture? Texture { get; set; }
 
             /// <summary>
             /// Collection of vertices data.
             /// </summary>
-            public float[]? Vertices { get => JSRef!.Get<float[]?>("vertices"); set => JSRef!.Set("vertices", value); }
+            [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+            [JsonPropertyName("vertices")]
+            public float[]? Vertices { get; set; }
 
             /// <summary>
             /// Collection of uvs data.
             /// </summary>
-            public float[]? Uvs { get => JSRef!.Get<float[]?>("uvs"); set => JSRef!.Set("uvs", value); }
+            [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+            [JsonPropertyName("uvs")]
+            public float[]? Uvs { get; set; }
 
             /// <summary>
             /// Collection of indices data.
             /// </summary>
-            public ushort[]? Indices { get => JSRef!.Get<ushort[]?>("indices"); set => JSRef!.Set("indices", value); }
+            [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+            [JsonPropertyName("indices")]
+            public ushort[]? Indices { get; set; }
 
             /// <summary>
             /// The rendering topology.
             /// </summary>
-            public string? Topology { get => JSRef!.Get<string?>("topology"); set => JSRef!.Set("topology", value); }
+            [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+            [JsonPropertyName("topology")]
+            public string? Topology { get; set; }
         }
     }
 }

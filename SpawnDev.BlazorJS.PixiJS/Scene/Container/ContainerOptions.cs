@@ -1,4 +1,4 @@
-using Microsoft.JSInterop;
+using System.Text.Json.Serialization;
 
 namespace SpawnDev.BlazorJS.PixiJS
 {
@@ -8,57 +8,70 @@ namespace SpawnDev.BlazorJS.PixiJS
         /// Options for the Container constructor.<br/>
         /// https://pixijs.download/release/docs/scene.ContainerOptions.html
         /// </summary>
-        public class ContainerOptions : JSObject
+        public class ContainerOptions
         {
-            /// <summary>
-            /// Deserialization constructor
-            /// </summary>
-            public ContainerOptions(IJSInProcessObjectReference _ref) : base(_ref) { }
-
-            /// <summary>
-            /// Creates a new instance
-            /// </summary>
-            public ContainerOptions() : base(JS.New("Object")) { }
-
             /// <summary>
             /// The opacity of the object.
             /// </summary>
-            public float? Alpha { get => JSRef!.Get<float?>("alpha"); set => JSRef!.Set("alpha", value); }
+            [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+            [JsonPropertyName("alpha")]
+            public float? Alpha { get; set; }
 
             /// <summary>
             /// The angle of the object in degrees.
             /// </summary>
-            public float? Angle { get => JSRef!.Get<float?>("angle"); set => JSRef!.Set("angle", value); }
+            [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+            [JsonPropertyName("angle")]
+            public float? Angle { get; set; }
 
             /// <summary>
             /// The visibility of the object.
             /// </summary>
-            public bool? Visible { get => JSRef!.Get<bool?>("visible"); set => JSRef!.Set("visible", value); }
+            [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+            [JsonPropertyName("visible")]
+            public bool? Visible { get; set; }
 
             /// <summary>
             /// The x coordinate of the object.
             /// </summary>
-            public float? X { get => JSRef!.Get<float?>("x"); set => JSRef!.Set("x", value); }
+            [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+            [JsonPropertyName("x")]
+            public float? X { get; set; }
 
             /// <summary>
             /// The y coordinate of the object.
             /// </summary>
-            public float? Y { get => JSRef!.Get<float?>("y"); set => JSRef!.Set("y", value); }
+            [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+            [JsonPropertyName("y")]
+            public float? Y { get; set; }
 
             /// <summary>
             /// The rotation of the object in radians.
             /// </summary>
-            public float? Rotation { get => JSRef!.Get<float?>("rotation"); set => JSRef!.Set("rotation", value); }
+            [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+            [JsonPropertyName("rotation")]
+            public float? Rotation { get; set; }
 
             /// <summary>
             /// The z-index of the object.
             /// </summary>
-            public int? ZIndex { get => JSRef!.Get<int?>("zIndex"); set => JSRef!.Set("zIndex", value); }
+            [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+            [JsonPropertyName("zIndex")]
+            public int? ZIndex { get; set; }
 
             /// <summary>
             /// The label of the object.
             /// </summary>
-            public string? Label { get => JSRef!.Get<string?>("label"); set => JSRef!.Set("label", value); }
+            [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+            [JsonPropertyName("label")]
+            public string? Label { get; set; }
+
+            /// <summary>
+            /// The name of the object.
+            /// </summary>
+            [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+            [JsonPropertyName("name")]
+            public string? Name { get; set; }
         }
     }
 }

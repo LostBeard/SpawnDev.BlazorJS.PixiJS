@@ -31,7 +31,18 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// <param name="indices">if you want to specify the indices</param>
             /// <param name="drawMode">the drawMode to be used</param>
             public MeshSimple(Texture texture, float[]? vertices = null, float[]? uvs = null, ushort[]? indices = null, int? drawMode = null)
-                : this(new MeshSimpleOptions { Texture = texture, Vertices = vertices, Uvs = uvs, Indices = indices, DrawMode = drawMode }) { }
+                : this(CreateMeshSimpleOptions(texture, vertices, uvs, indices, drawMode)) { }
+
+            static MeshSimpleOptions CreateMeshSimpleOptions(Texture texture, float[]? vertices = null, float[]? uvs = null, ushort[]? indices = null, int? drawMode = null)
+            {
+                var options = new MeshSimpleOptions();
+                options.Texture = texture;
+                options.Vertices = vertices;
+                options.Uvs = uvs;
+                options.Indices = indices;
+                options.DrawMode = drawMode;
+                return options;
+            }
 
             /// <summary>
             /// Collection of vertices data.

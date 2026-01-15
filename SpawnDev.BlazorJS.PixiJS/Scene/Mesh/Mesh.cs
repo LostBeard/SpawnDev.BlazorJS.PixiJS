@@ -30,7 +30,17 @@ namespace SpawnDev.BlazorJS.PixiJS
             /// <param name="state">The state that will be used to render the mesh.</param>
             /// <param name="drawMode">The drawMode to be used when rendering the mesh.</param>
             public Mesh(JSObject geometry, JSObject shader, JSObject? state = null, int? drawMode = null)
-                : this(new MeshOptions { Geometry = geometry, Shader = shader, State = state, DrawMode = drawMode }) { }
+                : this(CreateMeshOptions(geometry, shader, state, drawMode)) { }
+
+            static MeshOptions CreateMeshOptions(JSObject geometry, JSObject shader, JSObject? state = null, int? drawMode = null)
+            {
+                var options = new MeshOptions();
+                options.Geometry = geometry;
+                options.Shader = shader;
+                options.State = state;
+                options.DrawMode = drawMode;
+                return options;
+            }
 
             /// <summary>
             /// Includes vertex positions, face indices, normals, colors, UVs and custom attributes within buffers.
