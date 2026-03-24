@@ -1,0 +1,11 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "SpawnDev.BlazorJS.PixiJS.Demo\\SpawnDev.BlazorJS.PixiJS.Demo.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

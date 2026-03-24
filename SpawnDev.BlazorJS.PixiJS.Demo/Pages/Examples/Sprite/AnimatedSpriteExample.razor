@@ -6,12 +6,15 @@
 
 <h3>Animated Sprite Example</h3>
 <p>Animating a sprite sequence...</p>
+<p>Click the cat to change animations configured in its spritesheet json</p>
 <div @ref="containerElRef" style="width: 800px; height: 600px;"></div>
 
 @code {
     [Inject] BlazorJSRuntime JS { get; set; } = default!;
     ElementReference? containerElRef;
     Application? app;
+
+    private bool WhiteCat;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -29,13 +32,21 @@
         using var htmlElement = new HTMLElement(containerElRef!.Value);
         htmlElement!.AppendChild(app!.Canvas);
 
+        // Enable interactivity on the stage
+        app!.Stage!.EventMode = "static";
+        app!.Stage!.HitArea = app.Screen;
+
         // Load the spritesheet
         // In PixiJS v8, Assets.load with a json file usually returns the processed resource.
         // For spritesheets, it returns the Spritesheet object.
         var spritesheet = await PIXI.Assets.Load<Spritesheet>("assets/fighter.json");
+        var multiAnimSpritesheet = await PIXI.Assets.Load<Spritesheet>("assets/catspin.json");
 
         JS.Set("_spritesheet", spritesheet);
         JS.Log("_spritesheet", spritesheet);
+
+        JS.Set("_multiAnimSpritesheet", multiAnimSpritesheet);
+        JS.Log("_multiAnimSpritesheet", multiAnimSpritesheet);
 
         if (spritesheet != null) {
             // Create an AnimatedSprite with the 'roll' animation
@@ -48,12 +59,12 @@
                 // If Record is a Dictionary wrapper, it might have ContainsKey
                 // Use safe retrieval if possible or assume it's there if index is valid
                 var texture = spritesheet.Textures[key];
-                 if (texture != null)
+                if (texture != null)
                 {
                     textures.Add(texture);
                 }
             }
-            
+
             var anim = new AnimatedSprite(textures.ToArray());
             anim.X = app.Screen.Width / 2;
             anim.Y = app.Screen.Height / 2;
@@ -67,6 +78,30 @@
         {
             Console.WriteLine("Failed to load spritesheet.");
         }
+
+        //Set up cat spin animation (meow)
+        var catSpin = new AnimatedSprite(multiAnimSpritesheet.Animations["Black"]);
+        catSpin.OnClick += () =>
+        {
+            catSpin.Textures = WhiteCat ? new Array<Texture>(multiAnimSpritesheet.Animations["Black"]) : new Array<Texture>(multiAnimSpritesheet.Animations["White"]);
+            WhiteCat = !WhiteCat;
+            //Updating AnimatedSprite.Textures will stop animation
+            catSpin.Play();
+        };
+        app.Stage!.AddChild(catSpin);
+
+        //implementing scaling mode might be beneficial in the future
+        catSpin.Scale.X = 5;
+        catSpin.Scale.Y = 5;
+
+        catSpin.AnimationSpeed = 0.25f;
+
+        //cat interaction
+        catSpin.Interactive = true;
+        catSpin.EventMode = "static";
+        catSpin.Cursor = "pointer";
+
+        catSpin.Play();
     }
 
     public void Dispose()
